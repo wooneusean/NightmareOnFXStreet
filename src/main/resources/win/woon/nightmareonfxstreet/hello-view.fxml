@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="311.0" prefWidth="422.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="win.woon.nightmareonfxstreet.HelloController">
+<VBox alignment="CENTER" prefHeight="311.0" prefWidth="481.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="win.woon.nightmareonfxstreet.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
     <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="Hello!" />
+   <MFXButton buttonType="RAISED" depthLevel="LEVEL1" onAction="#onHelloButtonClick" prefHeight="35.0" prefWidth="125.0" rippleAnimationSpeed="2.0" rippleColor="#00ddff" style="-fx-background-color: rgb(0,0,0,0.1);" text="Hello">
+      <font>
+         <Font name="Segoe UI" size="18.0" />
+      </font></MFXButton>
 </VBox>

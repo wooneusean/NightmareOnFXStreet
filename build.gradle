@@ -15,9 +15,6 @@ ext {
     junitVersion = '5.7.1'
 }
 
-sourceCompatibility = '15'
-targetCompatibility = '15'
-
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
@@ -28,12 +25,11 @@ application {
 }
 
 javafx {
-    version = '15.0.1'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
-    implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
+    implementation('io.github.palexdev:materialfx:11.12.0')
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
