@@ -21,7 +21,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'win.woon.nightmareonfxstreet'
-    mainClass = 'win.woon.nightmareonfxstreet.HelloApplication'
+    mainClass = 'win.woon.nightmareonfxstreet.Launcher'
 }
 
 javafx {
