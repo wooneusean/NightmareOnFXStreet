@@ -1,9 +1,9 @@
-module win.woon.nightmareonfxstreet {
+module com.oodj.myvaksin {
     requires javafx.controls;
     requires javafx.fxml;
 
     requires MaterialFX;
 
-    opens win.woon.nightmareonfxstreet to javafx.fxml;
-    exports win.woon.nightmareonfxstreet;
+    opens com.oodj.myvaksin to javafx.fxml;
+    exports com.oodj.myvaksin;
 }

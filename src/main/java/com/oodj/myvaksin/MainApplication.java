@@ -1,4 +1,4 @@
-package win.woon.nightmareonfxstreet;
+package com.oodj.myvaksin;
 
 import javafx.application.Application;
 import javafx.application.Platform;

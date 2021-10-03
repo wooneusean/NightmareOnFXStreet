@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="win.woon.nightmareonfxstreet.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.myvaksin.MainController">
     <VBox alignment="CENTER" layoutX="146.0" layoutY="76.0" prefHeight="189.0" prefWidth="309.0" spacing="16.0">
         <TextField fx:id="tfOtherText" text="${controller.textValue}" />
         <TextField fx:id="tfText" />
         <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#printData" text="Login" />
       <Separator prefWidth="200.0" />
         <TextField fx:id="tfName" promptText="John Doe" />
-        <ComboBox fx:id="cbNames" maxWidth="1.7976931348623157E308" />
+        <ComboBox fx:id="cbNames" maxWidth="1.7976931348623157E308" items="${controller.names}" />
       <Button fx:id="btnAddName" mnemonicParsing="false" onAction="#addName" text="Add Name" />
     </VBox>
 </AnchorPane>

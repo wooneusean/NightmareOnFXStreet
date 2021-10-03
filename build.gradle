@@ -4,7 +4,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
-group 'win.woon'
+group 'com.oodj'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -20,8 +20,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'win.woon.nightmareonfxstreet'
-    mainClass = 'win.woon.nightmareonfxstreet.Launcher'
+    mainModule = 'com.oodj.myvaksin'
+    mainClass = 'com.oodj.myvaksin.Launcher'
 }
 
 javafx {
@@ -41,7 +41,7 @@ test {
 
 task fatJar(type: Jar) {
     manifest {
-        attributes 'Main-Class': 'win.woon.nightmareonfxstreet.Launcher'
+        attributes 'Main-Class': 'com.oodj.myvaksin.Launcher'
     }
     archiveClassifier = "all"
     duplicatesStrategy = DuplicatesStrategy.INCLUDE

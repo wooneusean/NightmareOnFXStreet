@@ -1,4 +1,4 @@
-package win.woon.nightmareonfxstreet;
+package com.oodj.myvaksin;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
@@ -92,7 +92,8 @@ public class MainController implements Initializable {
         // Using FluentAPI
         Bindings.bindBidirectional(tfText.textProperty(), vm.usernameProperty());
 
-        cbNames.setItems(names);
+        // Combo box binding method 1
+        // cbNames.setItems(names);
     }
 }
 
