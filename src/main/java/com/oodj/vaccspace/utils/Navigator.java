@@ -1,5 +1,6 @@
-package com.oodj.vaccspace;
+package com.oodj.vaccspace.utils;
 
+import com.oodj.vaccspace.MainApplication;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,28 +22,34 @@ public class Navigator {
     private static Scene scene = null;
     private static boolean hasBeenInitialized = false;
 
-    static Scene navigate(String route) {
+    public static void navigate(String route) {
+        Page destination = routeMap.get(route);
+
         Parent root;
         try {
-            FXMLLoader loader = new FXMLLoader(Navigator.class.getResource(routeMap.get(route).getPath()));
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(destination.getPath()));
             root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return;
         }
 
         if (root == null) {
             throw new IllegalArgumentException("Route does not exist!");
         }
 
-        setWindowTitle(routeMap.get(route).getDisplayName());
+        setWindowTitle(destination.getDisplayName());
 
-        scene = new Scene(root);
+        if (destination.getScene() == null) {
+            destination.setScene(new Scene(root));
+        }
+
+        scene = destination.getScene();
+
         primaryStage.setScene(scene);
-        return scene;
     }
 
-    static void init(Stage stage, String initialRoute) {
+    public static void init(Stage stage, String initialRoute) {
         if (hasBeenInitialized) return;
 
         primaryStage = stage;
@@ -51,7 +58,7 @@ public class Navigator {
 
         navigate(routeToLoad);
 
-        scene.getStylesheets().add(Objects.requireNonNull(Navigator.class.getResource("styles/main.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource("styles/main.css")).toExternalForm());
 
         primaryStage.show();
 
@@ -73,28 +80,3 @@ public class Navigator {
     }
 }
 
-class Page {
-    private String path;
-    private String displayName;
-
-    public Page(String path, String displayName) {
-        this.path = path;
-        this.displayName = displayName;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-}

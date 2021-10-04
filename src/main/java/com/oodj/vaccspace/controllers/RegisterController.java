@@ -1,5 +1,6 @@
-package com.oodj.vaccspace;
+package com.oodj.vaccspace.controllers;
 
+import com.oodj.vaccspace.utils.Navigator;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
