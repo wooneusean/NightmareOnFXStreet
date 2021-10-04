@@ -1,4 +1,4 @@
-package com.oodj.myvaksin;
+package com.oodj.vaccspace;
 
 public class Launcher {
     public static void main(String[] args) {

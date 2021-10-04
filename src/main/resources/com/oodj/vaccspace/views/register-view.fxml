@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.RegisterController">
+    <center>
+        <VBox alignment="CENTER_LEFT" spacing="8.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="This is the register page." />
+                <MFXButton fx:id="btnLogin" onAction="#onBtnLoginPressed" text="Back to Login">
+                    <styleClass>
+                        <String fx:value="btn-primary" />
+                        <String fx:value="btn" />
+                    </styleClass>
+                </MFXButton>
+            </children>
+            <padding>
+                <Insets left="100.0" right="100.0" />
+            </padding>
+        </VBox>
+    </center>
+</BorderPane>

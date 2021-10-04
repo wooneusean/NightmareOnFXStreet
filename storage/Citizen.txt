@@ -1,0 +1,1 @@
+vaccinationStatus:NOT_REGISTERED|password:123qwe|phone:012-3456789|name:JohnDoe|IC:040205-06-1337|id:1|email:ahkau@gmail.com

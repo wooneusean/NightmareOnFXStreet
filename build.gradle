@@ -20,8 +20,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'com.oodj.myvaksin'
-    mainClass = 'com.oodj.myvaksin.Launcher'
+    mainModule = 'com.oodj.vaccspace'
+    mainClass = 'com.oodj.vaccspace.Launcher'
 }
 
 javafx {
@@ -41,7 +41,7 @@ test {
 
 task fatJar(type: Jar) {
     manifest {
-        attributes 'Main-Class': 'com.oodj.myvaksin.Launcher'
+        attributes 'Main-Class': 'com.oodj.vaccspace.Launcher'
     }
     archiveClassifier = "all"
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
