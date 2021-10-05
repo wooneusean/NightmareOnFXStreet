@@ -10,37 +10,39 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="font-medium" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="font-medium" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.LoginController">
     <center>
-        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets />
             </BorderPane.margin>
-            <padding>
-                <Insets left="150.0" right="150.0" />
-            </padding>
-         <Label styleClass="font-fill-primary" text="Username" />
-            <MFXTextField fx:id="tfUsername" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
+         <Label styleClass="body-medium" text="Username" />
+            <MFXTextField fx:id="tfUsername" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308" styleClass="body-medium">
             </MFXTextField>
-         <Label styleClass="font-fill-primary" text="Password" />
-            <MFXPasswordField fx:id="tfPassword" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
+         <Label styleClass="body-medium" text="Password" />
+            <MFXPasswordField fx:id="tfPassword" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308" styleClass="body-medium">
             </MFXPasswordField>
          <HBox spacing="8.0">
             <children>
                <MFXButton fx:id="btnLogin" buttonType="RAISED" onAction="#onLoginPressed" rippleColor="WHITE" text="Login">
                   <styleClass>
-                     <String fx:value="btn-primary" />
                      <String fx:value="btn" />
+                     <String fx:value="body-medium" />
+                     <String fx:value="btn-primary" />
                   </styleClass>
                </MFXButton>
                <MFXButton fx:id="btnRegister" buttonType="RAISED" onAction="#onRegisterPressed" rippleColor="WHITE" text="Register">
                   <styleClass>
-                     <String fx:value="btn-secondary" />
                      <String fx:value="btn" />
+                     <String fx:value="body-medium" />
+                     <String fx:value="btn-secondary" />
                   </styleClass>
                </MFXButton>
             </children>
          </HBox>
+         <padding>
+            <Insets left="75.0" right="75.0" />
+         </padding>
         </VBox>
     </center>
 </BorderPane>

@@ -5,6 +5,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,33 +23,6 @@ public class Navigator {
     private static Stage primaryStage;
     private static Scene scene = null;
     private static boolean hasBeenInitialized = false;
-
-    public static void navigate(String route) {
-        Page destination = routeMap.get(route);
-
-        Parent root;
-        try {
-            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(destination.getPath()));
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        if (root == null) {
-            throw new IllegalArgumentException("Route does not exist!");
-        }
-
-        setWindowTitle(destination.getDisplayName());
-
-        if (destination.getScene() == null) {
-            destination.setScene(new Scene(root));
-        }
-
-        scene = destination.getScene();
-
-        primaryStage.setScene(scene);
-    }
 
     public static void init(Stage stage, String initialRoute) {
         if (hasBeenInitialized) return;
@@ -67,6 +42,58 @@ public class Navigator {
         setupOnCloseRequest();
     }
 
+    public static void navigate(String route) {
+        if (tryLoadScene(route, null)) return;
+
+        primaryStage.setScene(scene);
+    }
+
+    public static void openInNewWindow(String route) {
+        Stage newStage = createStage();
+
+        if (tryLoadScene(route, newStage)) return;
+
+        newStage.setScene(scene);
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.show();
+    }
+
+    public static void setWindowTitle(Stage targetStage, String title) {
+        Stage stage = targetStage;
+
+        if (stage == null) {
+            stage = primaryStage;
+        }
+
+        stage.setTitle(String.format("%s | VaccSpace", title));
+    }
+
+    private static boolean tryLoadScene(String route, Stage newStage) {
+        Page destination = routeMap.get(route);
+
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(destination.getPath()));
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return true;
+        }
+
+        if (root == null) {
+            throw new IllegalArgumentException("Route does not exist!");
+        }
+
+        if (destination.getScene() == null) {
+            destination.setScene(new Scene(root));
+        }
+
+        scene = destination.getScene();
+
+        setWindowTitle(newStage, destination.getDisplayName());
+        return false;
+    }
+
     private static void setupOnCloseRequest() {
         primaryStage.setOnCloseRequest(event -> {
             // Add dispose methods here
@@ -75,8 +102,10 @@ public class Navigator {
         });
     }
 
-    public static void setWindowTitle(String title) {
-        primaryStage.setTitle(String.format("%s | VaccSpace", title));
+    private static Stage createStage() {
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("images/vaccine.png"))));
+        return stage;
     }
 }
 

@@ -37,7 +37,7 @@ public class LoginController implements Initializable {
     @FXML
     void onRegisterPressed(ActionEvent event) {
         try {
-            Navigator.navigate("register");
+            Navigator.openInNewWindow("register");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,8 +45,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Navigator.setWindowTitle("Login");
-
         tfUsername.textProperty().bindBidirectional(vm.usernameProperty());
         tfPassword.passwordProperty().bindBidirectional(vm.passwordProperty());
     }

@@ -1,23 +1,4 @@
 // Font Declaration
-
-@font-face {
-    font-family: 'Poppins'
-    font-weight: 100;
-    src: url('../fonts/Poppins-Thin.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Poppins'
-    font-weight: 200;
-    src: url('../fonts/Poppins-ExtraLight.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Poppins'
-    font-weight: 300;
-    src: url('../fonts/Poppins-Light.ttf') format('truetype');
-}
-
 @font-face {
     font-family: 'Poppins'
     font-weight: 400;
@@ -31,94 +12,82 @@
 }
 
 @font-face {
-    font-family: 'Poppins'
-    font-weight: 600;
-    src: url('../fonts/Poppins-SemiBold.ttf') format('truetype');
+    font-family: 'Roboto'
+    font-weight: 400;
+    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Poppins'
-    font-weight: 700;
-    src: url('../fonts/Poppins-Bold.ttf') format('truetype');
+    font-family: 'Roboto'
+    font-weight: 500;
+    src: url('../fonts/Roboto-Medium.ttf') format('truetype');
 }
 
-@font-face {
-    font-family: 'Poppins'
-    font-weight: 800;
-    src: url('../fonts/Poppins-ExtraBold.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Poppins'
-    font-weight: 900;
-    src: url('../fonts/Poppins-Black.ttf') format('truetype');
-}
-
-.font-weight-bold {
-    -fx-font-family: 'Poppins Medium';
-}
-
-.font-fill-primary {
-    -fx-text-fill: #404040;
-}
-
-.font-fill-gray {
-    -fx-text-fill: #ababab;
-}
-
-.font-thin {
-    -fx-font-family: 'Poppins Thin';
-}
-
-.font-extraLight {
-    -fx-font-family: 'Poppins ExtraLight';
-}
-
-.font-light {
-    -fx-font-family: 'Poppins Light';
-}
-
-.font-regular {
-    -fx-font-family: 'Poppins Regular';
-}
-
-.font-medium {
-    -fx-font-family: 'Poppins Medium';
-}
-
-.font-semiBold {
-    -fx-font-family: 'Poppins SemiBold';
-}
-
-.font-bold {
-    -fx-font-family: 'Poppins Bold';
-}
-
-.font-extraBold {
-    -fx-font-family: 'Poppins ExtraBold';
-}
-
-.font-black {
-    -fx-font-family: 'Poppins Black';
+* {
+    -fx-font-smoothing-type: gray;
 }
 
 // Styles
-* {
-    -fx-font-smoothing-type: gray;
+.btn {
+    -fx-padding: 8 20 !important;
+}
+
+.btn-primary {
+    -fx-background-color: #a2f279 !important;
+    -fx-text-fill: black !important;
+}
+
+.btn-secondary {
+    -fx-background-color: #6896F3 !important;
+    -fx-text-fill: white !important;
+}
+
+.text-fill-primary {
+    -fx-text-fill: #404040 !important;
+}
+
+.text-fill-gray {
+    -fx-text-fill: #ababab !important;
+}
+
+.heading-regular {
+    -fx-font-family: 'Roboto';
+}
+
+.heading-medium {
+    -fx-font-family: 'Roboto Medium';
+}
+
+.body-regular {
+    -fx-font-family: 'Poppins';
+    -fx-font-size: 14;
+}
+
+.body-medium {
     -fx-font-family: 'Poppins Medium';
     -fx-font-size: 14;
 }
 
-.btn {
-    -fx-padding: 8 20;
+.h1 {
+    -fx-font-size: 32;
 }
 
-.btn-primary {
-    -fx-background-color: #a2f279;
-    -fx-text-fill: black;
+.h2 {
+    -fx-font-size: 24;
 }
 
-.btn-secondary {
-    -fx-background-color: #6896F3;
-    -fx-text-fill: white;
+.h3 {
+    -fx-font-size: 18;
+}
+
+.h4 {
+    -fx-font-size: 16;
+}
+
+.h5 {
+    -fx-font-size: 14;
+}
+
+.h6 {
+    -fx-font-size: 10;
 }

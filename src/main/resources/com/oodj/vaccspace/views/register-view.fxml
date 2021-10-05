@@ -8,18 +8,25 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.RegisterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="720.0" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.RegisterController">
     <center>
         <VBox alignment="CENTER_LEFT" spacing="8.0" BorderPane.alignment="CENTER">
             <children>
-                <Label text="This is the register page." />
-                <MFXButton fx:id="btnLogin" onAction="#onBtnLoginPressed" text="Back to Login">
+            <Label text="Registration">
+               <styleClass>
+                  <String fx:value="body-medium" />
+                  <String fx:value="h1" />
+               </styleClass>
+            </Label>
+                <Label styleClass="body-medium" text="This is the register page." />
+                <MFXButton fx:id="btnLogin" buttonType="RAISED" onAction="#onBtnLoginPressed" text="Back to Login">
                     <styleClass>
                         <String fx:value="btn-primary" />
                         <String fx:value="btn" />
+                  <String fx:value="body-medium" />
                     </styleClass>
                 </MFXButton>
-            <MFXTextField lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308" />
+            <MFXTextField lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
             </children>
             <padding>
                 <Insets left="100.0" right="100.0" />
