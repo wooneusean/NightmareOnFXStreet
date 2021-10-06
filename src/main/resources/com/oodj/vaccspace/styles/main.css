@@ -30,25 +30,29 @@
 
 // Styles
 .btn {
-    -fx-padding: 8 20 !important;
+    -fx-padding: 8 24;
+    -fx-background-radius: 50em;
 }
 
 .btn-primary {
-    -fx-background-color: rgba(100, 134, 221, 1) !important;
-    -fx-text-fill: rgba(255, 255, 255, 1) !important;
+    -fx-background-color: rgba(100, 134, 221, 1);
+    -fx-text-fill: rgba(255, 255, 255, 1);
 }
 
 .btn-secondary {
-    -fx-background-color: #6896F3 !important;
-    -fx-text-fill: white !important;
+    -fx-background-color: #343434;
+    -fx-text-fill: white;
+    -fx-border-width: 1px;
+    -fx-border-radius: 50em;
+    -fx-border-color: white;
 }
 
 .text-fill-primary {
-    -fx-text-fill: rgba(100, 134, 221, 1) !important;
+    -fx-text-fill: rgba(100, 134, 221, 1);
 }
 
 .text-fill-gray {
-    -fx-text-fill: #ababab !important;
+    -fx-text-fill: #ababab;
 }
 
 .heading-regular {

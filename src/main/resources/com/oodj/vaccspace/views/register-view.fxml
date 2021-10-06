@@ -1,36 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.euseanwoon.MFXPillButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="720.0" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.RegisterController">
-    <center>
-        <VBox alignment="CENTER_LEFT" spacing="8.0" BorderPane.alignment="CENTER">
-            <children>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="924.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.RegisterController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="14.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/vaccine_medium.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="VaccSpace">
+                     <styleClass>
+                        <String fx:value="h1" />
+                        <String fx:value="heading-medium" />
+                     </styleClass>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+                  <Pane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                  <MFXPillButton fx:id="btnBackToLogin" onAction="#onBackToLoginPressed" rippleArc="40.0" text="Back">
+                     <styleClass>
+                        <String fx:value="h4" />
+                        <String fx:value="btn-secondary" />
+                        <String fx:value="btn" />
+                        <String fx:value="body-regular" />
+                     </styleClass>
+                  </MFXPillButton>
+               </children>
+            </HBox>
             <Label text="Registration">
                <styleClass>
-                  <String fx:value="body-medium" />
-                  <String fx:value="h1" />
+                  <String fx:value="heading-medium" />
+                  <String fx:value="h2" />
+                  <String fx:value="text-fill-primary" />
                </styleClass>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
             </Label>
-                <Label styleClass="body-medium" text="This is the register page." />
-                <MFXButton fx:id="btnLogin" buttonType="RAISED" onAction="#onBtnLoginPressed" text="Back to Login">
-                    <styleClass>
-                        <String fx:value="btn-primary" />
+            <HBox spacing="14.0" VBox.vgrow="ALWAYS">
+               <children>
+                    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="28.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Name">
+                                 <styleClass>
+                                    <String fx:value="body-regular" />
+                                    <String fx:value="h3" />
+                                 </styleClass>
+                              </Label>
+                              <MFXTextField fx:id="tfName" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
+                                 <styleClass>
+                                    <String fx:value="body-medium" />
+                                    <String fx:value="h4" />
+                                 </styleClass>
+                              </MFXTextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Password">
+                                 <styleClass>
+                                    <String fx:value="body-regular" />
+                                    <String fx:value="h3" />
+                                 </styleClass>
+                              </Label>
+                              <MFXTextField fx:id="tfPassword" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
+                                 <styleClass>
+                                    <String fx:value="body-medium" />
+                                    <String fx:value="h4" />
+                                 </styleClass>
+                              </MFXTextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Repeat Password">
+                                 <styleClass>
+                                    <String fx:value="body-regular" />
+                                    <String fx:value="h3" />
+                                 </styleClass>
+                              </Label>
+                              <MFXTextField fx:id="tfRepeatPassword" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
+                                 <styleClass>
+                                    <String fx:value="body-medium" />
+                                    <String fx:value="h4" />
+                                 </styleClass>
+                              </MFXTextField>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                    </VBox>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="28.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Phone Number">
+                                 <styleClass>
+                                    <String fx:value="body-regular" />
+                                    <String fx:value="h3" />
+                                 </styleClass>
+                              </Label>
+                              <MFXTextField fx:id="tfPhoneNumber" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
+                                 <styleClass>
+                                    <String fx:value="body-medium" />
+                                    <String fx:value="h4" />
+                                 </styleClass>
+                              </MFXTextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Identification Number">
+                                 <styleClass>
+                                    <String fx:value="body-regular" />
+                                    <String fx:value="h3" />
+                                 </styleClass>
+                              </Label>
+                              <MFXTextField fx:id="tfIdentificationNumber" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
+                                 <styleClass>
+                                    <String fx:value="body-medium" />
+                                    <String fx:value="h4" />
+                                 </styleClass>
+                              </MFXTextField>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label text="Email">
+                                 <styleClass>
+                                    <String fx:value="body-regular" />
+                                    <String fx:value="h3" />
+                                 </styleClass>
+                              </Label>
+                              <MFXTextField fx:id="tfEmail" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
+                                 <styleClass>
+                                    <String fx:value="body-medium" />
+                                    <String fx:value="h4" />
+                                 </styleClass>
+                              </MFXTextField>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding></VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <MFXPillButton onAction="#onRegisterPressed" rippleArc="40.0" text="Register">
+                     <styleClass>
                         <String fx:value="btn" />
-                  <String fx:value="body-medium" />
-                    </styleClass>
-                </MFXButton>
-            <MFXTextField lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
-            </children>
-            <padding>
-                <Insets left="100.0" right="100.0" />
-            </padding>
-        </VBox>
-    </center>
+                        <String fx:value="body-regular" />
+                        <String fx:value="btn-primary" />
+                        <String fx:value="h4" />
+                     </styleClass>
+                  </MFXPillButton>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </padding>
+      </VBox>
+   </center>
 </BorderPane>

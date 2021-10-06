@@ -3,6 +3,7 @@ module com.oodj.vaccspace {
     requires javafx.fxml;
 
     requires MaterialFX;
+    requires io.github.euseanwoon;
 
     opens com.oodj.vaccspace to javafx.fxml;
     exports com.oodj.vaccspace;

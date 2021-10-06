@@ -1,7 +1,7 @@
 package com.oodj.vaccspace.controllers;
 
 import com.oodj.vaccspace.utils.Navigator;
-import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,7 +24,7 @@ public class LoginController implements Initializable {
     private MFXPasswordField tfPassword;
 
     @FXML
-    private MFXButton btnLogin;
+    private MFXPillButton btnLogin;
 
     @FXML
     private Hyperlink lnkRegister;
@@ -38,7 +38,7 @@ public class LoginController implements Initializable {
     @FXML
     void onRegisterPressed(ActionEvent event) {
         try {
-            Navigator.openInNewWindow("register");
+            Navigator.navigate("register");
         } catch (Exception e) {
             e.printStackTrace();
         }
