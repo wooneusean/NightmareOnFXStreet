@@ -24,6 +24,11 @@ public class Navigator {
     private static Scene scene = null;
     private static boolean hasBeenInitialized = false;
 
+    /**
+     * Initialize the {@link Navigator} with the primary stage and optional initial route
+     * @param stage Initialize the navigator on a specific page.
+     * @param initialRoute Optional: Set the initial route.
+     */
     public static void init(Stage stage, String initialRoute) {
         if (hasBeenInitialized) return;
 
@@ -42,12 +47,22 @@ public class Navigator {
         setupOnCloseRequest();
     }
 
+    /**
+     * Navigate to given in the current window.
+     *
+     * @param route Route declared in {@link #routeMap}
+     */
     public static void navigate(String route) {
         if (tryLoadScene(route, null)) return;
 
         primaryStage.setScene(scene);
     }
 
+    /**
+     * Opens route in new window
+     *
+     * @param route Route declared in {@link #routeMap}
+     */
     public static void openInNewWindow(String route) {
         Stage newStage = createStage();
 

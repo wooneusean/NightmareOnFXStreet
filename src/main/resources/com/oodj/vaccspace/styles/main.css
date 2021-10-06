@@ -25,6 +25,7 @@
 
 * {
     -fx-font-smoothing-type: gray;
+    -fx-text-fill: white;
 }
 
 // Styles
@@ -33,8 +34,8 @@
 }
 
 .btn-primary {
-    -fx-background-color: #a2f279 !important;
-    -fx-text-fill: black !important;
+    -fx-background-color: rgba(100, 134, 221, 1) !important;
+    -fx-text-fill: rgba(255, 255, 255, 1) !important;
 }
 
 .btn-secondary {
@@ -43,7 +44,7 @@
 }
 
 .text-fill-primary {
-    -fx-text-fill: #404040 !important;
+    -fx-text-fill: rgba(100, 134, 221, 1) !important;
 }
 
 .text-fill-gray {
@@ -90,4 +91,8 @@
 
 .h6 {
     -fx-font-size: 10;
+}
+
+.bg-color {
+    -fx-background-color:  #343434;
 }

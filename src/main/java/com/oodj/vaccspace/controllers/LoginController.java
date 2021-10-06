@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,7 +27,7 @@ public class LoginController implements Initializable {
     private MFXButton btnLogin;
 
     @FXML
-    private MFXButton btnRegister;
+    private Hyperlink lnkRegister;
 
 
     @FXML

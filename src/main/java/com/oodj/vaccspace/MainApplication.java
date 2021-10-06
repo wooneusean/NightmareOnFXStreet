@@ -22,13 +22,16 @@ public class MainApplication extends Application {
         TextORM.setMetaStoragePath("storage");
 
         // Set icons
-        stage.getIcons().add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("images/vaccine.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("images/vaccine_small.png"))));
 
         // Load fonts
         Font.loadFont(getClass().getResourceAsStream("fonts/Poppins-Medium.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("fonts/Poppins-Regular.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("fonts/Roboto-Medium.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("fonts/Roboto-Regular.ttf"), 16);
+
+        // Disable resizing
+        stage.setResizable(false);
 
         try {
             Navigator.init(stage, "login");
