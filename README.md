@@ -10,3 +10,7 @@ Truly a horrendous nightmare.
 ```
 
 or from the IDEA Gradle menu `other->fatJar`
+
+# Now being used as the Repo for VaccSpace
+
+its like my sejahtera but made in java and slightly worse.
