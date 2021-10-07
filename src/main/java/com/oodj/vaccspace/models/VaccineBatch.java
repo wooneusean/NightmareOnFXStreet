@@ -3,6 +3,7 @@ package com.oodj.vaccspace.models;
 import textorm.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public class VaccineBatch extends Model {
@@ -26,7 +27,7 @@ public class VaccineBatch extends Model {
     private LocalDate arrivalDate;
 
     @HasMany(targetKey = "vaccineBatchId")
-    private Vaccine[] vaccines;
+    private List<Vaccine> vaccines;
 
     public VaccineBatch() {
     }
@@ -64,12 +65,8 @@ public class VaccineBatch extends Model {
         this.vaccinationCenterId = vaccinationCenter.getId();
     }
 
-    public Vaccine[] getVaccines() {
+    public List<Vaccine> getVaccines() {
         return vaccines;
-    }
-
-    public void setVaccines(Vaccine[] vaccines) {
-        this.vaccines = vaccines;
     }
 
     public int getAmount() {

@@ -5,6 +5,8 @@ import textorm.HasMany;
 import textorm.Model;
 import textorm.Repository;
 
+import java.util.List;
+
 @Repository
 public class VaccinationCenter extends Model {
 
@@ -18,7 +20,7 @@ public class VaccinationCenter extends Model {
     private CenterStatus centerStatus;
 
     @HasMany(targetKey = "vaccinationCenterId")
-    private VaccineBatch[] vaccineBatches;
+    private List<VaccineBatch> vaccineBatches;
 
     public VaccinationCenter(String vaccinationCenterName, CenterStatus centerStatus) {
         this.vaccinationCenterName = vaccinationCenterName;

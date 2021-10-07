@@ -5,6 +5,7 @@ import textorm.HasMany;
 import textorm.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public class People extends User {
@@ -13,7 +14,7 @@ public class People extends User {
     VaccinationStatus vaccinationStatus;
 
     @HasMany(targetKey = "personId")
-    private Appointment[] appointments;
+    private List<Appointment> appointments;
 
     public People(String name, String phone, String email, String password, VaccinationStatus vaccinationStatus) {
         super(name, phone, email, password);
@@ -23,12 +24,8 @@ public class People extends User {
     public People() {
     }
 
-    public Appointment[] getAppointments() {
+    public List<Appointment> getAppointments() {
         return appointments;
-    }
-
-    public void setAppointments(Appointment[] appointments) {
-        this.appointments = appointments;
     }
 
     public VaccinationStatus getVaccinationStatus() {

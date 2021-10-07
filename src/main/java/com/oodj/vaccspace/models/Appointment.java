@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 @Repository
 public class Appointment extends Model {
+
     @HasOne(foreignKey = "personId")
     private People person;
 
@@ -20,14 +21,19 @@ public class Appointment extends Model {
 
     @HasOne(foreignKey = "vaccinationCenterId")
     private VaccinationCenter vaccinationCenter;
+
     @Column
     private int vaccineId;
+
     @HasOne(foreignKey = "vaccineId")
     private Vaccine vaccine;
+
     @Column
     private LocalDate appointmentDate;
+
     @Column
     private AppointmentStatus appointmentStatus;
+
     @Column
     private Dose dose;
 

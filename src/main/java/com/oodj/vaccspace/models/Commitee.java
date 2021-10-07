@@ -5,6 +5,7 @@ import textorm.Repository;
 
 @Repository
 public class Commitee extends User {
+
     @Column
     private int Salary;
 

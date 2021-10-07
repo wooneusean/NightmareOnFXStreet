@@ -5,6 +5,7 @@ import textorm.Repository;
 
 @Repository
 public class NonCitizen extends People {
+
     @Column
     private String passportNumber;
 

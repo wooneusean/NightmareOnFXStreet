@@ -29,7 +29,6 @@ public class LoginController implements Initializable {
     @FXML
     private Hyperlink lnkRegister;
 
-
     @FXML
     void onLoginPressed(ActionEvent event) {
 

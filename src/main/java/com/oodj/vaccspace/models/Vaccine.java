@@ -9,13 +9,16 @@ import java.time.LocalDate;
 
 @Repository
 public class Vaccine extends Model {
+
     @Column
     private int vaccineBatchId;
 
     @HasOne(foreignKey = "vaccineBatchId")
     private VaccineBatch vaccineBatch;
+
     @Column
     private LocalDate expiryDate;
+
     @Column
     private VaccineStatus vaccineStatus;
 

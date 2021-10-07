@@ -5,6 +5,7 @@ import textorm.Repository;
 
 @Repository
 public class Citizen extends People {
+
     @Column
     private String IC;
 

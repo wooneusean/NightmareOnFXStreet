@@ -6,6 +6,7 @@ import textorm.Repository;
 
 @Repository
 public class User extends Model {
+
     @Column
     private String name;
 
