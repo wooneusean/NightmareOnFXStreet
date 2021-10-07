@@ -1,23 +1,18 @@
 package com.oodj.vaccspace.utils;
 
+import io.github.palexdev.materialfx.controls.MFXStageDialog;
+import io.github.palexdev.materialfx.controls.enums.DialogType;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Window;
 
-class Page {
+public class Page {
     private String path;
     private String displayName;
-    private Scene scene;
 
     public Page(String path, String displayName) {
         this.path = path;
         this.displayName = displayName;
-    }
-
-    public Scene getScene() {
-        return scene;
-    }
-
-    public void setScene(Scene scene) {
-        this.scene = scene;
     }
 
     public String getPath() {
@@ -34,5 +29,16 @@ class Page {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public static void showDialog(Window owner, DialogType type, String title, String content) {
+        MFXStageDialog dialog = new MFXStageDialog(type, title, content);
+        dialog.setOwner(owner);
+        dialog.setAnimationMillis(250);
+        dialog.setModality(Modality.APPLICATION_MODAL);
+        dialog.setScrimBackground(true);
+        dialog.setCenterInOwner(true);
+        dialog.setScrimOpacity(0.75);
+        dialog.show();
     }
 }

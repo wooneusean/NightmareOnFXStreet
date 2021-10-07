@@ -1,21 +1,27 @@
 package com.oodj.vaccspace.controllers;
 
+import com.oodj.vaccspace.Global;
+import com.oodj.vaccspace.models.Citizen;
 import com.oodj.vaccspace.utils.Navigator;
+import com.oodj.vaccspace.utils.Page;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.enums.DialogType;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
+import textorm.TextORM;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-    LoginControllerViewModel vm = new LoginControllerViewModel();
+    LoginViewModel vm = null;
 
     @FXML
     private MFXTextField tfUsername;
@@ -31,7 +37,14 @@ public class LoginController implements Initializable {
 
     @FXML
     void onLoginPressed(ActionEvent event) {
+        Citizen citizen = TextORM.getOne(Citizen.class, data -> Objects.equals(data.get("name"), vm.getUsername()) && Objects.equals(data.get("password"), vm.getPassword()));
 
+        if (citizen != null) {
+            Global.setUserId(citizen.getId());
+            Navigator.navigate("dashboard");
+        } else {
+            Page.showDialog(tfUsername.getScene().getWindow(), DialogType.ERROR, "Error: Invalid Credentials", "Username and password combination does not match any records!");
+        }
     }
 
     @FXML
@@ -45,14 +58,18 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tfUsername.textProperty().bindBidirectional(vm.usernameProperty());
-        tfPassword.passwordProperty().bindBidirectional(vm.passwordProperty());
+        vm = new LoginViewModel(tfUsername.textProperty(), tfPassword.passwordProperty());
     }
 }
 
-class LoginControllerViewModel {
+class LoginViewModel {
     private final StringProperty username = new SimpleStringProperty("");
     private final StringProperty password = new SimpleStringProperty("");
+
+    public LoginViewModel(StringProperty username, StringProperty password) {
+        this.username.bindBidirectional(username);
+        this.password.bindBidirectional(password);
+    }
 
     public String getPassword() {
         return password.get();

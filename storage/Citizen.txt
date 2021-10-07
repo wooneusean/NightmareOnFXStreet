@@ -1,1 +1,2 @@
-vaccinationStatus:NOT_REGISTERED|password:123qwe|phone:012-3456789|name:JohnDoe|IC:040205-06-1337|id:1|email:ahkau@gmail.com
+vaccinationStatus:AWAITING_SECOND_DOSE|password:123qwe|phone:0129986301|name:Woon|IC:010306101111|id:1|email:euseanwoon2015@gmail.com
+vaccinationStatus:NOT_REGISTERED|password:123|phone:69|name:qwe|IC:69|id:2|email:SIXNINE@gmail.com

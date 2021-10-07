@@ -18,6 +18,7 @@ public class Navigator {
         put("base", new Page("views/base-view.fxml", "No Page"));
         put("login", new Page("views/login-view.fxml", "Login"));
         put("register", new Page("views/register-view.fxml", "Register"));
+        put("dashboard", new Page("views/dashboard-view.fxml", "Dashboard"));
     }};
 
     private static Stage primaryStage;
@@ -26,7 +27,8 @@ public class Navigator {
 
     /**
      * Initialize the {@link Navigator} with the primary stage and optional initial route
-     * @param stage Initialize the navigator on a specific page.
+     *
+     * @param stage        Initialize the navigator on a specific page.
      * @param initialRoute Optional: Set the initial route.
      */
     public static void init(Stage stage, String initialRoute) {
@@ -99,11 +101,7 @@ public class Navigator {
             throw new IllegalArgumentException("Route does not exist!");
         }
 
-        if (destination.getScene() == null) {
-            destination.setScene(new Scene(root));
-        }
-
-        scene = destination.getScene();
+        scene = new Scene(root);
 
         setWindowTitle(newStage, destination.getDisplayName());
         return false;

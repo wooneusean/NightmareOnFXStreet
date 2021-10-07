@@ -1,1 +1,0 @@
-vaccineId:1|dose:FIRST|vaccinationCenterId:1|appointmentStatus:AWAITING_CONFIRMATION|personId:1|id:1|appointmentDate:2021-10-04
