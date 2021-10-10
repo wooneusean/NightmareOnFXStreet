@@ -12,13 +12,10 @@ public class VaccinationCenter extends Model {
 
     @Column
     private String vaccinationCenterName;
-
-//    @Column
-//    private Address address;
-
     @Column
     private CenterStatus centerStatus;
-
+//    @Column
+//    private Address address;
     @HasMany(targetKey = "vaccinationCenterId")
     private List<VaccineBatch> vaccineBatches;
 
@@ -28,6 +25,11 @@ public class VaccinationCenter extends Model {
     }
 
     public VaccinationCenter() {
+    }
+
+    @Override
+    public String toString() {
+        return vaccinationCenterName;
     }
 
     public String getVaccinationCenterName() {

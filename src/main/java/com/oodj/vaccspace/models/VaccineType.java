@@ -27,6 +27,11 @@ public class VaccineType extends Model {
         this.dosesNeeded = dosesNeeded;
     }
 
+    @Override
+    public String toString() {
+        return vaccineName;
+    }
+
     public List<VaccineBatch> getVaccineBatches() {
         return vaccineBatches;
     }

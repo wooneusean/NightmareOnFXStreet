@@ -1,13 +1,18 @@
 package com.oodj.vaccspace.utils;
 
 import com.oodj.vaccspace.MainApplication;
+import com.oodj.vaccspace.controllers.BaseController;
+import com.oodj.vaccspace.mfx.CustomMFXDialog;
+import io.github.palexdev.materialfx.controls.MFXStageDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,6 +24,7 @@ public class Navigator {
         put("login", new Page("views/login-view.fxml", "Login"));
         put("register", new Page("views/register-view.fxml", "Register"));
         put("dashboard", new Page("views/dashboard-view.fxml", "Dashboard"));
+        put("new_appointment", new Page("views/new-appointment-view.fxml", "New Appointment"));
     }};
 
     private static Stage primaryStage;
@@ -86,25 +92,74 @@ public class Navigator {
     }
 
     private static boolean tryLoadScene(String route, Stage newStage) {
+        Parent root = loadPageFromFXML(route);
+
+        if (root == null) {
+            return true;
+        }
+
+        scene = new Scene(root);
+
+        setWindowTitle(newStage, routeMap.get(route).getDisplayName());
+        return false;
+    }
+
+    public static <T extends BaseController> void showInDialog(Window owner, String route, Object userData) {
         Page destination = routeMap.get(route);
 
-        Parent root;
+        MFXStageDialog dialog = new MFXStageDialog();
+        CustomMFXDialog content = new CustomMFXDialog();
+
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(destination.getPath()));
+            root = loader.load();
+
+            // This is such a hacky way to do this.
+            T controller = loader.getController();
+            controller.setStageDialog(dialog);
+            controller.setUserData(userData);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.printf("Unable to load route '%s'.%n", route);
+            return;
+        }
+
+        content.setCenter(root);
+
+        dialog.setOwner(owner);
+
+        dialog.setDialog(content);
+        dialog.setModality(Modality.APPLICATION_MODAL);
+
+        dialog.getDialog().setOverlayClose(true);
+
+        dialog.setScrimOpacity(0.75);
+        dialog.setScrimBackground(true);
+
+        dialog.setAnimate(true);
+        dialog.setAnimationMillis(200);
+
+        dialog.setAllowDrag(false);
+        dialog.setCenterInOwner(true);
+
+        Region childRegion = (Region) content.getCenter();
+        content.setPrefSize(childRegion.getPrefWidth(), childRegion.getPrefHeight());
+
+        dialog.show();
+    }
+
+    protected static Parent loadPageFromFXML(String route) {
+        Page destination = routeMap.get(route);
+        Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(destination.getPath()));
             root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
-            return true;
+            System.err.printf("Unable to load route '%s'.%n", route);
         }
-
-        if (root == null) {
-            throw new IllegalArgumentException("Route does not exist!");
-        }
-
-        scene = new Scene(root);
-
-        setWindowTitle(newStage, destination.getDisplayName());
-        return false;
+        return root;
     }
 
     private static void setupOnCloseRequest() {

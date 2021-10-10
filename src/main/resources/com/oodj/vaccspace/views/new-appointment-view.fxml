@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.euseanwoon.MFXPillButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.appointments.NewAppointmentController">
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+    </padding>
+    <HBox alignment="TOP_RIGHT">
+        <Label text="New Appointment">
+            <styleClass>
+                <String fx:value="heading-medium" />
+                <String fx:value="h1" />
+            </styleClass>
+            <HBox.margin>
+                <Insets bottom="14.0" />
+            </HBox.margin>
+        </Label>
+    </HBox>
+   <VBox spacing="8.0">
+      <children>
+          <Label text="Select your preferred vaccine:">
+              <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+              </styleClass>
+          </Label>
+          <MFXComboBox fx:id="cbVaccine" comboStyle="STYLE2" lineColor="#00c0eb" maxWidth="1.7976931348623157E308" />
+      </children>
+   </VBox>
+   <VBox spacing="8.0">
+      <children>
+          <Label text="Select your preferred vaccination center:">
+              <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+              </styleClass>
+          </Label>
+          <MFXComboBox fx:id="cbCenter" comboStyle="STYLE2" lineColor="#00c0eb" maxWidth="1.7976931348623157E308" />
+      </children>
+   </VBox>
+   <VBox spacing="8.0">
+      <children>
+          <Label text="Select your preferred date:">
+              <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+              </styleClass>
+          </Label>
+          <MFXDatePicker fx:id="dpDate" lineColor="#008cedb2" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308" pickerColor="#00a0ed" />
+      </children>
+   </VBox>
+    <HBox alignment="TOP_RIGHT" spacing="14.0">
+        <children>
+            <MFXPillButton fx:id="btnClose" onAction="#onClosePressed" rippleArc="40.0" text="Close">
+                <styleClass>
+                    <String fx:value="btn" />
+                    <String fx:value="btn-secondary" />
+                    <String fx:value="body-medium" />
+                    <String fx:value="h4" />
+                </styleClass>
+            </MFXPillButton>
+         <MFXPillButton fx:id="btnSubmit" layoutX="324.0" layoutY="10.0" onAction="#onSubmitPressed" rippleArc="40.0" text="Submit">
+            <styleClass>
+               <String fx:value="btn" />
+               <String fx:value="btn-primary" />
+               <String fx:value="body-medium" />
+               <String fx:value="h4" />
+            </styleClass>
+         </MFXPillButton>
+        </children>
+    </HBox>
+</VBox>

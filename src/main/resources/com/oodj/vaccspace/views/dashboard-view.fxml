@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.euseanwoon.MFXPillButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -11,13 +12,13 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="924.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="924.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.dashboard.DashboardController">
     <left>
         <VBox fx:id="vbNavigation" prefHeight="200.0" prefWidth="120.0" BorderPane.alignment="CENTER">
         </VBox>
     </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="14.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" spacing="14.0">
                <children>
@@ -62,9 +63,20 @@
                      </HBox.margin>
                   </Label>
                </children>
-               <padding>
-                  <Insets top="50.0" />
-               </padding>
+            </HBox>
+            <MFXTableView fx:id="tvAppointments" headerText="Vaccination Appointments" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            </MFXTableView>
+            <HBox alignment="TOP_RIGHT">
+               <children>
+                  <MFXPillButton fx:id="btnNewAppointment" onAction="#onNewAppointmentPressed" rippleArc="40.0" text="New Appointment">
+                     <styleClass>
+                        <String fx:value="body-medium" />
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                        <String fx:value="h4" />
+                     </styleClass>
+                  </MFXPillButton>
+               </children>
             </HBox>
          </children>
          <padding>

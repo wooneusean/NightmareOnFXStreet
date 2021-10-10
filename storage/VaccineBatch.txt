@@ -1,0 +1,1 @@
+amount:200|vaccineTypeId:1|vaccinationCenterId:1|id:1|arrivalDate:2021-10-09

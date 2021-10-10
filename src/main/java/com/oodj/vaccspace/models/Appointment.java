@@ -50,6 +50,7 @@ public class Appointment extends Model {
     }
 
     public VaccinationCenter getVaccinationCenter() {
+        this.include(VaccinationCenter.class);
         return vaccinationCenter;
     }
 
@@ -67,6 +68,7 @@ public class Appointment extends Model {
     }
 
     public Vaccine getVaccine() {
+        this.include(Vaccine.class);
         return vaccine;
     }
 
@@ -130,5 +132,16 @@ public class Appointment extends Model {
 
     public void absentAppointment() {
         appointmentStatus = AppointmentStatus.ABSENT;
+    }
+
+    //
+    // For use with table
+    //
+    public String getAppointmentCenterName() {
+        return getVaccinationCenter().getVaccinationCenterName();
+    }
+
+    public String getVaccineName() {
+        return getVaccine().getVaccineBatch().getVaccineType().getVaccineName();
     }
 }

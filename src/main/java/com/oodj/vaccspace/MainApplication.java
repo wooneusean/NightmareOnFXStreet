@@ -1,5 +1,6 @@
 package com.oodj.vaccspace;
 
+import com.oodj.vaccspace.models.*;
 import com.oodj.vaccspace.utils.Navigator;
 import javafx.application.Application;
 import javafx.scene.image.Image;
@@ -7,6 +8,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import textorm.TextORM;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 
@@ -38,6 +40,25 @@ public class MainApplication extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void seedModels() {
+        Citizen citizen = new Citizen("qwe", "0123456789", "qwe@mail.com", "qwe", VaccinationStatus.NOT_REGISTERED, "010203040506");
+        citizen.save();
+
+        VaccinationCenter vc = new VaccinationCenter("Bukit Jalil", CenterStatus.OPEN);
+        vc.save();
+
+        VaccineType vt = new VaccineType("Sinovac", 2);
+        vt.save();
+
+        VaccineBatch vb = new VaccineBatch(vt.getId(), 200, vc.getId(), LocalDate.now());
+        vb.save();
+
+        Vaccine vaccine = new Vaccine(vb.getId(), LocalDate.now(), VaccineStatus.AVAILABLE);
+        vaccine.save();
+
+        new Appointment(citizen.getId(), vc.getId(), vaccine.getId(), LocalDate.now(), AppointmentStatus.CONFIRMED, Dose.FIRST).save();
     }
 }
 

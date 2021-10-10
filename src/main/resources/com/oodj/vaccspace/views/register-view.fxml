@@ -11,7 +11,7 @@
 <BorderPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="582.0" prefWidth="924.0" styleClass="bg-color" stylesheets="@../styles/main.css"
             xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.oodj.vaccspace.controllers.RegisterController">
+            fx:controller="com.oodj.vaccspace.controllers.register.RegisterController">
     <center>
         <VBox prefHeight="200.0" prefWidth="100.0" spacing="14.0" BorderPane.alignment="CENTER">
             <children>

@@ -34,11 +34,16 @@ public class Page {
     public static void showDialog(Window owner, DialogType type, String title, String content) {
         MFXStageDialog dialog = new MFXStageDialog(type, title, content);
         dialog.setOwner(owner);
+
         dialog.setAnimationMillis(250);
+        dialog.setAnimate(true);
+
         dialog.setModality(Modality.APPLICATION_MODAL);
+
         dialog.setScrimBackground(true);
-        dialog.setCenterInOwner(true);
         dialog.setScrimOpacity(0.75);
+
+        dialog.setCenterInOwner(true);
         dialog.show();
     }
 }

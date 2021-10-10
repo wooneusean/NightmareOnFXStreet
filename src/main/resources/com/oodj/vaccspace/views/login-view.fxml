@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="582.0" prefWidth="924.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.LoginController">
+<BorderPane prefHeight="582.0" prefWidth="924.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.login.LoginController">
     <right>
         <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="582.0" prefWidth="334.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
@@ -69,7 +69,10 @@
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="582.0" fitWidth="590.0" layoutX="95.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <ImageView fitHeight="895.0" fitWidth="644.0" layoutY="-178.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-135.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.260498046875" AnchorPane.topAnchor="-178.0">
+               <image>
+                  <Image url="@../images/vaccspace.jpg" />
+               </image></ImageView>
                 <Label layoutX="14.0" layoutY="545.0" text="Don't have an account?">
                <styleClass>
                   <String fx:value="body-regular" />

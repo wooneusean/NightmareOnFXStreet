@@ -1,1 +1,6 @@
-tableName:Citizen|autoIncrement:3
+autoIncrement:2|tableName:Citizen
+autoIncrement:2|tableName:VaccinationCenter
+autoIncrement:2|tableName:VaccineType
+autoIncrement:2|tableName:VaccineBatch
+autoIncrement:2|tableName:Vaccine
+autoIncrement:7|tableName:Appointment

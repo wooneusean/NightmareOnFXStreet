@@ -1,0 +1,1 @@
+centerStatus:OPEN|id:1|vaccinationCenterName:Bukit Jalil

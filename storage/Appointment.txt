@@ -1,0 +1,6 @@
+vaccineId:1|dose:FIRST|vaccinationCenterId:1|appointmentStatus:CONFIRMED|personId:1|id:1|appointmentDate:2021-10-09
+vaccineId:1|dose:FIRST|vaccinationCenterId:1|appointmentStatus:AWAITING_CONFIRMATION|personId:1|id:2|appointmentDate:2022-01-09
+vaccineId:1|dose:FIRST|vaccinationCenterId:1|appointmentStatus:AWAITING_CONFIRMATION|personId:1|id:3|appointmentDate:2021-11-19
+vaccineId:1|dose:FIRST|vaccinationCenterId:1|appointmentStatus:AWAITING_CONFIRMATION|personId:1|id:4|appointmentDate:2023-10-12
+vaccineId:1|dose:FIRST|vaccinationCenterId:1|appointmentStatus:AWAITING_CONFIRMATION|personId:1|id:5|appointmentDate:2027-10-09
+vaccineId:1|dose:FIRST|vaccinationCenterId:1|appointmentStatus:AWAITING_CONFIRMATION|personId:1|id:6|appointmentDate:2060-11-09

@@ -1,0 +1,1 @@
+vaccineName:Sinovac|id:1|dosesNeeded:2

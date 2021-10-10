@@ -15,4 +15,12 @@ module com.oodj.vaccspace {
     opens com.oodj.vaccspace.utils to javafx.fxml;
     exports com.oodj.vaccspace.controllers;
     opens com.oodj.vaccspace.controllers to javafx.fxml;
+    exports com.oodj.vaccspace.controllers.dashboard;
+    opens com.oodj.vaccspace.controllers.dashboard to javafx.fxml;
+    exports com.oodj.vaccspace.controllers.login;
+    opens com.oodj.vaccspace.controllers.login to javafx.fxml;
+    exports com.oodj.vaccspace.controllers.register;
+    opens com.oodj.vaccspace.controllers.register to javafx.fxml;
+    exports com.oodj.vaccspace.controllers.appointments;
+    opens com.oodj.vaccspace.controllers.appointments to javafx.fxml;
 }
