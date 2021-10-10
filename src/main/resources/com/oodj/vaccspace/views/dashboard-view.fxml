@@ -12,15 +12,15 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="924.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.dashboard.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.dashboard.DashboardController">
     <left>
-        <VBox fx:id="vbNavigation" prefHeight="200.0" prefWidth="120.0" BorderPane.alignment="CENTER">
+        <VBox fx:id="vbNavigation" prefWidth="120.0" BorderPane.alignment="CENTER">
         </VBox>
     </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="14.0" BorderPane.alignment="CENTER">
+      <VBox spacing="14.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" spacing="14.0">
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="14.0">
                <children>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -43,7 +43,7 @@
                   </MFXPillButton>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <children>
                   <Label fx:id="lblGreeting" text="Hello, User.">
                      <styleClass>
@@ -66,7 +66,7 @@
             </HBox>
             <MFXTableView fx:id="tvAppointments" headerText="Vaccination Appointments" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
             </MFXTableView>
-            <HBox alignment="TOP_RIGHT">
+            <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <children>
                   <MFXPillButton fx:id="btnNewAppointment" onAction="#onNewAppointmentPressed" rippleArc="40.0" text="New Appointment">
                      <styleClass>

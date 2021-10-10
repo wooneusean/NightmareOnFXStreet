@@ -116,7 +116,6 @@ public class DashboardController implements Initializable {
         // Table stuff
         // https://github.com/palexdev/MaterialFX/blob/fcd13025937704043b50afc51b8b42ee8ea397ce/demo/src/main/java/io/github/palexdev/materialfx/demo/controllers/TableViewsDemoController.java#L134
 
-        tvAppointments.setItems(FXCollections.observableArrayList(citizen.getAppointments()));
 
         MFXTableColumn<Appointment> appointmentLocation = new MFXTableColumn<>("Location", Comparator.comparing(Appointment::getAppointmentCenterName));
         appointmentLocation.setRowCellFunction(appointment -> new MFXTableRowCell(appointment.getAppointmentCenterName()));
@@ -132,21 +131,28 @@ public class DashboardController implements Initializable {
 
         MFXTableColumn<Appointment> actions = new MFXTableColumn<>("Actions");
         actions.setRowCellFunction(appointment -> {
-            MFXTableRowCell rowCell = new MFXTableRowCell("Show");
-            rowCell.setBorder(new Border(new BorderStroke(Color.rgb(230, 230, 230), BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(1))));
-            rowCell.setPadding(new Insets(5));
-            rowCell.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> System.out.println(appointment.getAppointmentDate()));
+            MFXTableRowCell rowCell = new MFXTableRowCell("");
 
+            MFXButton btn = new MFXButton("Show");
+            btn.setBackground(new Background(new BackgroundFill(Color.rgb(100, 134, 221), new CornerRadii(3), new Insets(0))));
+            btn.setTextFill(Color.WHITE);
+
+            btn.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> System.out.println(appointment.getAppointmentDate()));
+            rowCell.setLeadingGraphic(btn);
             return rowCell;
         });
 
         tvAppointments.getTableColumns().addAll(appointmentLocation, appointmentVaccine, appointmentDate, appointmentStatus, actions);
+
+        if (citizen.getAppointments() == null || citizen.getAppointments().size() == 0) return;
+
+        tvAppointments.setItems(FXCollections.observableArrayList(citizen.getAppointments()));
     }
 
     private String getGreetingText(String name) {
         Calendar rightNow = Calendar.getInstance();
         int timeOfDay = rightNow.get(Calendar.HOUR_OF_DAY);
-        String timeGreeting = "";
+        String timeGreeting;
         if (timeOfDay < 12) {
             timeGreeting = "Good morning, %s";
         } else if (timeOfDay < 16) {

@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.10'
+    id "com.github.johnrengelman.shadow" version "7.1.0"
 }
 
 group 'com.oodj'
@@ -44,15 +45,15 @@ test {
     useJUnitPlatform()
 }
 
-task fatJar(type: Jar) {
-    manifest {
-        attributes 'Main-Class': 'com.oodj.vaccspace.Launcher'
-    }
-    archiveClassifier = "all"
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    from {
-        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    with jar
-}
+//task fatJar(type: Jar) {
+//    manifest {
+//        attributes 'Main-Class': 'com.oodj.vaccspace.Launcher'
+//    }
+//    archiveClassifier = "all"
+//    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+//    from {
+//        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+//        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
+//    with jar
+//}
