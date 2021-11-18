@@ -16,15 +16,13 @@ public class Vaccine extends Model {
     @HasOne(foreignKey = "vaccineBatchId")
     private VaccineBatch vaccineBatch;
 
-    @Column
-    private LocalDate expiryDate;
+
 
     @Column
     private VaccineStatus vaccineStatus;
 
-    public Vaccine(int vaccineBatchId, LocalDate expiryDate, VaccineStatus vaccineStatus) {
+    public Vaccine(int vaccineBatchId, VaccineStatus vaccineStatus) {
         this.vaccineBatchId = vaccineBatchId;
-        this.expiryDate = expiryDate;
         this.vaccineStatus = vaccineStatus;
     }
 
@@ -47,14 +45,6 @@ public class Vaccine extends Model {
 
     public void setVaccineBatchId(int vaccineBatchId) {
         this.vaccineBatchId = vaccineBatchId;
-    }
-
-    public LocalDate getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(LocalDate expiryDate) {
-        this.expiryDate = expiryDate;
     }
 
     public VaccineStatus getVaccineStatus() {

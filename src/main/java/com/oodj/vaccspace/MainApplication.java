@@ -52,10 +52,10 @@ public class MainApplication extends Application {
         VaccineType vt = new VaccineType("Sinovac", 2);
         vt.save();
 
-        VaccineBatch vb = new VaccineBatch(vt.getId(), 200, vc.getId(), LocalDate.now());
+        VaccineBatch vb = new VaccineBatch(vt.getId(), 200, vc.getId(), LocalDate.now(), LocalDate.of(2022, 5, 13), 200);
         vb.save();
 
-        Vaccine vaccine = new Vaccine(vb.getId(), LocalDate.now(), VaccineStatus.AVAILABLE);
+        Vaccine vaccine = new Vaccine(vb.getId(), VaccineStatus.AVAILABLE);
         vaccine.save();
 
         new Appointment(citizen.getId(), vc.getId(), vaccine.getId(), LocalDate.now(), AppointmentStatus.CONFIRMED, Dose.FIRST).save();
