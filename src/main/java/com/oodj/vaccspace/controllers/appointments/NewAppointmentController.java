@@ -17,6 +17,7 @@ import javafx.scene.control.DatePicker;
 import textorm.TextORM;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -36,6 +37,26 @@ public class NewAppointmentController extends BaseController implements Initiali
 
     @FXML
     private DatePicker dpDate;
+
+    @FXML
+    void onVaccinationCenterChanged(ActionEvent event) {
+        VaccinationCenter selectedCenter = cbCenter.getSelectionModel().getSelectedItem();
+        selectedCenter.include(VaccineBatch.class);
+        ArrayList<VaccineType> vaccineTypes = new ArrayList<>();
+        selectedCenter.getVaccineBatches().forEach(centerBatch -> {
+            if (vaccineTypes.stream().noneMatch(accumulatorType ->
+                    Objects.equals(accumulatorType.getVaccineName(), centerBatch.getVaccineType().getVaccineName())
+            )) {
+                vaccineTypes.add(centerBatch.getVaccineType());
+            }
+        });
+
+        ObservableList<VaccineType> vaccines = FXCollections.observableList(
+                Objects.requireNonNull(vaccineTypes)
+        );
+        cbVaccine.setItems(vaccines);
+        cbVaccine.setDisable(false);
+    }
 
     @FXML
     void onSubmitPressed(ActionEvent event) {
@@ -73,8 +94,7 @@ public class NewAppointmentController extends BaseController implements Initiali
         ObservableList<VaccinationCenter> centers = FXCollections.observableList(Objects.requireNonNull(TextORM.getAll(VaccinationCenter.class, vacc -> true)));
         cbCenter.setItems(centers);
 
-        ObservableList<VaccineType> vaccines = FXCollections.observableList(Objects.requireNonNull(TextORM.getAll(VaccineType.class, type -> true)));
-        cbVaccine.setItems(vaccines);
+        cbVaccine.setDisable(true);
     }
 
     @FXML
