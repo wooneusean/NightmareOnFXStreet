@@ -4,14 +4,16 @@ import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.controllers.dashboard.DashboardController;
 import com.oodj.vaccspace.models.*;
+import com.oodj.vaccspace.utils.Page;
 import io.github.euseanwoon.MFXPillButton;
-import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.enums.DialogType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import textorm.TextORM;
 
 import java.net.URL;
@@ -19,7 +21,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class NewAppointmentController extends BaseController implements Initializable {
-
 
     @FXML
     private MFXPillButton btnClose;
@@ -34,14 +35,37 @@ public class NewAppointmentController extends BaseController implements Initiali
     private ComboBox<VaccineType> cbVaccine;
 
     @FXML
-    private MFXDatePicker dpDate;
+    private DatePicker dpDate;
 
     @FXML
     void onSubmitPressed(ActionEvent event) {
-        Appointment appointment = new Appointment(Global.getUserId(), cbCenter.getSelectionModel().getSelectedItem().getId(), cbVaccine.getSelectionModel().getSelectedItem().getId(), dpDate.getDate(), AppointmentStatus.AWAITING_CONFIRMATION, Dose.FIRST);
+        if (!validateInputs()) {
+            return;
+        }
+
+        Appointment appointment = new Appointment(Global.getUserId(), cbCenter.getSelectionModel().getSelectedItem().getId(), cbVaccine.getSelectionModel().getSelectedItem().getId(), dpDate.getValue(), AppointmentStatus.AWAITING_CONFIRMATION, Dose.FIRST);
         appointment.save();
         getStageDialog().close();
         ((DashboardController) getUserData()).refresh();
+    }
+
+    boolean validateInputs() {
+        if (cbCenter.getSelectionModel().getSelectedItem() == null) {
+            Page.showDialog(cbCenter.getScene().getWindow(), DialogType.ERROR, "Error: No Vaccination Center Selected", "Please ensure you select a vaccination center!");
+            return false;
+        }
+
+        if (cbVaccine.getSelectionModel().getSelectedItem() == null) {
+            Page.showDialog(cbCenter.getScene().getWindow(), DialogType.ERROR, "Error: No Vaccine Selected", "Please ensure you select a vaccine!");
+            return false;
+        }
+
+        if (dpDate.getValue() == null) {
+            Page.showDialog(cbCenter.getScene().getWindow(), DialogType.ERROR, "Error: No Date Selected", "Please ensure you select an appointment date!");
+            return false;
+        }
+
+        return true;
     }
 
     @Override
