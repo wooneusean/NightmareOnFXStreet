@@ -8,8 +8,6 @@ import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.enums.DialogType;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,7 +22,7 @@ public class LoginController implements Initializable {
     LoginViewModel vm = null;
 
     @FXML
-    private MFXTextField tfUsername;
+    private MFXTextField tfEmail;
 
     @FXML
     private MFXPasswordField tfPassword;
@@ -37,13 +35,13 @@ public class LoginController implements Initializable {
 
     @FXML
     void onLoginPressed(ActionEvent event) {
-        Citizen citizen = TextORM.getOne(Citizen.class, data -> Objects.equals(data.get("name"), vm.getUsername()) && Objects.equals(data.get("password"), vm.getPassword()));
+        Citizen citizen = TextORM.getOne(Citizen.class, data -> Objects.equals(data.get("email"), vm.getEmail()) && Objects.equals(data.get("password"), vm.getPassword()));
 
         if (citizen != null) {
             Global.setUserId(citizen.getId());
             Navigator.navigate("dashboard");
         } else {
-            Page.showDialog(tfUsername.getScene().getWindow(), DialogType.ERROR, "Error: Invalid Credentials", "Username and password combination does not match any records!");
+            Page.showDialog(tfEmail.getScene().getWindow(), DialogType.ERROR, "Error: Invalid Credentials", "Username and password combination does not match any records!");
         }
     }
 
@@ -58,7 +56,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        vm = new LoginViewModel(tfUsername.textProperty(), tfPassword.passwordProperty());
+        vm = new LoginViewModel(tfEmail.textProperty(), tfPassword.passwordProperty());
     }
 }
 
