@@ -1,2 +1,2 @@
 vaccinationStatus:NOT_REGISTERED|password:qwe|phone:0123456789|name:qwe|IC:010203040506|id:1|email:qwe@mail.com
-vaccinationStatus:NOT_REGISTERED|password:weedweed|phone:0129986301|name:Swag Lord|IC:010306101111|id:2|email:swaglord@mail.com
+vaccinationStatus:AWAITING_FIRST_DOSE|password:asd|phone:0123456789|name:asd|IC:010203040506|id:2|email:asd@mail.com

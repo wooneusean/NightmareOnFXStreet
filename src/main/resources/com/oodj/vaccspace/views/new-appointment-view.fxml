@@ -26,6 +26,17 @@
     </HBox>
    <VBox spacing="8.0">
       <children>
+          <Label text="Select your preferred vaccination center:">
+              <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+              </styleClass>
+          </Label>
+         <ComboBox fx:id="cbCenter" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onVaccinationCenterChanged" prefWidth="150.0" styleClass="body-medium" />
+      </children>
+   </VBox>
+   <VBox spacing="8.0">
+      <children>
           <Label text="Select your preferred vaccine:">
               <styleClass>
                   <String fx:value="body-regular" />
@@ -33,17 +44,6 @@
               </styleClass>
           </Label>
          <ComboBox fx:id="cbVaccine" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" styleClass="body-medium" />
-      </children>
-   </VBox>
-   <VBox spacing="8.0">
-      <children>
-          <Label text="Select your preferred vaccination center:">
-              <styleClass>
-                  <String fx:value="body-regular" />
-                  <String fx:value="h4" />
-              </styleClass>
-          </Label>
-         <ComboBox fx:id="cbCenter" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" styleClass="body-medium" />
       </children>
    </VBox>
    <VBox spacing="8.0">
