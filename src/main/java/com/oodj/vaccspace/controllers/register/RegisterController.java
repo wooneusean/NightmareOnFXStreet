@@ -19,6 +19,8 @@ import textorm.TextORM;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterController implements Initializable {
 
@@ -55,6 +57,48 @@ public class RegisterController implements Initializable {
 
     @FXML
     void onRegisterPressed(ActionEvent event) {
+        //Empty Fields Validation
+        if (vm.getName().equals("") || vm.getPassword().equals("") || vm.getRepeatPassword().equals("") || vm.getPhoneNumber().equals("") || vm.getEmail().equals("") || vm.getIdentificationNumber().equals("")) {
+            Page.showDialog(container.getScene().getWindow(), DialogType.ERROR, "Error: Empty fields", "All fields must be filled in!");
+            return;
+        }
+
+        // Name Validation
+        if (vm.getName().matches(".*\\d.*")) {
+            Page.showDialog(container.getScene().getWindow(), DialogType.ERROR, "Error: Invalid Name", "The name should not contain any numbers!");
+            return;
+        }
+
+        //Password Validation
+        if (!vm.getPassword().equals(vm.getRepeatPassword())) {
+            Page.showDialog(container.getScene().getWindow(), DialogType.ERROR, "Error: Invalid Password", "The passwords do not match!");
+            return;
+        }
+
+        if (vm.getPassword().length() < 8) {
+            Page.showDialog(container.getScene().getWindow(), DialogType.ERROR, "Error: Invalid Password", "Your password must have at least 8 characters!");
+            return;
+        }
+
+        //Phone Validation
+        if (!vm.getPhoneNumber().matches("^[0-9]*$")) {
+            Page.showDialog(container.getScene().getWindow(), DialogType.ERROR, "Error: Invalid Phone", "Phone number must only have numbers!");
+            return;
+        }
+
+        //Identification Number Validation
+        if (!vm.getIdentificationNumber().matches("^[0-9]*$")) {
+            Page.showDialog(container.getScene().getWindow(), DialogType.ERROR, "Error: Invalid IC Number", "Identification number must only have numbers!");
+            return;
+        }
+
+        //Email Validation
+        if (!validateEmail(vm.getEmail())) {
+            Page.showDialog(container.getScene().getWindow(), DialogType.ERROR, "Error: Invalid Email", "Invalid Email Address!");
+            return;
+        }
+
+        //IC Duplication Validation
         Citizen duplicate = TextORM.getOne(Citizen.class, data -> Objects.equals(data.get("IC"), vm.getIdentificationNumber()));
 
         if (duplicate != null) {
@@ -62,10 +106,19 @@ public class RegisterController implements Initializable {
             return;
         }
 
+        //Success case
         Citizen newCitizen = new Citizen(vm.getName(), vm.getPhoneNumber(), vm.getEmail(), vm.getPassword(), VaccinationStatus.NOT_REGISTERED, vm.getIdentificationNumber());
         newCitizen.save();
         Page.showDialog(container.getScene().getWindow(), DialogType.INFO, "Success","Successfully registered.");
         Navigator.navigate("login");
+    }
+
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    public static boolean validateEmail(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
     }
 
     @Override
