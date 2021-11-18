@@ -4,11 +4,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 class LoginViewModel {
-    private final StringProperty username = new SimpleStringProperty("");
+    private final StringProperty email = new SimpleStringProperty("");
     private final StringProperty password = new SimpleStringProperty("");
 
-    public LoginViewModel(StringProperty username, StringProperty password) {
-        this.username.bindBidirectional(username);
+    public LoginViewModel(StringProperty email, StringProperty password) {
+        this.email.bindBidirectional(email);
         this.password.bindBidirectional(password);
     }
 
@@ -24,15 +24,15 @@ class LoginViewModel {
         return password;
     }
 
-    public String getUsername() {
-        return username.get();
+    public String getEmail() {
+        return email.get();
     }
 
-    public void setUsername(String username) {
-        this.username.set(username);
+    public void setEmail(String email) {
+        this.email.set(email);
     }
 
-    public StringProperty usernameProperty() {
-        return username;
+    public StringProperty emailProperty() {
+        return email;
     }
 }

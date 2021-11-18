@@ -28,12 +28,12 @@
                         <Insets bottom="75.0" top="-75.0" />
                     </VBox.margin>
                 </Label>
-                <Label text="Username">
+                <Label text="Email">
                <styleClass>
                   <String fx:value="body-medium" />
                   <String fx:value="h4" />
                </styleClass></Label>
-                <MFXTextField fx:id="tfUsername" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
+                <MFXTextField fx:id="tfEmail" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
                <styleClass>
                   <String fx:value="body-medium" />
                   <String fx:value="h4" />

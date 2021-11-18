@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.euseanwoon.MFXPillButton?>
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -32,7 +32,7 @@
                   <String fx:value="h4" />
               </styleClass>
           </Label>
-          <MFXComboBox fx:id="cbVaccine" comboStyle="STYLE2" lineColor="#00c0eb" maxWidth="1.7976931348623157E308" />
+         <ComboBox fx:id="cbVaccine" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" styleClass="body-regular" />
       </children>
    </VBox>
    <VBox spacing="8.0">
@@ -43,7 +43,7 @@
                   <String fx:value="h4" />
               </styleClass>
           </Label>
-          <MFXComboBox fx:id="cbCenter" comboStyle="STYLE2" lineColor="#00c0eb" maxWidth="1.7976931348623157E308" />
+         <ComboBox fx:id="cbCenter" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" styleClass="body-medium" />
       </children>
    </VBox>
    <VBox spacing="8.0">

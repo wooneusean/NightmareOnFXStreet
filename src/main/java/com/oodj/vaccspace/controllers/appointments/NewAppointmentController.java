@@ -5,14 +5,13 @@ import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.controllers.dashboard.DashboardController;
 import com.oodj.vaccspace.models.*;
 import io.github.euseanwoon.MFXPillButton;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.utils.BindingUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import textorm.TextORM;
 
 import java.net.URL;
@@ -29,17 +28,17 @@ public class NewAppointmentController extends BaseController implements Initiali
     private MFXPillButton btnSubmit;
 
     @FXML
-    private MFXComboBox<VaccinationCenter> cbCenter;
+    private ComboBox<VaccinationCenter> cbCenter;
 
     @FXML
-    private MFXComboBox<VaccineType> cbVaccine;
+    private ComboBox<VaccineType> cbVaccine;
 
     @FXML
     private MFXDatePicker dpDate;
 
     @FXML
     void onSubmitPressed(ActionEvent event) {
-        Appointment appointment = new Appointment(Global.getUserId(), cbCenter.getSelectedValue().getId(), cbVaccine.getSelectedValue().getId(), dpDate.getDate(), AppointmentStatus.AWAITING_CONFIRMATION, Dose.FIRST);
+        Appointment appointment = new Appointment(Global.getUserId(), cbCenter.getSelectionModel().getSelectedItem().getId(), cbVaccine.getSelectionModel().getSelectedItem().getId(), dpDate.getDate(), AppointmentStatus.AWAITING_CONFIRMATION, Dose.FIRST);
         appointment.save();
         getStageDialog().close();
         ((DashboardController) getUserData()).refresh();
@@ -49,13 +48,9 @@ public class NewAppointmentController extends BaseController implements Initiali
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList<VaccinationCenter> centers = FXCollections.observableList(Objects.requireNonNull(TextORM.getAll(VaccinationCenter.class, vacc -> true)));
         cbCenter.setItems(centers);
-        cbCenter.setValidated(true);
-        cbCenter.getValidator().add(BindingUtils.toProperty(cbCenter.getSelectionModel().selectedIndexProperty().isNotEqualTo(-1)), "A value must be selected");
 
         ObservableList<VaccineType> vaccines = FXCollections.observableList(Objects.requireNonNull(TextORM.getAll(VaccineType.class, type -> true)));
         cbVaccine.setItems(vaccines);
-        cbVaccine.setValidated(true);
-        cbVaccine.getValidator().add(BindingUtils.toProperty(cbVaccine.getSelectionModel().selectedIndexProperty().isNotEqualTo(-1)), "A value must be selected");
     }
 
     @FXML
