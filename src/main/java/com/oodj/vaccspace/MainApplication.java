@@ -38,7 +38,6 @@ public class MainApplication extends Application {
         stage.setResizable(false);
 
         try {
-            // Change initialRoute to test different pages.
             Navigator.init(stage, "login");
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,9 +75,6 @@ public class MainApplication extends Application {
 
         VaccineBatch sinovacFirstBatch = new VaccineBatch(sinovac.getId(), 200, bukitJalil.getId(), LocalDate.now());
         sinovacFirstBatch.save();
-
-        VaccineBatch sinovacSecondBatch = new VaccineBatch(sinovac.getId(), 200, bukitJalil.getId(), LocalDate.now());
-        sinovacSecondBatch.save();
 
         VaccineBatch pfizerBatch1 = new VaccineBatch(pfizer.getId(), 250, bukitJalil.getId(), LocalDate.now());
         pfizerBatch1.save();

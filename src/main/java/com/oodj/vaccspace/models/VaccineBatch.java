@@ -29,14 +29,22 @@ public class VaccineBatch extends Model {
     @HasMany(targetKey = "vaccineBatchId")
     private List<Vaccine> vaccines;
 
+    @Column
+    private int availableAmount;
+
+    @Column
+    private LocalDate expiryDate;
+
     public VaccineBatch() {
     }
 
-    public VaccineBatch(int vaccineTypeId, int amount, int vaccinationCenterId, LocalDate arrivalDate) {
+    public VaccineBatch(int vaccineTypeId, int amount, int vaccinationCenterId, LocalDate arrivalDate, LocalDate expiryDate, int availableAmount) {
         this.vaccineTypeId = vaccineTypeId;
         this.amount = amount;
         this.vaccinationCenterId = vaccinationCenterId;
         this.arrivalDate = arrivalDate;
+        this.expiryDate = expiryDate;
+        this.availableAmount = availableAmount;
     }
 
     public VaccineType getVaccineType() {
@@ -93,4 +101,12 @@ public class VaccineBatch extends Model {
     public void setArrivalDate(LocalDate arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
+
+    public int getAvailableAmount() { return availableAmount; }
+
+    public void setAvailableAmount(int availableAmount) { this.availableAmount = availableAmount; }
+
+    public LocalDate getExpiryDate() { return expiryDate; }
+
+    public void setExpiryDate(LocalDate expiryDate) { this.expiryDate = expiryDate; }
 }
