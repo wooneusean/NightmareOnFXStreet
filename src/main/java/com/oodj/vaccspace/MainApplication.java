@@ -23,7 +23,7 @@ public class MainApplication extends Application {
         TextORM.setStoragePath("storage");
         TextORM.setMetaStoragePath("storage");
 
-        // seedModels();
+        seedModels();
 
         // Set icons
         stage.getIcons().add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("images/vaccine_small.png"))));
@@ -73,27 +73,27 @@ public class MainApplication extends Application {
 
         // Batches
 
-        VaccineBatch sinovacFirstBatch = new VaccineBatch(sinovac.getId(), 200, bukitJalil.getId(), LocalDate.now());
+        VaccineBatch sinovacFirstBatch = new VaccineBatch(sinovac.getId(), 200, 200, bukitJalil.getId(), LocalDate.now(), LocalDate.now().plusYears(3));
         sinovacFirstBatch.save();
 
-        VaccineBatch pfizerBatch1 = new VaccineBatch(pfizer.getId(), 250, bukitJalil.getId(), LocalDate.now());
+        VaccineBatch pfizerBatch1 = new VaccineBatch(pfizer.getId(), 250, 250, bukitJalil.getId(), LocalDate.now(), LocalDate.now().plusYears(3));
         pfizerBatch1.save();
 
-        VaccineBatch pfizerBatch2 = new VaccineBatch(pfizer.getId(), 250, movenpick.getId(), LocalDate.now());
+        VaccineBatch pfizerBatch2 = new VaccineBatch(pfizer.getId(), 250, 250, movenpick.getId(), LocalDate.now(), LocalDate.now().plusYears(3));
         pfizerBatch2.save();
 
-        VaccineBatch johnsonBatch1 = new VaccineBatch(johnson.getId(), 125, movenpick.getId(), LocalDate.now());
+        VaccineBatch johnsonBatch1 = new VaccineBatch(johnson.getId(), 125, 125, movenpick.getId(), LocalDate.now(), LocalDate.now().plusYears(3));
         johnsonBatch1.save();
 
         // Vaccines
 
-        Vaccine sinovacVaccine = new Vaccine(sinovacFirstBatch.getId(), LocalDate.now(), VaccineStatus.AVAILABLE);
+        Vaccine sinovacVaccine = new Vaccine(sinovacFirstBatch.getId(), VaccineStatus.AVAILABLE);
         sinovacVaccine.save();
 
-        Vaccine pfizerVaccine = new Vaccine(pfizerBatch1.getId(), LocalDate.now(), VaccineStatus.AVAILABLE);
+        Vaccine pfizerVaccine = new Vaccine(pfizerBatch1.getId(), VaccineStatus.AVAILABLE);
         pfizerVaccine.save();
 
-        Vaccine johnsonVaccine = new Vaccine(johnsonBatch1.getId(), LocalDate.now(), VaccineStatus.USED);
+        Vaccine johnsonVaccine = new Vaccine(johnsonBatch1.getId(), VaccineStatus.USED);
         johnsonVaccine.save();
 
         new Appointment(citizen1.getId(), bukitJalil.getId(), sinovacVaccine.getId(), LocalDate.now(), AppointmentStatus.CONFIRMED, Dose.FIRST).save();

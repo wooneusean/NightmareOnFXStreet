@@ -38,13 +38,13 @@ public class VaccineBatch extends Model {
     public VaccineBatch() {
     }
 
-    public VaccineBatch(int vaccineTypeId, int amount, int vaccinationCenterId, LocalDate arrivalDate, LocalDate expiryDate, int availableAmount) {
+    public VaccineBatch(int vaccineTypeId, int amount, int availableAmount, int vaccinationCenterId, LocalDate arrivalDate, LocalDate expiryDate) {
         this.vaccineTypeId = vaccineTypeId;
         this.amount = amount;
+        this.availableAmount = availableAmount;
         this.vaccinationCenterId = vaccinationCenterId;
         this.arrivalDate = arrivalDate;
         this.expiryDate = expiryDate;
-        this.availableAmount = availableAmount;
     }
 
     public VaccineType getVaccineType() {
@@ -102,11 +102,19 @@ public class VaccineBatch extends Model {
         this.arrivalDate = arrivalDate;
     }
 
-    public int getAvailableAmount() { return availableAmount; }
+    public int getAvailableAmount() {
+        return availableAmount;
+    }
 
-    public void setAvailableAmount(int availableAmount) { this.availableAmount = availableAmount; }
+    public void setAvailableAmount(int availableAmount) {
+        this.availableAmount = availableAmount;
+    }
 
-    public LocalDate getExpiryDate() { return expiryDate; }
+    public LocalDate getExpiryDate() {
+        return expiryDate;
+    }
 
-    public void setExpiryDate(LocalDate expiryDate) { this.expiryDate = expiryDate; }
+    public void setExpiryDate(LocalDate expiryDate) {
+        this.expiryDate = expiryDate;
+    }
 }
