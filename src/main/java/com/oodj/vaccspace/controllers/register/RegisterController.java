@@ -19,6 +19,8 @@ import textorm.TextORM;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterController implements Initializable {
 
@@ -91,7 +93,7 @@ public class RegisterController implements Initializable {
         }
 
         //Email Validation
-        if (!vm.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+        if (!validateEmail(vm.getEmail())) {
             Page.showDialog(container.getScene().getWindow(), DialogType.ERROR, "Error: Invalid Email", "Invalid Email Address!");
             return;
         }
@@ -109,6 +111,14 @@ public class RegisterController implements Initializable {
         newCitizen.save();
         Page.showDialog(container.getScene().getWindow(), DialogType.INFO, "Success","Successfully registered.");
         Navigator.navigate("login");
+    }
+
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    public static boolean validateEmail(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
     }
 
     @Override
