@@ -18,12 +18,16 @@ public class TextORM {
     private static Path storagePath = Paths.get("");
     private static Path metaStoragePath = storagePath;
 
-    public static void setStoragePath(String storagePath) {
-        TextORM.storagePath = Paths.get(storagePath);
+    public static Path getMetaStoragePath() {
+        return metaStoragePath;
     }
 
     public static void setMetaStoragePath(String metaStoragePath) {
         TextORM.metaStoragePath = Paths.get(metaStoragePath);
+    }
+
+    public static void setStoragePath(String storagePath) {
+        TextORM.storagePath = Paths.get(storagePath);
     }
 
     public static <T extends Model> List<T> getAll(Class<T> model, Function<HashMap<String, String>, Boolean> filter, Class<? extends Model>... includes) {

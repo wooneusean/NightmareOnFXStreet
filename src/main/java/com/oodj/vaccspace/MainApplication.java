@@ -8,6 +8,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import textorm.TextORM;
 
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -45,6 +46,10 @@ public class MainApplication extends Application {
     }
 
     private void seedModels() {
+        if (Files.exists(TextORM.getMetaStoragePath())) {
+            return;
+        }
+
         // Citizen
         Citizen citizen1 = new Citizen("qwe", "0123456789", "qwe@mail.com", "qwe", VaccinationStatus.NOT_REGISTERED, "010203040506");
         citizen1.save();
