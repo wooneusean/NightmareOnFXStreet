@@ -1,6 +1,7 @@
 package com.oodj.vaccspace.models;
 
 public enum VaccineStatus {
+    BOOKED("Booked"),
     USED("Used"),
     EXPIRED("Expired"),
     VOIDED("Voided"),

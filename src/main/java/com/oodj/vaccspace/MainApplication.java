@@ -103,7 +103,7 @@ public class MainApplication extends Application {
 
         new Appointment(citizen1.getId(), bukitJalil.getId(), sinovacVaccine.getId(), LocalDate.now(), AppointmentStatus.CONFIRMED, Dose.FIRST).save();
 
-        new Appointment(citizen2.getId(), movenpick.getId(), johnsonVaccine.getId(), LocalDate.now(), AppointmentStatus.AWAITING_CONFIRMATION, Dose.FIRST).save();
+        new Appointment(citizen2.getId(), movenpick.getId(), johnsonVaccine.getId(), LocalDate.now(), AppointmentStatus.CONFIRMED, Dose.FIRST).save();
     }
 }
 

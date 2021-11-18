@@ -1,3 +1,7 @@
 vaccineStatus:AVAILABLE|vaccineBatchId:1|id:1
 vaccineStatus:AVAILABLE|vaccineBatchId:2|id:2
 vaccineStatus:USED|vaccineBatchId:4|id:3
+vaccineStatus:BOOKED|vaccineBatchId:4|id:4
+vaccineStatus:BOOKED|vaccineBatchId:1|id:5
+vaccineStatus:BOOKED|vaccineBatchId:4|id:6
+vaccineStatus:BOOKED|vaccineBatchId:1|id:7

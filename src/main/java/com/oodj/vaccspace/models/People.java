@@ -4,7 +4,6 @@ import textorm.Column;
 import textorm.HasMany;
 import textorm.Repository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -38,11 +37,5 @@ public class People extends User {
 
     public String getIdentification() {
         return this.getEmail();
-    }
-
-    public Appointment registerVaccination(int vaccinationCenterId, int vaccineId, LocalDate appointmentDate) {
-        Appointment newAppointment = new Appointment(getId(), vaccinationCenterId, vaccineId, appointmentDate, AppointmentStatus.AWAITING_CONFIRMATION, Dose.FIRST);
-        newAppointment.save();
-        return newAppointment;
     }
 }

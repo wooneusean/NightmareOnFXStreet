@@ -1,7 +1,6 @@
 package com.oodj.vaccspace.models;
 
 public enum AppointmentStatus {
-    AWAITING_CONFIRMATION("Awaiting Confirmation"),
     CONFIRMED("Confirmed"),
     FULFILLED("Fulfilled"),
     VOIDED("Voided"),
