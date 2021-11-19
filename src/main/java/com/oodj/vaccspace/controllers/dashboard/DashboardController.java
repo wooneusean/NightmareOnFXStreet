@@ -5,6 +5,7 @@ import com.oodj.vaccspace.models.Appointment;
 import com.oodj.vaccspace.models.AppointmentStatus;
 import com.oodj.vaccspace.models.Citizen;
 import com.oodj.vaccspace.models.Dose;
+import com.oodj.vaccspace.utils.BorderPaneNodes;
 import com.oodj.vaccspace.utils.Navigator;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -19,10 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.kordamp.ikonli.javafx.FontIcon;
 import textorm.TextORM;
@@ -32,16 +30,16 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class DashboardController implements Initializable {
-    List<DashboardIconButton> iconList = Arrays.asList(
-            new DashboardIconButton("fas-bars", "btnMenu", this::onBtnPress),
-            new DashboardIconButton("fas-home", "btnHome", this::onBtnPress),
-            new DashboardIconButton("fas-syringe", "btnVaccination", this::onBtnPress),
-            new DashboardIconButton("fas-hospital", "btnVaccinationCenter", this::onBtnPress),
-            new DashboardIconButton("fas-cog", "btnSettings", this::onBtnPress)
-    );
-
     Citizen citizen = null;
-
+    @FXML
+    private BorderPane bpDashboard;
+    List<DashboardIconButton> iconList = Arrays.asList(
+            new DashboardIconButton("fas-bars", "btnMenu", actionEvent -> onNavBtnPress(actionEvent, "base")),
+            new DashboardIconButton("fas-home", "btnHome", actionEvent -> onNavBtnPress(actionEvent, "base")),
+            new DashboardIconButton("fas-syringe", "btnVaccination", actionEvent -> onNavBtnPress(actionEvent, "base")),
+            new DashboardIconButton("fas-hospital", "btnVaccinationCenter", actionEvent -> onNavBtnPress(actionEvent, "base")),
+            new DashboardIconButton("fas-cog", "btnSettings", actionEvent -> onNavBtnPress(actionEvent, "base"))
+    );
     @FXML
     private MFXButton btnMenu;
 
@@ -76,8 +74,8 @@ public class DashboardController implements Initializable {
     private MFXPillButton btnNewAppointment;
 
     @FXML
-    void onBtnPress(ActionEvent event) {
-        System.out.println(event.getSource());
+    void onNavBtnPress(ActionEvent event, String route) {
+        Navigator.navigateInContainer(route, bpDashboard, BorderPaneNodes.CENTER);
     }
 
     @FXML

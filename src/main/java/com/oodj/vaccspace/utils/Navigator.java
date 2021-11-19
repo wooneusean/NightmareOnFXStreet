@@ -6,9 +6,13 @@ import com.oodj.vaccspace.mfx.CustomMFXDialog;
 import io.github.palexdev.materialfx.controls.MFXStageDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -66,6 +70,23 @@ public class Navigator {
         primaryStage.setScene(scene);
     }
 
+    public static void navigateInContainer(String route, BorderPane container, BorderPaneNodes nodes) {
+        Parent root = loadPageFromFXML(route);
+
+        switch (nodes) {
+            case BOTTOM -> container.setBottom(root);
+            case TOP -> container.setTop(root);
+            case LEFT -> container.setLeft(root);
+            case RIGHT -> container.setRight(root);
+            case CENTER -> container.setCenter(root);
+        }
+    }
+
+    public static void navigateInContainer(String route, Pane container) {
+        Node root = loadPageFromFXML(route);
+        container.getChildren().setAll(root);
+    }
+
     /**
      * Opens route in new window
      *
@@ -110,7 +131,7 @@ public class Navigator {
         MFXStageDialog dialog = new MFXStageDialog();
         CustomMFXDialog content = new CustomMFXDialog();
 
-        Parent root = null;
+        Parent root;
         try {
             FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(destination.getPath()));
             root = loader.load();
