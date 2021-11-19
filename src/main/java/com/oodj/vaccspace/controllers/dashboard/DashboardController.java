@@ -2,27 +2,33 @@ package com.oodj.vaccspace.controllers.dashboard;
 
 import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.models.Appointment;
+import com.oodj.vaccspace.models.AppointmentStatus;
 import com.oodj.vaccspace.models.Citizen;
+import com.oodj.vaccspace.models.Dose;
 import com.oodj.vaccspace.utils.Navigator;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXTableView;
-import io.github.palexdev.materialfx.controls.cell.MFXTableColumn;
-import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.effects.DepthLevel;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import org.kordamp.ikonli.javafx.FontIcon;
 import textorm.TextORM;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 
 public class DashboardController implements Initializable {
@@ -64,7 +70,7 @@ public class DashboardController implements Initializable {
     private VBox vbNavigation;
 
     @FXML
-    private MFXTableView<Appointment> tvAppointments;
+    private TableView<Appointment> tvAppointments;
 
     @FXML
     private MFXPillButton btnNewAppointment;
@@ -113,40 +119,49 @@ public class DashboardController implements Initializable {
     }
 
     private void setupTable(Citizen citizen) {
-        // Table stuff
-        // https://github.com/palexdev/MaterialFX/blob/fcd13025937704043b50afc51b8b42ee8ea397ce/demo/src/main/java/io/github/palexdev/materialfx/demo/controllers/TableViewsDemoController.java#L134
+        TableColumn<Appointment, String> appointmentLocation = new TableColumn<>("Location");
+        appointmentLocation.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getVaccinationCenter().getVaccinationCenterName()));
 
+        TableColumn<Appointment, String> appointmentVaccine = new TableColumn<>("Vaccine");
+        appointmentVaccine.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getVaccineName()));
 
-        MFXTableColumn<Appointment> appointmentLocation = new MFXTableColumn<>("Location", Comparator.comparing(Appointment::getAppointmentCenterName));
-        appointmentLocation.setRowCellFunction(appointment -> new MFXTableRowCell(appointment.getAppointmentCenterName()));
+        TableColumn<Appointment, LocalDate> appointmentDate = new TableColumn<>("Appointment Date");
+        appointmentDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDate"));
 
-        MFXTableColumn<Appointment> appointmentVaccine = new MFXTableColumn<>("Vaccine", Comparator.comparing(Appointment::getVaccineName));
-        appointmentVaccine.setRowCellFunction(appointment -> new MFXTableRowCell(appointment.getVaccineName()));
+        TableColumn<Appointment, AppointmentStatus> appointmentStatus = new TableColumn<>("Status");
+        appointmentStatus.setCellValueFactory(new PropertyValueFactory<>("appointmentStatus"));
 
-        MFXTableColumn<Appointment> appointmentDate = new MFXTableColumn<>("Appointment Date", Comparator.comparing(Appointment::getAppointmentDate));
-        appointmentDate.setRowCellFunction(appointment -> new MFXTableRowCell(appointment.getAppointmentDate().toString()));
+        TableColumn<Appointment, Dose> dose = new TableColumn<>("Dose");
+        dose.setCellValueFactory(new PropertyValueFactory<>("dose"));
 
-        MFXTableColumn<Appointment> appointmentStatus = new MFXTableColumn<>("Status", Comparator.comparing(Appointment::getAppointmentStatus));
-        appointmentStatus.setRowCellFunction(appointment -> new MFXTableRowCell(appointment.getAppointmentStatus().getValue()));
+        tvAppointments.getColumns().addAll(appointmentLocation, appointmentVaccine, appointmentDate, appointmentStatus, dose);
 
-        MFXTableColumn<Appointment> actions = new MFXTableColumn<>("Actions");
-        actions.setRowCellFunction(appointment -> {
-            MFXTableRowCell rowCell = new MFXTableRowCell("");
-
-            MFXButton btn = new MFXButton("Show");
-            btn.setBackground(new Background(new BackgroundFill(Color.rgb(100, 134, 221), new CornerRadii(3), new Insets(0))));
-            btn.setTextFill(Color.WHITE);
-
-            btn.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> System.out.println(appointment.getAppointmentDate()));
-            rowCell.setLeadingGraphic(btn);
-            return rowCell;
+        // Autosize all columns
+        tvAppointments.widthProperty().addListener((observableValue, number, t1) -> {
+            int numCol = tvAppointments.getColumns().size();
+            for (var col :
+                    tvAppointments.getColumns()) {
+                col.setPrefWidth((t1.doubleValue() - numCol) / numCol);
+            }
         });
-
-        tvAppointments.getTableColumns().addAll(appointmentLocation, appointmentVaccine, appointmentDate, appointmentStatus, actions);
 
         if (citizen.getAppointments() == null || citizen.getAppointments().size() == 0) return;
 
+        citizen.getAppointments().sort(Comparator.comparing(Appointment::getAppointmentDate));
+
         tvAppointments.setItems(FXCollections.observableArrayList(citizen.getAppointments()));
+
+        // https://stackoverflow.com/a/26565887/4987298
+        tvAppointments.setRowFactory(tv -> {
+            TableRow<Appointment> row = new TableRow<>();
+            row.setOnMouseClicked(mouseEvent -> {
+                if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
+                    Appointment rowData = row.getItem();
+                    System.out.println(rowData.getVaccineName());
+                }
+            });
+            return row;
+        });
     }
 
     private String getGreetingText(String name) {

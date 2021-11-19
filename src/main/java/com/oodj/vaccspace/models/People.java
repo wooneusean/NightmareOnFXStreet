@@ -7,7 +7,7 @@ import textorm.Repository;
 import java.util.List;
 
 @Repository
-public class People extends User {
+public abstract class People extends User {
 
     @Column
     VaccinationStatus vaccinationStatus;

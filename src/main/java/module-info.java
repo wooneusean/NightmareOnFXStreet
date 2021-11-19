@@ -23,4 +23,5 @@ module com.oodj.vaccspace {
     opens com.oodj.vaccspace.controllers.register to javafx.fxml;
     exports com.oodj.vaccspace.controllers.appointments;
     opens com.oodj.vaccspace.controllers.appointments to javafx.fxml;
+    exports com.oodj.vaccspace.models;
 }

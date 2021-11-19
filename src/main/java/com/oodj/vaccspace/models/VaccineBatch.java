@@ -21,6 +21,9 @@ public class VaccineBatch extends Model {
     private int amount;
 
     @Column
+    private int availableAmount;
+
+    @Column
     private int vaccinationCenterId;
 
     @HasOne(foreignKey = "vaccinationCenterId")
@@ -31,9 +34,6 @@ public class VaccineBatch extends Model {
 
     @HasMany(targetKey = "vaccineBatchId")
     private List<Vaccine> vaccines;
-
-    @Column
-    private int availableAmount;
 
     @Column
     private LocalDate expiryDate;

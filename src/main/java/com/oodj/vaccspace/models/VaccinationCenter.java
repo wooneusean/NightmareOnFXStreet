@@ -12,10 +12,13 @@ public class VaccinationCenter extends Model {
 
     @Column
     private String vaccinationCenterName;
+
     @Column
     private CenterStatus centerStatus;
+
     //    @Column
 //    private Address address;
+
     @HasMany(targetKey = "vaccinationCenterId")
     private List<VaccineBatch> vaccineBatches;
 

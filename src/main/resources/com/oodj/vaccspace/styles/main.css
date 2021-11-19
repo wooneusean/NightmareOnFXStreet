@@ -177,3 +177,8 @@
     -fx-text-fill: white;
     -fx-font-family: "Poppins Medium";
 }
+
+.table-column {
+    -fx-size: 40;
+    -fx-padding: 12;
+}

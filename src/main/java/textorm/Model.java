@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-public class Model {
+public abstract class Model {
     @Column()
     private int id = -1;
 

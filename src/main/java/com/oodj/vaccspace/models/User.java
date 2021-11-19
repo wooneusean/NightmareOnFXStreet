@@ -5,7 +5,7 @@ import textorm.Model;
 import textorm.Repository;
 
 @Repository
-public class User extends Model {
+public abstract class User extends Model {
 
     @Column
     private String name;
