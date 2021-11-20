@@ -51,11 +51,11 @@ public class MainApplication extends Application {
         }
 
         // Citizen
-        Citizen citizen1 = new Citizen("qwe", "0123456789", "qwe@mail.com", "qwe", VaccinationStatus.NOT_REGISTERED, "010203040506");
+        Person citizen1 = new Person("qwe", "0123456789", "qwe@mail.com", "qwe", VaccinationStatus.NOT_REGISTERED, "010203040506", false);
         citizen1.save();
 
-        Citizen citizen2 = new Citizen("asd", "0123456789", "asd@mail.com", "asd", VaccinationStatus.AWAITING_FIRST_DOSE, "010203040506");
-        citizen2.save();
+        Person noncitizen = new Person("asd", "0123456789", "asd@mail.com", "asd", VaccinationStatus.AWAITING_FIRST_DOSE, "010203040506",true);
+        noncitizen.save();
 
         // Center
 
@@ -103,7 +103,7 @@ public class MainApplication extends Application {
 
         new Appointment(citizen1.getId(), bukitJalil.getId(), sinovacVaccine.getId(), LocalDate.now(), AppointmentStatus.CONFIRMED, Dose.FIRST).save();
 
-        new Appointment(citizen2.getId(), movenpick.getId(), johnsonVaccine.getId(), LocalDate.now(), AppointmentStatus.CONFIRMED, Dose.FIRST).save();
+        new Appointment(noncitizen.getId(), movenpick.getId(), johnsonVaccine.getId(), LocalDate.now(), AppointmentStatus.CONFIRMED, Dose.FIRST).save();
     }
 }
 

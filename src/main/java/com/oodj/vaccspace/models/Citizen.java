@@ -1,17 +1,12 @@
 package com.oodj.vaccspace.models;
 
-import textorm.Column;
 import textorm.Repository;
 
 @Repository
-public class Citizen extends People {
+public class Citizen extends Person {
 
-    @Column
-    private String IC;
-
-    public Citizen(String name, String phone, String email, String password, VaccinationStatus vaccinationStatus, String IC) {
-        super(name, phone, email, password, vaccinationStatus);
-        this.IC = IC;
+    public Citizen(String name, String phone, String email, String password, VaccinationStatus vaccinationStatus, String identificationNumber, boolean isNonCitizen) {
+        super(name, phone, email, password, vaccinationStatus, identificationNumber, isNonCitizen);
     }
 
     public Citizen() {
@@ -19,6 +14,6 @@ public class Citizen extends People {
 
     @Override
     public String getIdentification() {
-        return this.IC;
+        return this.identificationNumber;
     }
 }

@@ -1,6 +1,5 @@
-vaccineId:1|dose:FIRST|vaccinationCenterId:1|appointmentStatus:CONFIRMED|personId:1|id:1|appointmentDate:2021-11-18
-vaccineId:3|dose:FIRST|vaccinationCenterId:2|appointmentStatus:CONFIRMED|personId:2|id:2|appointmentDate:2021-11-18
-vaccineId:4|dose:FIRST|vaccinationCenterId:2|appointmentStatus:CONFIRMED|personId:2|id:3|appointmentDate:2021-12-31
-vaccineId:5|dose:FIRST|vaccinationCenterId:1|appointmentStatus:CONFIRMED|personId:2|id:4|appointmentDate:2022-11-30
-vaccineId:6|dose:FIRST|vaccinationCenterId:2|appointmentStatus:CONFIRMED|personId:1|id:5|appointmentDate:2020-01-31
-vaccineId:7|dose:FIRST|vaccinationCenterId:1|appointmentStatus:CONFIRMED|personId:2|id:6|appointmentDate:2021-11-30
+vaccineId:1|dose:FIRST|vaccinationCenterId:1|appointmentStatus:CONFIRMED|personId:1|id:1|appointmentDate:2021-11-21
+vaccineId:3|dose:FIRST|vaccinationCenterId:2|appointmentStatus:CONFIRMED|personId:2|id:2|appointmentDate:2021-11-21
+vaccineId:4|dose:FIRST|vaccinationCenterId:2|appointmentStatus:CONFIRMED|personId:3|id:3|appointmentDate:2021-11-30
+vaccineId:5|dose:FIRST|vaccinationCenterId:1|appointmentStatus:CONFIRMED|personId:3|id:4|appointmentDate:2021-11-30
+vaccineId:6|dose:FIRST|vaccinationCenterId:2|appointmentStatus:CONFIRMED|personId:3|id:5|appointmentDate:2021-12-01

@@ -182,3 +182,11 @@
     -fx-size: 40;
     -fx-padding: 12;
 }
+
+.mfx-checkbox {
+    -mfx-checked-color: rgb(100, 134, 221);
+}
+
+.body-regular:determinate .label .text {
+    -fx-fill: white;
+}

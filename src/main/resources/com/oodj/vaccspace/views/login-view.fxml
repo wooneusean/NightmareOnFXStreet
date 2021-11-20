@@ -35,7 +35,7 @@
                </styleClass></Label>
                 <MFXTextField fx:id="tfEmail" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
                <styleClass>
-                  <String fx:value="body-medium" />
+                  <String fx:value="body-regular" />
                   <String fx:value="h4" />
                </styleClass></MFXTextField>
                 <Label text="Password">
@@ -45,7 +45,7 @@
                </styleClass></Label>
                 <MFXPasswordField fx:id="tfPassword" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
                <styleClass>
-                  <String fx:value="body-medium" />
+                  <String fx:value="body-regular" />
                   <String fx:value="h4" />
                </styleClass></MFXPasswordField>
                 <HBox alignment="CENTER_RIGHT" spacing="8.0">

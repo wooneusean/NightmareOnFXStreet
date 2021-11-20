@@ -1,7 +1,7 @@
 package com.oodj.vaccspace.controllers.login;
 
 import com.oodj.vaccspace.Global;
-import com.oodj.vaccspace.models.Citizen;
+import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.Page;
 import io.github.euseanwoon.MFXPillButton;
@@ -35,7 +35,7 @@ public class LoginController implements Initializable {
 
     @FXML
     void onLoginPressed(ActionEvent event) {
-        Citizen citizen = TextORM.getOne(Citizen.class, data -> Objects.equals(data.get("email"), vm.getEmail()) && Objects.equals(data.get("password"), vm.getPassword()));
+        Person citizen = TextORM.getOne(Person.class, data -> Objects.equals(data.get("email"), vm.getEmail()) && Objects.equals(data.get("password"), vm.getPassword()));
 
         if (citizen != null) {
             Global.setUserId(citizen.getId());

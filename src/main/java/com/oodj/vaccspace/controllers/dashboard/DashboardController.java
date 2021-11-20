@@ -2,9 +2,7 @@ package com.oodj.vaccspace.controllers.dashboard;
 
 import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.models.Appointment;
-import com.oodj.vaccspace.models.AppointmentStatus;
-import com.oodj.vaccspace.models.Citizen;
-import com.oodj.vaccspace.models.Dose;
+import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.utils.BorderPaneNodes;
 import com.oodj.vaccspace.utils.Navigator;
 import io.github.euseanwoon.MFXPillButton;
@@ -23,14 +21,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.kordamp.ikonli.javafx.FontIcon;
-import textorm.TextORM;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
 
 public class DashboardController implements Initializable {
-    Citizen citizen = null;
+    Person person = null;
+
     @FXML
     private BorderPane bpDashboard;
     List<DashboardIconButton> iconList = Arrays.asList(
@@ -40,6 +38,7 @@ public class DashboardController implements Initializable {
             new DashboardIconButton("fas-hospital", "btnVaccinationCenter", actionEvent -> onNavBtnPress(actionEvent, "base")),
             new DashboardIconButton("fas-cog", "btnSettings", actionEvent -> onNavBtnPress(actionEvent, "base"))
     );
+
     @FXML
     private MFXButton btnMenu;
 
@@ -91,32 +90,40 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        citizen = TextORM.getOne(Citizen.class, data -> Integer.parseInt(data.get("id")) == Global.getUserId(), Appointment.class);
+        person = Global.getLoggedInUser();
 
-        if (citizen == null) {
+        if (person == null) {
             Navigator.navigate("login");
             return;
         }
+
+        person.include(Appointment.class);
 
         setupUI();
     }
 
     public void refresh() {
-        citizen.include(Appointment.class);
-        tvAppointments.setItems(FXCollections.observableArrayList(citizen.getAppointments()));
+        person = Global.getLoggedInUser();
+        person.include(Appointment.class);
+        tvAppointments.setItems(FXCollections.observableArrayList(person.getAppointments()));
+        updateVaccinationStatusBanner();
     }
 
     private void setupUI() {
-        lblVaccinationStatus.setText(String.format("Vaccination Status: %s", citizen.getVaccinationStatus().getValue()));
-        lblVaccinationStatus.setStyle(String.format("-fx-background-color: %s;", citizen.getVaccinationStatus().getColor()));
-        lblGreeting.setText(getGreetingText(citizen.getName()));
+        updateVaccinationStatusBanner();
 
-        setupTable(citizen);
+        setupTable(person);
 
         initializeIcons();
     }
 
-    private void setupTable(Citizen citizen) {
+    private void updateVaccinationStatusBanner() {
+        lblVaccinationStatus.setText(String.format("Vaccination Status: %s", person.getVaccinationStatus().getValue()));
+        lblVaccinationStatus.setStyle(String.format("-fx-background-color: %s;", person.getVaccinationStatus().getColor()));
+        lblGreeting.setText(getGreetingText(person.getName()));
+    }
+
+    private void setupTable(Person citizen) {
         TableColumn<Appointment, String> appointmentLocation = new TableColumn<>("Location");
         appointmentLocation.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getVaccinationCenter().getVaccinationCenterName()));
 
@@ -126,11 +133,11 @@ public class DashboardController implements Initializable {
         TableColumn<Appointment, LocalDate> appointmentDate = new TableColumn<>("Appointment Date");
         appointmentDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDate"));
 
-        TableColumn<Appointment, AppointmentStatus> appointmentStatus = new TableColumn<>("Status");
-        appointmentStatus.setCellValueFactory(new PropertyValueFactory<>("appointmentStatus"));
+        TableColumn<Appointment, String> appointmentStatus = new TableColumn<>("Status");
+        appointmentStatus.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getAppointmentStatus().getValue()));
 
-        TableColumn<Appointment, Dose> dose = new TableColumn<>("Dose");
-        dose.setCellValueFactory(new PropertyValueFactory<>("dose"));
+        TableColumn<Appointment, String> dose = new TableColumn<>("Dose");
+        dose.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getDose().getValue()));
 
         tvAppointments.getColumns().addAll(appointmentLocation, appointmentVaccine, appointmentDate, appointmentStatus, dose);
 

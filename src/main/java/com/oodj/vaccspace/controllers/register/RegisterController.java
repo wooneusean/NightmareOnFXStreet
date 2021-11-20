@@ -1,15 +1,14 @@
 package com.oodj.vaccspace.controllers.register;
 
-import com.oodj.vaccspace.models.Citizen;
+import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.models.VaccinationStatus;
 import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.Page;
 import io.github.euseanwoon.MFXPillButton;
+import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.enums.DialogType;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +22,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterController implements Initializable {
+
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     @FXML
     public BorderPane container;
@@ -49,6 +51,14 @@ public class RegisterController implements Initializable {
 
     @FXML
     private MFXPasswordField tfRepeatPassword;
+
+    @FXML
+    private MFXCheckbox cbIsNotCitizen;
+
+    public static boolean validateEmail(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
+    }
 
     @FXML
     void onBackToLoginPressed(ActionEvent event) {
@@ -99,26 +109,17 @@ public class RegisterController implements Initializable {
         }
 
         //IC Duplication Validation
-        Citizen duplicate = TextORM.getOne(Citizen.class, data -> Objects.equals(data.get("IC"), vm.getIdentificationNumber()));
+        Person duplicate = TextORM.getOne(Person.class, data -> Objects.equals(data.get("identificationNumber"), vm.getIdentificationNumber()));
 
         if (duplicate != null) {
             Page.showDialog(container.getScene().getWindow(), DialogType.ERROR, "Error: Duplicate Identification Number", "The given identification number already exists!");
             return;
         }
 
-        //Success case
-        Citizen newCitizen = new Citizen(vm.getName(), vm.getPhoneNumber(), vm.getEmail(), vm.getPassword(), VaccinationStatus.NOT_REGISTERED, vm.getIdentificationNumber());
-        newCitizen.save();
-        Page.showDialog(container.getScene().getWindow(), DialogType.INFO, "Success","Successfully registered.");
+        Person newPerson = new Person(vm.getName(), vm.getPhoneNumber(), vm.getEmail(), vm.getPassword(), VaccinationStatus.NOT_REGISTERED, vm.getIdentificationNumber(), vm.isNotCitizen());
+        newPerson.save();
+        Page.showDialog(container.getScene().getWindow(), DialogType.INFO, "Success", "Successfully registered.");
         Navigator.navigate("login");
-    }
-
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
-    public static boolean validateEmail(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
-        return matcher.find();
     }
 
     @Override
@@ -129,7 +130,8 @@ public class RegisterController implements Initializable {
                 tfRepeatPassword.passwordProperty(),
                 tfPhoneNumber.textProperty(),
                 tfIdentificationNumber.textProperty(),
-                tfEmail.textProperty()
+                tfEmail.textProperty(),
+                cbIsNotCitizen.selectedProperty()
         );
     }
 }
