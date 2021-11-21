@@ -29,6 +29,7 @@ public class Navigator {
         put("register", new Page("views/register-view.fxml", "Register"));
         put("dashboard", new Page("views/dashboard-view.fxml", "Dashboard"));
         put("new_appointment", new Page("views/new-appointment-view.fxml", "New Appointment"));
+        put("vaccines", new Page("views/vaccines-view.fxml", "Vaccines"));
     }};
 
     private static Stage primaryStage;
@@ -83,7 +84,7 @@ public class Navigator {
     }
 
     public static void navigateInContainer(String route, Pane container) {
-        Node root = loadPageFromFXML(route);
+        Parent root = loadPageFromFXML(route);
         container.getChildren().setAll(root);
     }
 
