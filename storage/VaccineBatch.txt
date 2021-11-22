@@ -1,4 +1,4 @@
-expiryDate:2024-11-18|amount:200|vaccineTypeId:1|vaccinationCenterId:1|availableAmount:200|id:1|arrivalDate:2021-11-18
+expiryDate:2024-11-18|amount:200|vaccineTypeId:1|availableAmount:197|vaccinationCenterId:1|id:1|arrivalDate:2021-11-18
 expiryDate:2024-11-18|amount:250|vaccineTypeId:2|vaccinationCenterId:1|availableAmount:250|id:2|arrivalDate:2021-11-18
 expiryDate:2024-11-18|amount:250|vaccineTypeId:2|vaccinationCenterId:2|availableAmount:250|id:3|arrivalDate:2021-11-18
-expiryDate:2024-11-18|amount:125|vaccineTypeId:3|vaccinationCenterId:2|availableAmount:125|id:4|arrivalDate:2021-11-18
+expiryDate:2024-11-18|amount:125|vaccineTypeId:3|availableAmount:123|vaccinationCenterId:2|id:4|arrivalDate:2021-11-18
