@@ -60,13 +60,22 @@ public class NewAppointmentController extends BaseController implements Initiali
         cbVaccine.setDisable(false);
     }
 
+    @Override
+    public void onLoaded() {
+        System.out.println(getUserData());
+    }
+
     @FXML
     void onSubmitPressed(ActionEvent event) {
         if (!validateInputs()) {
             return;
         }
 
-        VaccineBatch nextVaccineBatch = VaccineBatch.getNextAvailableVaccineBatch(vm.getSelectedVaccineTypeProperty().getSelectedItem().getVaccineName());
+        VaccineBatch nextVaccineBatch = VaccineBatch.getNextAvailableVaccineBatch(
+                vm.getSelectedVaccineTypeProperty()
+                  .getSelectedItem()
+                  .getVaccineName()
+        );
         nextVaccineBatch.setAvailableAmount(nextVaccineBatch.getAmount() - 1);
         nextVaccineBatch.save();
 
@@ -97,17 +106,32 @@ public class NewAppointmentController extends BaseController implements Initiali
 
     boolean validateInputs() {
         if (cbCenter.getSelectionModel().getSelectedItem() == null) {
-            Page.showDialog(cbCenter.getScene().getWindow(), DialogType.ERROR, "Error: No Vaccination Center Selected", "Please ensure you select a vaccination center!");
+            Page.showDialog(
+                    cbCenter.getScene().getWindow(),
+                    DialogType.ERROR,
+                    "Error: No Vaccination Center Selected",
+                    "Please ensure you select a vaccination center!"
+            );
             return false;
         }
 
         if (cbVaccine.getSelectionModel().getSelectedItem() == null) {
-            Page.showDialog(cbCenter.getScene().getWindow(), DialogType.ERROR, "Error: No Vaccine Selected", "Please ensure you select a vaccine!");
+            Page.showDialog(
+                    cbCenter.getScene().getWindow(),
+                    DialogType.ERROR,
+                    "Error: No Vaccine Selected",
+                    "Please ensure you select a vaccine!"
+            );
             return false;
         }
 
         if (dpDate.getValue() == null) {
-            Page.showDialog(cbCenter.getScene().getWindow(), DialogType.ERROR, "Error: No Date Selected", "Please ensure you select an appointment date!");
+            Page.showDialog(
+                    cbCenter.getScene().getWindow(),
+                    DialogType.ERROR,
+                    "Error: No Date Selected",
+                    "Please ensure you select an appointment date!"
+            );
             return false;
         }
 
@@ -124,7 +148,10 @@ public class NewAppointmentController extends BaseController implements Initiali
 
         vm.localDateObjectPropertyProperty().bindBidirectional(dpDate.valueProperty());
 
-        vm.setVaccinationCenterListProperty(FXCollections.observableList(Objects.requireNonNull(TextORM.getAll(VaccinationCenter.class, vacc -> true))));
+        vm.setVaccinationCenterListProperty(FXCollections.observableList(Objects.requireNonNull(TextORM.getAll(
+                VaccinationCenter.class,
+                vacc -> true
+        ))));
         cbVaccine.setDisable(true);
     }
 
