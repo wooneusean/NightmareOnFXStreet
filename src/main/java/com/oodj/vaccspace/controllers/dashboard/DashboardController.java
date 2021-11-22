@@ -156,6 +156,7 @@ public class DashboardController implements Initializable {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
                     Appointment rowData = row.getItem();
                     System.out.println(rowData.getVaccineName());
+                    Navigator.showInDialog(tvAppointments.getScene().getWindow(), "view_appointment", rowData);
                 }
             });
             return row;
