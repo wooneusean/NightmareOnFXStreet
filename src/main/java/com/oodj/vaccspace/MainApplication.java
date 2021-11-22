@@ -59,7 +59,6 @@ public class MainApplication extends Application {
                 "qwe",
                 VaccinationStatus.NOT_REGISTERED,
                 "010203040506",
-                "-",
                 false
         );
         citizen.save();
@@ -70,7 +69,6 @@ public class MainApplication extends Application {
                 "asd",
                 "asd",
                 VaccinationStatus.AWAITING_FIRST_DOSE,
-                "-",
                 "010203040506",
                 true
         );

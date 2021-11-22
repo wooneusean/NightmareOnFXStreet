@@ -12,6 +12,7 @@ import io.github.palexdev.materialfx.controls.enums.DialogType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import textorm.TextORM;
 
@@ -40,6 +41,9 @@ public class RegisterController implements Initializable {
     private MFXTextField tfEmail;
 
     @FXML
+    private Label lblID;
+
+    @FXML
     private MFXTextField tfIdentificationNumber;
 
     @FXML
@@ -65,6 +69,15 @@ public class RegisterController implements Initializable {
     @FXML
     void onBackToLoginPressed(ActionEvent event) {
         Navigator.navigate("login");
+    }
+
+    @FXML
+    void onToggleIdentification(ActionEvent event) {
+        if (cbIsNotCitizen.isSelected()) {
+            lblID.setText("Passport Number");
+        } else {
+            lblID.setText("Identification Number");
+        }
     }
 
     @FXML
@@ -173,8 +186,7 @@ public class RegisterController implements Initializable {
                 vm.getEmail(),
                 vm.getPassword(),
                 VaccinationStatus.NOT_REGISTERED,
-                vm.isNotCitizen() ? "-" : vm.getIdentificationNumber(),
-                vm.isNotCitizen() ? vm.getIdentificationNumber() : "-",
+                vm.getIdentificationNumber(),
                 vm.isNotCitizen()
         );
         newPerson.save();

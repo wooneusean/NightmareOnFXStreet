@@ -190,7 +190,6 @@ public class DashboardController implements Initializable {
             row.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
                     Appointment rowData = row.getItem();
-                    System.out.println(person.getIdentificationNumber());
                 }
             });
             return row;

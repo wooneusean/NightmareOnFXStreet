@@ -138,7 +138,7 @@
                                 </VBox>
                                 <VBox>
                                     <children>
-                                        <Label text="Identification Number">
+                                        <Label fx:id="lblID" text="Identification Number">
                                             <styleClass>
                                                 <String fx:value="body-regular" />
                                                 <String fx:value="h3" />
@@ -177,7 +177,7 @@
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" spacing="14.0">
                     <children>
-                  <MFXCheckbox fx:id="cbIsNotCitizen" styleClass="body-regular" text="I am NOT a citizen of Malaysia" />
+                  <MFXCheckbox fx:id="cbIsNotCitizen" onAction="#onToggleIdentification" styleClass="body-regular" text="I am NOT a citizen of Malaysia" />
                         <MFXPillButton onAction="#onRegisterPressed" rippleArc="40.0" text="Register">
                             <styleClass>
                                 <String fx:value="btn" />

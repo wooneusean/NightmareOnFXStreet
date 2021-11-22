@@ -13,10 +13,7 @@ public class Person extends User {
     VaccinationStatus vaccinationStatus;
 
     @Column
-    String identificationNumber;
-
-    @Column
-    String passportNumber;
+    String identification;
 
     @Column
     boolean isNonCitizen;
@@ -30,34 +27,24 @@ public class Person extends User {
             String email,
             String password,
             VaccinationStatus vaccinationStatus,
-            String identificationNumber,
-            String passportNumber,
+            String identification,
             boolean isNonCitizen
     ) {
         super(name, phone, email, password);
         this.vaccinationStatus = vaccinationStatus;
-        this.identificationNumber = identificationNumber;
-        this.passportNumber = passportNumber;
+        this.identification = identification;
         this.isNonCitizen = isNonCitizen;
     }
 
     public Person() {
     }
 
-    public String getPassportNumber() {
-        return passportNumber;
+    public String getIdentification() {
+        return this.identification;
     }
 
-    public void setPassportNumber(String passportNumber) {
-        this.passportNumber = passportNumber;
-    }
-
-    public String getIdentificationNumber() {
-        return this.identificationNumber;
-    }
-
-    public void setIdentificationNumber(String identificationNumber) {
-        this.identificationNumber = identificationNumber;
+    public void setIdentification(String identification) {
+        this.identification = identification;
     }
 
     public boolean isNonCitizen() {
@@ -78,13 +65,5 @@ public class Person extends User {
 
     public void setVaccinationStatus(VaccinationStatus vaccinationStatus) {
         this.vaccinationStatus = vaccinationStatus;
-    }
-
-    public String getIdentification() {
-        return "This is not a Citizen or Non-Citizen";
-    }
-
-    public void setIdentification(String identification) {
-        // nothing
     }
 }
