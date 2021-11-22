@@ -5,8 +5,8 @@ import com.oodj.vaccspace.models.Appointment;
 import com.oodj.vaccspace.models.AppointmentStatus;
 import com.oodj.vaccspace.models.Citizen;
 import com.oodj.vaccspace.models.Dose;
-import com.oodj.vaccspace.utils.BorderPaneNodes;
 import com.oodj.vaccspace.utils.Navigator;
+import com.oodj.vaccspace.utils.Table;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.effects.DepthLevel;
@@ -30,9 +30,28 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class DashboardController implements Initializable {
+
     Citizen citizen = null;
     @FXML
     private BorderPane bpDashboard;
+    @FXML
+    private MFXButton btnMenu;
+    @FXML
+    private MFXButton btnHome;
+    @FXML
+    private MFXButton btnVaccination;
+    @FXML
+    private MFXButton btnVaccinationCenter;
+    @FXML
+    private MFXButton btnSettings;
+    @FXML
+    private MFXPillButton btnLogout;
+    @FXML
+    private Label lblGreeting;
+    @FXML
+    private Label lblVaccinationStatus;
+    @FXML
+    private VBox vbxContent;
     List<DashboardIconButton> iconList = Arrays.asList(
             new DashboardIconButton(
                     "fas-bars",
@@ -52,7 +71,7 @@ public class DashboardController implements Initializable {
             new DashboardIconButton(
                     "fas-hospital",
                     "btnVaccinationCenter",
-                    actionEvent -> onNavBtnPress(actionEvent, "base")
+                    actionEvent -> onNavBtnPress(actionEvent, "vaccine_centers")
             ),
             new DashboardIconButton(
                     "fas-cog",
@@ -61,44 +80,17 @@ public class DashboardController implements Initializable {
             )
     );
     @FXML
-    private MFXButton btnMenu;
+    private VBox vbxNavigation;
 
     @FXML
-    private MFXButton btnHome;
-
-    @FXML
-    private MFXButton btnVaccination;
-
-    @FXML
-    private MFXButton btnVaccinationCenter;
-
-    @FXML
-    private MFXButton btnSettings;
-
-    @FXML
-    private MFXPillButton btnLogout;
-
-    @FXML
-    private Label lblGreeting;
-
-    @FXML
-    private Label lblVaccinationStatus;
-
-    @FXML
-    private VBox vbContent;
-
-    @FXML
-    private VBox vbNavigation;
-
-    @FXML
-    private TableView<Appointment> tvAppointments;
+    private TableView<Appointment> tblAppointments;
 
     @FXML
     private MFXPillButton btnNewAppointment;
 
     @FXML
     void onNavBtnPress(ActionEvent event, String route) {
-        Navigator.navigateInContainer(route, vbContent);
+        Navigator.navigateInContainer(route, vbxContent);
     }
 
     @FXML
@@ -130,7 +122,7 @@ public class DashboardController implements Initializable {
 
     public void refresh() {
         citizen.include(Appointment.class);
-        tvAppointments.setItems(FXCollections.observableArrayList(citizen.getAppointments()));
+        tblAppointments.setItems(FXCollections.observableArrayList(citizen.getAppointments()));
     }
 
     private void setupUI() {
@@ -167,26 +159,20 @@ public class DashboardController implements Initializable {
         TableColumn<Appointment, Dose> dose = new TableColumn<>("Dose");
         dose.setCellValueFactory(new PropertyValueFactory<>("dose"));
 
-        tvAppointments.getColumns()
-                      .addAll(appointmentLocation, appointmentVaccine, appointmentDate, appointmentStatus, dose);
+        tblAppointments.getColumns()
+                       .addAll(appointmentLocation, appointmentVaccine, appointmentDate, appointmentStatus, dose);
 
         // Autosize all columns
-        tvAppointments.widthProperty().addListener((observableValue, number, t1) -> {
-            int numCol = tvAppointments.getColumns().size();
-            for (var col :
-                    tvAppointments.getColumns()) {
-                col.setPrefWidth((t1.doubleValue() - numCol) / numCol);
-            }
-        });
+        Table.autoSizeColumns(tblAppointments);
 
         if (citizen.getAppointments() == null || citizen.getAppointments().size() == 0) return;
 
         citizen.getAppointments().sort(Comparator.comparing(Appointment::getAppointmentDate));
 
-        tvAppointments.setItems(FXCollections.observableArrayList(citizen.getAppointments()));
+        tblAppointments.setItems(FXCollections.observableArrayList(citizen.getAppointments()));
 
         // https://stackoverflow.com/a/26565887/4987298
-        tvAppointments.setRowFactory(tv -> {
+        tblAppointments.setRowFactory(tv -> {
             TableRow<Appointment> row = new TableRow<>();
             row.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
@@ -219,7 +205,7 @@ public class DashboardController implements Initializable {
         for (Iterator<DashboardIconButton> iterator = iconList.iterator(); iterator.hasNext(); ) {
             DashboardIconButton fragment = iterator.next();
 
-            vbNavigation.getChildren().add(createIcon(fragment));
+            vbxNavigation.getChildren().add(createIcon(fragment));
 //            if (iterator.hasNext()) {
 //                vbNavigation.getChildren().add(createSpacer());
 //            }
