@@ -28,6 +28,7 @@ public class Navigator {
         put("login", new Page("views/login-view.fxml", "Login"));
         put("register", new Page("views/register-view.fxml", "Register"));
         put("dashboard", new Page("views/dashboard-view.fxml", "Dashboard"));
+        put("home", new Page("views/home-view.fxml", "Home"));
         put("new_appointment", new Page("views/new-appointment-view.fxml", "New Appointment"));
         put("view_appointment", new Page("views/view-appointment-view.fxml", "View Appointment"));
         put("vaccines", new Page("views/vaccines-view.fxml", "Vaccines"));

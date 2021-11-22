@@ -54,13 +54,13 @@ class CenterStatusIndicatorCell extends TableCell<VaccinationCenter, CenterStatu
     protected Color getStatusColor(CenterStatus status) {
         switch (status) {
             case OPEN -> {
-                return new Color(0, 1, 0, 1);
+                return new Color(0, 0.82745098, 0.11372549, 1);
             }
             case CLOSED -> {
                 return new Color(1, 0, 0, 1);
             }
             case CLOSED_COVID -> {
-                return new Color(1, 1, 0, 1);
+                return new Color(1, 0.819607843, 0, 1);
             }
             default -> {
                 return new Color(0, 0, 0, 1);

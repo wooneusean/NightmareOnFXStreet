@@ -36,5 +36,8 @@ module com.oodj.vaccspace {
     exports com.oodj.vaccspace.controllers.vaccinecenters;
     opens com.oodj.vaccspace.controllers.vaccinecenters to javafx.fxml;
 
+    exports com.oodj.vaccspace.controllers.home;
+    opens com.oodj.vaccspace.controllers.home to javafx.fxml;
+
     exports com.oodj.vaccspace.models;
 }

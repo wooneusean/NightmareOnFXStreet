@@ -1,2 +1,3 @@
 centerStatus:OPEN|id:1|vaccinationCenterName:Bukit Jalil
-centerStatus:OPEN|id:2|vaccinationCenterName:Movenpick
+centerStatus:CLOSED|id:2|vaccinationCenterName:Movenpick
+centerStatus:CLOSED_COVID|id:3|vaccinationCenterName:Serdang Hospital
