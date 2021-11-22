@@ -1,7 +1,7 @@
 package com.oodj.vaccspace;
 
+import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.controllers.dashboard.DashboardController;
-import com.oodj.vaccspace.models.Citizen;
 import textorm.TextORM;
 
 public class Global {
@@ -25,7 +25,7 @@ public class Global {
         Global.userId = userId;
     }
 
-    public static Citizen getLoggedInUser() {
-        return TextORM.getOne(Citizen.class, data -> Integer.parseInt(data.get("id")) == userId);
+    public static Person getLoggedInUser() {
+        return TextORM.getOne(Person.class, hashMap -> Integer.parseInt(hashMap.get("id")) == userId);
     }
 }

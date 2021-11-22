@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -51,7 +50,8 @@ public class Navigator {
 
         navigate(routeToLoad);
 
-        scene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource("styles/main.css")).toExternalForm());
+        scene.getStylesheets()
+             .add(Objects.requireNonNull(MainApplication.class.getResource("styles/main.css")).toExternalForm());
 
         primaryStage.show();
 
@@ -195,7 +195,8 @@ public class Navigator {
 
     private static Stage createStage() {
         Stage stage = new Stage();
-        stage.getIcons().add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("images/vaccine.png"))));
+        stage.getIcons()
+             .add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("images/vaccine.png"))));
         return stage;
     }
 }

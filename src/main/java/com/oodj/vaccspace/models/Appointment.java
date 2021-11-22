@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Appointment extends Model {
 
     @HasOne(foreignKey = "personId")
-    private People person;
+    private Person person;
 
     @Column
     private int personId;
@@ -83,11 +83,11 @@ public class Appointment extends Model {
         this.vaccineId = vaccine.getId();
     }
 
-    public People getPerson() {
+    public Person getPerson() {
         return person;
     }
 
-    public void setPerson(People person) {
+    public void setPerson(Person person) {
         this.person = person;
         this.personId = person.getId();
     }

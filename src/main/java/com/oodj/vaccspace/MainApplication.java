@@ -27,7 +27,8 @@ public class MainApplication extends Application {
         seedModels();
 
         // Set icons
-        stage.getIcons().add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("images/vaccine_small.png"))));
+        stage.getIcons()
+             .add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("images/vaccine_small.png"))));
 
         // Load fonts
         Font.loadFont(getClass().getResourceAsStream("fonts/Poppins-Medium.ttf"), 16);
@@ -51,11 +52,27 @@ public class MainApplication extends Application {
         }
 
         // Citizen
-        Citizen citizen1 = new Citizen("qwe", "0123456789", "qwe@mail.com", "qwe", VaccinationStatus.NOT_REGISTERED, "010203040506");
-        citizen1.save();
+        Person citizen = new Person(
+                "Siti Zheng",
+                "0123456789",
+                "qwe",
+                "qwe",
+                VaccinationStatus.NOT_REGISTERED,
+                "010203040506",
+                false
+        );
+        citizen.save();
 
-        Citizen citizen2 = new Citizen("asd", "0123456789", "asd@mail.com", "asd", VaccinationStatus.AWAITING_FIRST_DOSE, "010203040506");
-        citizen2.save();
+        Person noncitizen = new Person(
+                "Naan Siti Zhen",
+                "0123456789",
+                "asd",
+                "asd",
+                VaccinationStatus.AWAITING_FIRST_DOSE,
+                "010203040506",
+                true
+        );
+        noncitizen.save();
 
         // Center
 
@@ -78,16 +95,44 @@ public class MainApplication extends Application {
 
         // Batches
 
-        VaccineBatch sinovacFirstBatch = new VaccineBatch(sinovac.getId(), 200, 200, bukitJalil.getId(), LocalDate.now(), LocalDate.now().plusYears(3));
+        VaccineBatch sinovacFirstBatch = new VaccineBatch(
+                sinovac.getId(),
+                200,
+                200,
+                bukitJalil.getId(),
+                LocalDate.now(),
+                LocalDate.now().plusYears(3)
+        );
         sinovacFirstBatch.save();
 
-        VaccineBatch pfizerBatch1 = new VaccineBatch(pfizer.getId(), 250, 250, bukitJalil.getId(), LocalDate.now(), LocalDate.now().plusYears(3));
+        VaccineBatch pfizerBatch1 = new VaccineBatch(
+                pfizer.getId(),
+                250,
+                250,
+                bukitJalil.getId(),
+                LocalDate.now(),
+                LocalDate.now().plusYears(3)
+        );
         pfizerBatch1.save();
 
-        VaccineBatch pfizerBatch2 = new VaccineBatch(pfizer.getId(), 250, 250, movenpick.getId(), LocalDate.now(), LocalDate.now().plusYears(3));
+        VaccineBatch pfizerBatch2 = new VaccineBatch(
+                pfizer.getId(),
+                250,
+                250,
+                movenpick.getId(),
+                LocalDate.now(),
+                LocalDate.now().plusYears(3)
+        );
         pfizerBatch2.save();
 
-        VaccineBatch johnsonBatch1 = new VaccineBatch(johnson.getId(), 125, 125, movenpick.getId(), LocalDate.now(), LocalDate.now().plusYears(3));
+        VaccineBatch johnsonBatch1 = new VaccineBatch(
+                johnson.getId(),
+                125,
+                125,
+                movenpick.getId(),
+                LocalDate.now(),
+                LocalDate.now().plusYears(3)
+        );
         johnsonBatch1.save();
 
         // Vaccines
@@ -101,9 +146,23 @@ public class MainApplication extends Application {
         Vaccine johnsonVaccine = new Vaccine(johnsonBatch1.getId(), VaccineStatus.USED);
         johnsonVaccine.save();
 
-        new Appointment(citizen1.getId(), bukitJalil.getId(), sinovacVaccine.getId(), LocalDate.now(), AppointmentStatus.CONFIRMED, Dose.FIRST).save();
+        new Appointment(
+                citizen.getId(),
+                bukitJalil.getId(),
+                sinovacVaccine.getId(),
+                LocalDate.now(),
+                AppointmentStatus.CONFIRMED,
+                Dose.FIRST
+        ).save();
 
-        new Appointment(citizen2.getId(), movenpick.getId(), johnsonVaccine.getId(), LocalDate.now(), AppointmentStatus.CONFIRMED, Dose.FIRST).save();
+        new Appointment(
+                noncitizen.getId(),
+                movenpick.getId(),
+                johnsonVaccine.getId(),
+                LocalDate.now(),
+                AppointmentStatus.CONFIRMED,
+                Dose.FIRST
+        ).save();
     }
 }
 

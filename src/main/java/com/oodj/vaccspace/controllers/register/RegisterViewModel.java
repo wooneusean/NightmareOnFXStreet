@@ -1,5 +1,7 @@
 package com.oodj.vaccspace.controllers.register;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -10,6 +12,7 @@ class RegisterViewModel {
     private final StringProperty phoneNumber = new SimpleStringProperty("");
     private final StringProperty identificationNumber = new SimpleStringProperty("");
     private final StringProperty email = new SimpleStringProperty("");
+    private final BooleanProperty isNotCitizen = new SimpleBooleanProperty(false);
 
     public RegisterViewModel(
             StringProperty name,
@@ -17,7 +20,8 @@ class RegisterViewModel {
             StringProperty repeatPassword,
             StringProperty phoneNumber,
             StringProperty identificationNumber,
-            StringProperty email
+            StringProperty email,
+            BooleanProperty isNotCitizen
     ) {
         this.name.bindBidirectional(name);
         this.password.bindBidirectional(password);
@@ -25,6 +29,7 @@ class RegisterViewModel {
         this.phoneNumber.bindBidirectional(phoneNumber);
         this.identificationNumber.bindBidirectional(identificationNumber);
         this.email.bindBidirectional(email);
+        this.isNotCitizen.bindBidirectional(isNotCitizen);
     }
 
     public String getName() {
@@ -97,5 +102,17 @@ class RegisterViewModel {
 
     public StringProperty emailProperty() {
         return email;
+    }
+
+    public boolean isNotCitizen() {
+        return isNotCitizen.get();
+    }
+
+    public void setIsNotCitizen(boolean isNotCitizen) {
+        this.isNotCitizen.set(isNotCitizen);
+    }
+
+    public BooleanProperty isNotCitizenProperty() {
+        return isNotCitizen;
     }
 }

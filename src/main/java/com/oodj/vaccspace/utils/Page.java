@@ -31,6 +31,13 @@ public class Page {
         this.displayName = displayName;
     }
 
+    /**
+     * Shows a dialog over the owner window with specified type, title and content
+     * @param owner {@link Window} to instantiate the dialog.
+     * @param type {@link DialogType} of the dialog.
+     * @param title Title for the dialog.
+     * @param content Content of the dialog.
+     */
     public static void showDialog(Window owner, DialogType type, String title, String content) {
         MFXStageDialog dialog = new MFXStageDialog(type, title, content);
         dialog.setOwner(owner);
