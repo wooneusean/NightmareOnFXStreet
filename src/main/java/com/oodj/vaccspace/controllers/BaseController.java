@@ -21,4 +21,7 @@ public abstract class BaseController {
     public void setUserData(Object userData) {
         this.userData = userData;
     }
+
+    public void onLoaded() {
+    }
 }
