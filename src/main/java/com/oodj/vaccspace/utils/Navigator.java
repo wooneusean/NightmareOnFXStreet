@@ -29,6 +29,7 @@ public class Navigator {
         put("register", new Page("views/register-view.fxml", "Register"));
         put("dashboard", new Page("views/dashboard-view.fxml", "Dashboard"));
         put("new_appointment", new Page("views/new-appointment-view.fxml", "New Appointment"));
+        put("view_appointment", new Page("views/view-appointment-view.fxml", "View Appointment"));
         put("vaccines", new Page("views/vaccines-view.fxml", "Vaccines"));
         put("vaccine_centers", new Page("views/vaccine-centers-view.fxml", "Vaccine Centers"));
     }};
@@ -52,7 +53,8 @@ public class Navigator {
 
         navigate(routeToLoad);
 
-        scene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource("styles/main.css")).toExternalForm());
+        scene.getStylesheets()
+             .add(Objects.requireNonNull(MainApplication.class.getResource("styles/main.css")).toExternalForm());
 
         primaryStage.show();
 
@@ -85,7 +87,7 @@ public class Navigator {
     }
 
     public static void navigateInContainer(String route, Pane container) {
-        Parent root = loadPageFromFXML(route);
+        Node root = loadPageFromFXML(route);
         container.getChildren().setAll(root);
     }
 
@@ -196,7 +198,8 @@ public class Navigator {
 
     private static Stage createStage() {
         Stage stage = new Stage();
-        stage.getIcons().add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("images/vaccine.png"))));
+        stage.getIcons()
+             .add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("images/vaccine.png"))));
         return stage;
     }
 }

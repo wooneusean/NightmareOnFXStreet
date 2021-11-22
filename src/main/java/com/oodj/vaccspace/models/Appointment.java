@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Appointment extends Model {
 
     @HasOne(foreignKey = "personId")
-    private People person;
+    private Person person;
 
     @Column
     private int personId;
@@ -37,7 +37,14 @@ public class Appointment extends Model {
     @Column
     private Dose dose;
 
-    public Appointment(int personId, int vaccinationCenterId, int vaccineId, LocalDate appointmentDate, AppointmentStatus appointmentStatus, Dose dose) {
+    public Appointment(
+            int personId,
+            int vaccinationCenterId,
+            int vaccineId,
+            LocalDate appointmentDate,
+            AppointmentStatus appointmentStatus,
+            Dose dose
+    ) {
         this.personId = personId;
         this.vaccinationCenterId = vaccinationCenterId;
         this.vaccineId = vaccineId;
@@ -68,7 +75,6 @@ public class Appointment extends Model {
     }
 
     public Vaccine getVaccine() {
-        this.include(Vaccine.class);
         return vaccine;
     }
 
@@ -77,11 +83,11 @@ public class Appointment extends Model {
         this.vaccineId = vaccine.getId();
     }
 
-    public People getPerson() {
+    public Person getPerson() {
         return person;
     }
 
-    public void setPerson(People person) {
+    public void setPerson(Person person) {
         this.person = person;
         this.personId = person.getId();
     }
@@ -142,6 +148,23 @@ public class Appointment extends Model {
     }
 
     public String getVaccineName() {
-        return getVaccine().getVaccineBatch().getVaccineType().getVaccineName();
+        include(Vaccine.class);
+        this.getVaccine().include(VaccineBatch.class);
+        this.getVaccine().getVaccineBatch().include(VaccineType.class);
+        return this.getVaccine().getVaccineBatch().getVaccineType().getVaccineName();
+    }
+
+    public void cancel() {
+        // Doing this cuz its a shortcut
+        // to include all the needed models
+        getVaccineName();
+
+        setAppointmentStatus(AppointmentStatus.VOIDED);
+        getVaccine().getVaccineBatch().setAvailableAmount(getVaccine().getVaccineBatch().getAvailableAmount() - 1);
+        save();
+
+        // TODO:
+        //  - Change person vaccination status
+        //  - Change vaccine status
     }
 }

@@ -68,7 +68,6 @@ public class VaccineBatch extends Model {
     }
 
     public VaccineType getVaccineType() {
-        this.include(VaccineType.class);
         return vaccineType;
     }
 
