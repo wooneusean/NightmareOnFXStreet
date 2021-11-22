@@ -5,3 +5,4 @@ vaccineStatus:BOOKED|vaccineBatchId:4|id:4
 vaccineStatus:BOOKED|vaccineBatchId:1|id:5
 vaccineStatus:BOOKED|vaccineBatchId:4|id:6
 vaccineStatus:BOOKED|vaccineBatchId:1|id:7
+vaccineStatus:BOOKED|vaccineBatchId:1|id:8
