@@ -1,3 +1,2 @@
 vaccinationStatus:NOT_REGISTERED|password:qwe|identification:010203040506|phone:0123456789|name:Siti Zheng|id:1|isNonCitizen:false|email:qwe
 vaccinationStatus:AWAITING_FIRST_DOSE|password:asd|identification:010203040506|phone:0123456789|name:Naan Siti Zhen|id:2|isNonCitizen:true|email:asd
-vaccinationStatus:REGISTERED|password:naannaan|identification:01020305401|phone:0129986301|name:Naan Siti Zen|id:3|isNonCitizen:true|email:naan@mail.com

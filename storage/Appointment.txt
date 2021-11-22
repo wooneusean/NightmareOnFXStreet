@@ -1,3 +1,2 @@
 vaccineId:1|dose:FIRST|vaccinationCenterId:1|appointmentStatus:CONFIRMED|personId:1|id:1|appointmentDate:2021-11-22
 vaccineId:3|dose:FIRST|vaccinationCenterId:2|appointmentStatus:CONFIRMED|personId:2|id:2|appointmentDate:2021-11-22
-vaccineId:4|dose:FIRST|vaccinationCenterId:1|appointmentStatus:CONFIRMED|personId:3|id:3|appointmentDate:2021-11-30
