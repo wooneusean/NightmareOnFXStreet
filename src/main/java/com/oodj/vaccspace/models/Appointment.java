@@ -163,8 +163,9 @@ public class Appointment extends Model {
         getVaccine().getVaccineBatch().setAvailableAmount(getVaccine().getVaccineBatch().getAvailableAmount() - 1);
         save();
 
+        getVaccine().setVaccineStatus(VaccineStatus.AVAILABLE);
+
         // TODO:
         //  - Change person vaccination status
-        //  - Change vaccine status
     }
 }
