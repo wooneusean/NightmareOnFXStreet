@@ -18,6 +18,7 @@ import textorm.TextORM;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -44,17 +45,14 @@ public class NewAppointmentController extends BaseController implements Initiali
         var selectedCenter = vm.getSelectedVaccinationCenterProperty().getSelectedItem();
         selectedCenter.include(VaccineBatch.class);
 
-        ArrayList<VaccineType> vaccineTypes = new ArrayList<>();
+        HashSet<VaccineType> vaccineTypes = new HashSet<>();
         selectedCenter.getVaccineBatches().forEach(centerBatch -> {
-            if (vaccineTypes.stream().noneMatch(accumulatorType ->
-                    Objects.equals(accumulatorType.getVaccineName(), centerBatch.getVaccineType().getVaccineName())
-            )) {
-                vaccineTypes.add(centerBatch.getVaccineType());
-            }
+            centerBatch.include(VaccineType.class);
+            vaccineTypes.add(centerBatch.getVaccineType());
         });
 
         vm.setVaccineTypeListProperty(FXCollections.observableList(
-                Objects.requireNonNull(vaccineTypes)
+                new ArrayList<>(vaccineTypes)
         ));
 
         cbVaccine.setDisable(false);

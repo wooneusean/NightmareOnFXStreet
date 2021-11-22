@@ -111,6 +111,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         person = Global.getLoggedInUser();
+        Global.setDashboardReference(this);
 
         if (person == null) {
             Navigator.navigate("login");
@@ -190,6 +191,7 @@ public class DashboardController implements Initializable {
             row.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
                     Appointment rowData = row.getItem();
+                    Navigator.showInDialog(tvAppointments.getScene().getWindow(), "view_appointment", rowData);
                 }
             });
             return row;

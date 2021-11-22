@@ -28,6 +28,7 @@ public class Navigator {
         put("register", new Page("views/register-view.fxml", "Register"));
         put("dashboard", new Page("views/dashboard-view.fxml", "Dashboard"));
         put("new_appointment", new Page("views/new-appointment-view.fxml", "New Appointment"));
+        put("view_appointment", new Page("views/view-appointment-view.fxml", "View Appointment"));
     }};
 
     private static Stage primaryStage;

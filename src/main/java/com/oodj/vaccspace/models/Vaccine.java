@@ -30,7 +30,6 @@ public class Vaccine extends Model {
     }
 
     public VaccineBatch getVaccineBatch() {
-        this.include(VaccineBatch.class);
         return vaccineBatch;
     }
 

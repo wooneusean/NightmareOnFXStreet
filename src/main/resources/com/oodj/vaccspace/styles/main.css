@@ -47,6 +47,11 @@
     -fx-border-color: white;
 }
 
+.btn-warning {
+    -fx-background-color: #FF7B7B;
+    -fx-text-fill: rgba(255, 255, 255, 1);
+}
+
 .text-fill-primary {
     -fx-text-fill: rgba(100, 134, 221, 1);
 }
