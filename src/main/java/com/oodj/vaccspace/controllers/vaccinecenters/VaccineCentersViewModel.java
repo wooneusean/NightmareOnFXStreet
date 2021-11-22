@@ -1,9 +1,9 @@
-package com.oodj.vaccspace.controllers.vaccines;
+package com.oodj.vaccspace.controllers.vaccinecenters;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-class VaccineViewModel {
+public class VaccineCentersViewModel {
     private final StringProperty search = new SimpleStringProperty();
 
     public String getSearch() {

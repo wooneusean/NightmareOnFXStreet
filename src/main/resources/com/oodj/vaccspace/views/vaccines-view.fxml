@@ -16,7 +16,7 @@
                   <String fx:value="h2" />
                </styleClass>
             </Label>
-            <MFXTextField fx:id="txtSearch" lineStrokeWidth="1.0" prefHeight="30.0" prefWidth="450.0" promptText="Insert keywords here..." styleClass="body-medium" />
+            <MFXTextField fx:id="txtSearch" lineStrokeWidth="1.0" onKeyTyped="#onSearchChanged" prefHeight="30.0" prefWidth="450.0" promptText="Insert keywords here..." styleClass="body-medium" />
          </children>
       </VBox>
       <TableView fx:id="tblVaccines" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-regular" VBox.vgrow="ALWAYS" />

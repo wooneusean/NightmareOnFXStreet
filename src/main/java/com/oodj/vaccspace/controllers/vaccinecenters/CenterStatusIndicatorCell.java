@@ -9,6 +9,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.paint.Color;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+// https://stackoverflow.com/questions/46927484/tablecolumn-setcellfactory
 class CenterStatusIndicatorCell extends TableCell<VaccinationCenter, CenterStatus> {
     @Override
     protected void updateItem(CenterStatus centerStatus, boolean empty) {
@@ -28,6 +29,8 @@ class CenterStatusIndicatorCell extends TableCell<VaccinationCenter, CenterStatu
 
             label.setGraphic(statusDot);
             setGraphic(label);
+        } else {
+            setGraphic(null);
         }
     }
 
