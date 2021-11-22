@@ -140,6 +140,7 @@ public class Navigator {
             T controller = loader.getController();
             controller.setStageDialog(dialog);
             controller.setUserData(userData);
+            controller.onLoaded();
         } catch (IOException e) {
             e.printStackTrace();
             System.err.printf("Unable to load route '%s'.%n", route);
