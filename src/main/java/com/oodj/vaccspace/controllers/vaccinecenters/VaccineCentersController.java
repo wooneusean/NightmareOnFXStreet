@@ -2,20 +2,14 @@ package com.oodj.vaccspace.controllers.vaccinecenters;
 
 import com.oodj.vaccspace.models.CenterStatus;
 import com.oodj.vaccspace.models.VaccinationCenter;
-import com.oodj.vaccspace.utils.ColorHelper;
 import com.oodj.vaccspace.utils.Table;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
-import org.kordamp.ikonli.javafx.FontIcon;
 import textorm.TextORM;
 
 import java.net.URL;
@@ -37,7 +31,7 @@ public class VaccineCentersController implements Initializable {
 
         TableColumn<VaccinationCenter, CenterStatus> vaccineCenterStatusColumn = new TableColumn<>("Status");
         vaccineCenterStatusColumn.setCellValueFactory(new PropertyValueFactory<>("centerStatus"));
-        vaccineCenterStatusColumn.setCellFactory(statusColumn -> new CenterStatusIndicator());
+        vaccineCenterStatusColumn.setCellFactory(statusColumn -> new CenterStatusIndicatorCell());
 
         List<VaccinationCenter> vaccineTypes = TextORM.getAll(VaccinationCenter.class, hashMap -> true);
 

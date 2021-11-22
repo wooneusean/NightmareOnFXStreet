@@ -9,7 +9,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.paint.Color;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-class CenterStatusIndicator extends TableCell<VaccinationCenter, CenterStatus> {
+class CenterStatusIndicatorCell extends TableCell<VaccinationCenter, CenterStatus> {
     @Override
     protected void updateItem(CenterStatus centerStatus, boolean empty) {
         super.updateItem(centerStatus, empty);
