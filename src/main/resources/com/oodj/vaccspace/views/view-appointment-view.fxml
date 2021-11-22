@@ -94,7 +94,7 @@
                     <String fx:value="h4" />
                 </styleClass>
             </MFXPillButton>
-         <MFXPillButton fx:id="btnCancelAppointment" layoutX="324.0" layoutY="10.0" onAction="#onCancelApptPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Cancel Appointment">
+         <MFXPillButton fx:id="btnCancelAppointment" layoutX="324.0" layoutY="10.0" onAction="#onCancelAppointmentPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Cancel Appointment">
             <styleClass>
                <String fx:value="btn" />
                <String fx:value="btn-warning" />

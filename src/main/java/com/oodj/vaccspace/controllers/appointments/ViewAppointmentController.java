@@ -2,24 +2,16 @@ package com.oodj.vaccspace.controllers.appointments;
 
 import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.controllers.BaseController;
-import com.oodj.vaccspace.controllers.dashboard.DashboardController;
-import com.oodj.vaccspace.models.*;
+import com.oodj.vaccspace.models.Appointment;
+import com.oodj.vaccspace.models.AppointmentStatus;
+import com.oodj.vaccspace.models.VaccinationStatus;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.SingleSelectionModel;
-import textorm.TextORM;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class ViewAppointmentController extends BaseController implements Initializable {
@@ -44,8 +36,12 @@ public class ViewAppointmentController extends BaseController implements Initial
     private MFXTextField txtDose;
 
     @FXML
-    public void onCancelApptPressed(ActionEvent event) {
-        System.out.println("hi");
+    public void onCancelAppointmentPressed(ActionEvent event) {
+        appointment.cancel();
+
+        Global.getDashboardReference().refresh();
+
+        getStageDialog().close();
     }
 
     @FXML
@@ -64,9 +60,9 @@ public class ViewAppointmentController extends BaseController implements Initial
         txtCenter.setText(appointment.getVaccinationCenter().toString());
         txtVaccine.setText(appointment.getVaccineName());
         txtDate.setText(appointment.getAppointmentDate().toString());
-        txtDose.setText(appointment.getDose().toString());
+        txtDose.setText(appointment.getDose().getValue());
 
-        if(!appointment.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)) {
+        if (!appointment.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)) {
             btnCancelAppointment.setManaged(false);
         }
     }

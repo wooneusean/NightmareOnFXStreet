@@ -37,7 +37,11 @@ public class DashboardController implements Initializable {
             new DashboardIconButton("fas-bars", "btnMenu", actionEvent -> onNavBtnPress(actionEvent, "base")),
             new DashboardIconButton("fas-home", "btnHome", actionEvent -> onNavBtnPress(actionEvent, "base")),
             new DashboardIconButton("fas-syringe", "btnVaccination", actionEvent -> onNavBtnPress(actionEvent, "base")),
-            new DashboardIconButton("fas-hospital", "btnVaccinationCenter", actionEvent -> onNavBtnPress(actionEvent, "base")),
+            new DashboardIconButton(
+                    "fas-hospital",
+                    "btnVaccinationCenter",
+                    actionEvent -> onNavBtnPress(actionEvent, "base")
+            ),
             new DashboardIconButton("fas-cog", "btnSettings", actionEvent -> onNavBtnPress(actionEvent, "base"))
     );
     @FXML
@@ -91,7 +95,13 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        citizen = TextORM.getOne(Citizen.class, data -> Integer.parseInt(data.get("id")) == Global.getUserId(), Appointment.class);
+        Global.setDashboardReference(this);
+
+        citizen = TextORM.getOne(
+                Citizen.class,
+                data -> Integer.parseInt(data.get("id")) == Global.getUserId(),
+                Appointment.class
+        );
 
         if (citizen == null) {
             Navigator.navigate("login");
@@ -107,8 +117,14 @@ public class DashboardController implements Initializable {
     }
 
     private void setupUI() {
-        lblVaccinationStatus.setText(String.format("Vaccination Status: %s", citizen.getVaccinationStatus().getValue()));
-        lblVaccinationStatus.setStyle(String.format("-fx-background-color: %s;", citizen.getVaccinationStatus().getColor()));
+        lblVaccinationStatus.setText(String.format(
+                "Vaccination Status: %s",
+                citizen.getVaccinationStatus().getValue()
+        ));
+        lblVaccinationStatus.setStyle(String.format(
+                "-fx-background-color: %s;",
+                citizen.getVaccinationStatus().getColor()
+        ));
         lblGreeting.setText(getGreetingText(citizen.getName()));
 
         setupTable(citizen);
@@ -118,7 +134,9 @@ public class DashboardController implements Initializable {
 
     private void setupTable(Citizen citizen) {
         TableColumn<Appointment, String> appointmentLocation = new TableColumn<>("Location");
-        appointmentLocation.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getVaccinationCenter().getVaccinationCenterName()));
+        appointmentLocation.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue()
+                                                                                       .getVaccinationCenter()
+                                                                                       .getVaccinationCenterName()));
 
         TableColumn<Appointment, String> appointmentVaccine = new TableColumn<>("Vaccine");
         appointmentVaccine.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getVaccineName()));
@@ -132,7 +150,8 @@ public class DashboardController implements Initializable {
         TableColumn<Appointment, Dose> dose = new TableColumn<>("Dose");
         dose.setCellValueFactory(new PropertyValueFactory<>("dose"));
 
-        tvAppointments.getColumns().addAll(appointmentLocation, appointmentVaccine, appointmentDate, appointmentStatus, dose);
+        tvAppointments.getColumns()
+                      .addAll(appointmentLocation, appointmentVaccine, appointmentDate, appointmentStatus, dose);
 
         // Autosize all columns
         tvAppointments.widthProperty().addListener((observableValue, number, t1) -> {
@@ -155,7 +174,6 @@ public class DashboardController implements Initializable {
             row.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
                     Appointment rowData = row.getItem();
-                    System.out.println(rowData.getVaccineName());
                     Navigator.showInDialog(tvAppointments.getScene().getWindow(), "view_appointment", rowData);
                 }
             });
