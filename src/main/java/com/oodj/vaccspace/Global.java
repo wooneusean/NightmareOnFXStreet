@@ -1,20 +1,20 @@
 package com.oodj.vaccspace;
 
+import com.oodj.vaccspace.controllers.home.HomeController;
 import com.oodj.vaccspace.models.Person;
-import com.oodj.vaccspace.controllers.dashboard.DashboardController;
 import textorm.TextORM;
 
 public class Global {
-    private static DashboardController dashboardReference;
+    private static HomeController homeReference;
 
     private static int userId;
 
-    public static DashboardController getDashboardReference() {
-        return dashboardReference;
+    public static HomeController getHomeReference() {
+        return homeReference;
     }
 
-    public static void setDashboardReference(DashboardController dashboardReference) {
-        Global.dashboardReference = dashboardReference;
+    public static void setHomeReference(HomeController homeReference) {
+        Global.homeReference = homeReference;
     }
 
     public static int getUserId() {

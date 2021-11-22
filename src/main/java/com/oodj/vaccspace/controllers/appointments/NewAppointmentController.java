@@ -2,7 +2,7 @@ package com.oodj.vaccspace.controllers.appointments;
 
 import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.controllers.BaseController;
-import com.oodj.vaccspace.controllers.dashboard.DashboardController;
+import com.oodj.vaccspace.controllers.home.HomeController;
 import com.oodj.vaccspace.models.*;
 import com.oodj.vaccspace.utils.Page;
 import io.github.euseanwoon.MFXPillButton;
@@ -99,7 +99,7 @@ public class NewAppointmentController extends BaseController implements Initiali
         person.save();
 
         getStageDialog().close();
-        ((DashboardController) getUserData()).refresh();
+        ((HomeController) getUserData()).refresh();
     }
 
     boolean validateInputs() {

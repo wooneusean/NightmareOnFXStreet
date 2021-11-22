@@ -79,8 +79,11 @@ public class MainApplication extends Application {
         VaccinationCenter bukitJalil = new VaccinationCenter("Bukit Jalil", CenterStatus.OPEN);
         bukitJalil.save();
 
-        VaccinationCenter movenpick = new VaccinationCenter("Movenpick", CenterStatus.OPEN);
+        VaccinationCenter movenpick = new VaccinationCenter("Movenpick", CenterStatus.CLOSED);
         movenpick.save();
+
+        VaccinationCenter serdangHospital = new VaccinationCenter("Serdang Hospital", CenterStatus.CLOSED_COVID);
+        serdangHospital.save();
 
         // Types
 

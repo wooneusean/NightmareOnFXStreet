@@ -4,7 +4,6 @@ import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.Appointment;
 import com.oodj.vaccspace.models.AppointmentStatus;
-import com.oodj.vaccspace.models.VaccinationStatus;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
@@ -39,7 +38,7 @@ public class ViewAppointmentController extends BaseController implements Initial
     public void onCancelAppointmentPressed(ActionEvent event) {
         appointment.cancel();
 
-        Global.getDashboardReference().refresh();
+        Global.getHomeReference().refresh();
 
         getStageDialog().close();
     }
