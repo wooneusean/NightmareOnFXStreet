@@ -7,11 +7,26 @@ class DashboardIconButton {
     private String iconLiteral;
     private String fxmlId;
     private EventHandler<ActionEvent> eventHandler;
+    private boolean requiresCommittee;
 
-    public DashboardIconButton(String iconLiteral, String fxmlId, EventHandler<ActionEvent> eventHandler) {
+    public DashboardIconButton(
+            String iconLiteral,
+            String fxmlId,
+            EventHandler<ActionEvent> eventHandler,
+            boolean requiresCommittee
+    ) {
         this.iconLiteral = iconLiteral;
         this.fxmlId = fxmlId;
         this.eventHandler = eventHandler;
+        this.requiresCommittee = requiresCommittee;
+    }
+
+    public boolean isRequiresCommittee() {
+        return requiresCommittee;
+    }
+
+    public void setRequiresCommittee(boolean requiresCommittee) {
+        this.requiresCommittee = requiresCommittee;
     }
 
     public String getIconLiteral() {

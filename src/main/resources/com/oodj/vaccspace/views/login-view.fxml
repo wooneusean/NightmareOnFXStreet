@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.euseanwoon.MFXPillButton?>
+<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.lang.String?>
@@ -43,14 +44,15 @@
                   <String fx:value="body-medium" />
                   <String fx:value="h4" />
                </styleClass></Label>
-                <MFXPasswordField fx:id="tfPassword" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
+                <MFXPasswordField fx:id="tfPassword" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308" onAction="#onSubmit">
                <styleClass>
                   <String fx:value="body-regular" />
                   <String fx:value="h4" />
                </styleClass></MFXPasswordField>
-                <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                <HBox alignment="CENTER_RIGHT" spacing="14.0">
                     <children>
-                        <MFXPillButton fx:id="btnLogin" buttonType="RAISED" defaultButton="true" onAction="#onLoginPressed" rippleArc="40" rippleColor="WHITE" text="Login">
+                  <MFXCheckbox fx:id="chkIsCommittee" styleClass="body-regular" text="Committee" />
+                        <MFXPillButton fx:id="btnLogin" buttonType="RAISED" onAction="#onLoginPressed" rippleArc="40" rippleColor="WHITE" text="Login">
                             <styleClass>
                                 <String fx:value="btn-primary" />
                                 <String fx:value="btn" />

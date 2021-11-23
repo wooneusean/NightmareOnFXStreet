@@ -20,61 +20,57 @@ import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
 
+    boolean isNavigationMinimized = false;
     @FXML
     private BorderPane bpDashboard;
-
     @FXML
     private MFXButton btnMenu;
-
     @FXML
     private MFXButton btnHome;
-
     @FXML
     private MFXButton btnVaccination;
-
     @FXML
     private MFXButton btnVaccinationCenter;
-
     @FXML
     private MFXButton btnSettings;
-
     @FXML
     private MFXPillButton btnLogout;
-
     @FXML
     private VBox vbxContent;
-
+    @FXML
+    private VBox vbxNavigation;
     List<DashboardIconButton> iconList = Arrays.asList(
             new DashboardIconButton(
                     "fas-bars",
                     "btnMenu",
-                    actionEvent -> onNavBtnPress(actionEvent, "base")
+                    actionEvent -> resizeNavigation(),
+                    false
             ),
             new DashboardIconButton(
                     "fas-home",
                     "btnHome",
-                    actionEvent -> onNavBtnPress(actionEvent, "home")
+                    actionEvent -> onNavBtnPress(actionEvent, "home"),
+                    false
             ),
             new DashboardIconButton(
                     "fas-syringe",
                     "btnVaccination",
-                    actionEvent -> onNavBtnPress(actionEvent, "vaccines")
+                    actionEvent -> onNavBtnPress(actionEvent, "vaccines"),
+                    false
             ),
             new DashboardIconButton(
                     "fas-hospital",
                     "btnVaccinationCenter",
-                    actionEvent -> onNavBtnPress(actionEvent, "vaccine_centers")
+                    actionEvent -> onNavBtnPress(actionEvent, "vaccine_centers"),
+                    false
             ),
             new DashboardIconButton(
                     "fas-cog",
                     "btnSettings",
-                    actionEvent -> onNavBtnPress(actionEvent, "base")
+                    actionEvent -> onNavBtnPress(actionEvent, "base"),
+                    false
             )
     );
-
-    @FXML
-    private VBox vbxNavigation;
-
 
     @FXML
     void onNavBtnPress(ActionEvent event, String route) {
@@ -89,16 +85,26 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // TODO:
+        //  - Reroute based on Global.isCommittee()
         Navigator.navigateInContainer("home", vbxContent);
 
         initializeIcons();
+    }
+
+    private void resizeNavigation() {
+        vbxNavigation.setPrefWidth(isNavigationMinimized ? 120 : 20);
+        isNavigationMinimized = !isNavigationMinimized;
     }
 
     private void initializeIcons() {
         for (Iterator<DashboardIconButton> iterator = iconList.iterator(); iterator.hasNext(); ) {
             DashboardIconButton fragment = iterator.next();
 
-            vbxNavigation.getChildren().add(createIcon(fragment));
+
+            if (!fragment.isRequiresCommittee() || Global.isCommittee()) {
+                vbxNavigation.getChildren().add(createIcon(fragment));
+            }
 //            if (iterator.hasNext()) {
 //                vbNavigation.getChildren().add(createSpacer());
 //            }
