@@ -1,3 +1,0 @@
-vaccineStatus:AVAILABLE|vaccineBatchId:1|id:1
-vaccineStatus:AVAILABLE|vaccineBatchId:2|id:2
-vaccineStatus:USED|vaccineBatchId:4|id:3

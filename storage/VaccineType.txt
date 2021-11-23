@@ -1,3 +1,0 @@
-vaccineName:Sinovac|id:1|dosesNeeded:2
-vaccineName:Pfizer|id:2|dosesNeeded:2
-vaccineName:Johnson & Johnson|id:3|dosesNeeded:2

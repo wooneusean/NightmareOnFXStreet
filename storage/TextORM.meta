@@ -1,7 +1,0 @@
-tableName:Committee|autoIncrement:2
-tableName:Person|autoIncrement:3
-tableName:VaccinationCenter|autoIncrement:4
-tableName:VaccineType|autoIncrement:4
-tableName:VaccineBatch|autoIncrement:5
-tableName:Vaccine|autoIncrement:4
-tableName:Appointment|autoIncrement:3
