@@ -1,10 +1,13 @@
 package com.oodj.vaccspace.controllers.login;
 
 import com.oodj.vaccspace.Global;
+import com.oodj.vaccspace.models.Committee;
 import com.oodj.vaccspace.models.Person;
+import com.oodj.vaccspace.models.User;
 import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.Page;
 import io.github.euseanwoon.MFXPillButton;
+import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.enums.DialogType;
@@ -34,15 +37,33 @@ public class LoginController implements Initializable {
     private Hyperlink lnkRegister;
 
     @FXML
-    void onLoginPressed(ActionEvent event) {
-        Person citizen = TextORM.getOne(Person.class, data -> Objects.equals(data.get("email"), vm.getEmail()) && Objects.equals(data.get("password"), vm.getPassword()));
+    private MFXCheckbox chkIsCommittee;
 
-        if (citizen != null) {
-            Global.setUserId(citizen.getId());
+    @FXML
+    void onLoginPressed(ActionEvent event) {
+        User user = getUser();
+
+        if (user != null) {
+            Global.setUserId(user.getId());
+            Global.setIsCommittee(vm.isCommittee());
             Navigator.navigate("dashboard");
         } else {
-            Page.showDialog(tfEmail.getScene().getWindow(), DialogType.ERROR, "Error: Invalid Credentials", "Username and password combination does not match any records!");
+            Page.showDialog(
+                    tfEmail.getScene().getWindow(),
+                    DialogType.ERROR,
+                    "Error: Invalid Credentials",
+                    "Username and password combination does not match any records!"
+            );
         }
+    }
+
+    private User getUser() {
+        Class<? extends User> toFind = vm.isCommittee() ? Committee.class : Person.class;
+        return TextORM.getOne(
+                toFind,
+                data -> Objects.equals(data.get("email"), vm.getEmail()) &&
+                        Objects.equals(data.get("password"), vm.getPassword())
+        );
     }
 
     @FXML
@@ -54,9 +75,21 @@ public class LoginController implements Initializable {
         }
     }
 
+    @FXML
+    void onSubmit(ActionEvent event) {
+        // MFX is scuffed so this doesn't work for now
+        // and will probably not work until MFX
+        // is updated.
+        System.out.println("Submitted");
+        onLoginPressed(event);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        vm = new LoginViewModel(tfEmail.textProperty(), tfPassword.passwordProperty());
+        vm = new LoginViewModel(
+                tfEmail.textProperty(),
+                tfPassword.passwordProperty(),
+                chkIsCommittee.selectedProperty()
+        );
     }
 }
-

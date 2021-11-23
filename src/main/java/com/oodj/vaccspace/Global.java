@@ -9,6 +9,16 @@ public class Global {
 
     private static int userId;
 
+    private static boolean isCommittee = false;
+
+    public static boolean isCommittee() {
+        return isCommittee;
+    }
+
+    public static void setIsCommittee(boolean isCommittee) {
+        Global.isCommittee = isCommittee;
+    }
+
     public static HomeController getHomeReference() {
         return homeReference;
     }

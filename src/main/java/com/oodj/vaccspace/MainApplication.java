@@ -51,6 +51,10 @@ public class MainApplication extends Application {
             return;
         }
 
+        // Committee
+        Committee committee = new Committee("Khom Mee Tee", "69420", "zxc", "zxc", 2600);
+        committee.save();
+
         // Citizen
         Person citizen = new Person(
                 "Siti Zheng",

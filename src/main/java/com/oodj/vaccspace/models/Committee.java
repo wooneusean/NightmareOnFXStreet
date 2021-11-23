@@ -4,15 +4,15 @@ import textorm.Column;
 import textorm.Repository;
 
 @Repository
-public class Commitee extends User {
+public class Committee extends User {
 
     @Column
     private int Salary;
 
-    public Commitee() {
+    public Committee() {
     }
 
-    public Commitee(String name, String phone, String email, String password, int salary) {
+    public Committee(String name, String phone, String email, String password, int salary) {
         super(name, phone, email, password);
         Salary = salary;
     }
@@ -23,9 +23,5 @@ public class Commitee extends User {
 
     public void setSalary(int salary) {
         Salary = salary;
-    }
-
-    public void staffLogin() {
-
     }
 }
