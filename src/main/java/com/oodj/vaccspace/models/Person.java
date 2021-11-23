@@ -39,20 +39,20 @@ public class Person extends User {
     public Person() {
     }
 
-    public String getIdentification() {
-        return this.identification;
-    }
-
-    public void setIdentification(String identification) {
-        this.identification = identification;
-    }
-
     public boolean isNonCitizen() {
         return isNonCitizen;
     }
 
     public void setNonCitizen(boolean nonCitizen) {
         isNonCitizen = nonCitizen;
+    }
+
+    public String getIdentification() {
+        return this.identification;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
     }
 
     public List<Appointment> getAppointments() {

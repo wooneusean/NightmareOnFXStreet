@@ -95,7 +95,7 @@ public class NewAppointmentController extends BaseController implements Initiali
         appointment.save();
 
         Person person = Global.getLoggedInUser();
-        person.setVaccinationStatus(VaccinationStatus.REGISTERED);
+        person.setVaccinationStatus(VaccinationStatus.AWAITING_FIRST_DOSE);
         person.save();
 
         getStageDialog().close();

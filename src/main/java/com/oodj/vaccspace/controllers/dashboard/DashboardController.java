@@ -53,10 +53,11 @@ public class DashboardController implements Initializable {
                     "btnHome",
                     actionEvent -> onNavBtnPress(actionEvent, "home"),
                     false
-            ), new DashboardIconButton(
+            ),
+            new DashboardIconButton(
                     "fas-users",
                     "btnPeople",
-                    actionEvent -> onNavBtnPress(actionEvent, "home"),
+                    actionEvent -> onNavBtnPress(actionEvent, "people"),
                     true
             ),
             new DashboardIconButton(

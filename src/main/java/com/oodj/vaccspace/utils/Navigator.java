@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -33,6 +32,7 @@ public class Navigator {
         put("view_appointment", new Page("views/view-appointment-view.fxml", "View Appointment"));
         put("vaccines", new Page("views/vaccines-view.fxml", "Vaccines"));
         put("vaccine_centers", new Page("views/vaccine-centers-view.fxml", "Vaccine Centers"));
+        put("people", new Page("views/people-view.fxml", "People"));
     }};
 
     private static Stage primaryStage;

@@ -6,6 +6,8 @@ import textorm.Model;
 import textorm.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class Appointment extends Model {
@@ -165,7 +167,33 @@ public class Appointment extends Model {
 
         getVaccine().setVaccineStatus(VaccineStatus.AVAILABLE);
 
-        // TODO:
-        //  - Change person vaccination status
+        include(Person.class);
+        Person person = getPerson();
+        person.include(Appointment.class);
+
+        List<Appointment> appointments = person.getAppointments()
+                                               .stream()
+                                               .filter(appointment -> appointment.getAppointmentStatus() ==
+                                                                      AppointmentStatus.FULFILLED)
+                                               .collect(Collectors.toList());
+
+        boolean hasFulfilledAppointments = appointments.stream()
+                                                       .anyMatch(appointment ->
+                                                               appointment.getAppointmentStatus() ==
+                                                               AppointmentStatus.FULFILLED);
+
+        boolean hasConfirmedAppointments = appointments.stream()
+                                                       .anyMatch(appointment ->
+                                                               appointment.getAppointmentStatus() ==
+                                                               AppointmentStatus.CONFIRMED);
+
+        if (hasFulfilledAppointments) {
+            person.setVaccinationStatus(VaccinationStatus.AWAITING_SECOND_DOSE);
+        } else if (hasConfirmedAppointments) {
+            person.setVaccinationStatus(VaccinationStatus.AWAITING_FIRST_DOSE);
+        } else {
+            person.setVaccinationStatus(VaccinationStatus.NOT_REGISTERED);
+        }
+        person.save();
     }
 }
