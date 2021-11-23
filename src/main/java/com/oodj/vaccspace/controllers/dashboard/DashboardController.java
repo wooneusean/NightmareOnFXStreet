@@ -51,7 +51,7 @@ public class DashboardController implements Initializable {
             new DashboardIconButton(
                     "fas-home",
                     "btnHome",
-                    actionEvent -> onNavBtnPress(actionEvent, "home"),
+                    actionEvent -> onNavBtnPress(actionEvent, Global.isCommittee() ? "appointments" : "home"),
                     false
             ),
             new DashboardIconButton(
@@ -103,9 +103,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO:
-        //  - Reroute based on Global.isCommittee()
-        Navigator.navigateInContainer("home", vbxContent);
+        Navigator.navigateInContainer(Global.isCommittee() ? "appointments" : "home", vbxContent);
 
         initializeIcons();
     }
