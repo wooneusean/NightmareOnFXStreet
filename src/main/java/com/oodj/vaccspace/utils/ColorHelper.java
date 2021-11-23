@@ -12,4 +12,13 @@ public class ColorHelper {
                 color.getOpacity()
         );
     }
+
+    public static Color hexToRGB(String colorStr) {
+        return new Color(
+                Integer.valueOf(colorStr.substring(1, 3), 16) / 255f,
+                Integer.valueOf(colorStr.substring(3, 5), 16) / 255f,
+                Integer.valueOf(colorStr.substring(5, 7), 16) / 255f,
+                1f
+        );
+    }
 }

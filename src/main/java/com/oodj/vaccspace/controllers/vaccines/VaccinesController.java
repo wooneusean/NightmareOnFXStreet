@@ -1,6 +1,7 @@
 package com.oodj.vaccspace.controllers.vaccines;
 
 import com.oodj.vaccspace.models.VaccineType;
+import com.oodj.vaccspace.utils.StringHelper;
 import com.oodj.vaccspace.utils.Table;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
@@ -32,12 +33,13 @@ public class VaccinesController implements Initializable {
     @FXML
     void onSearchChanged(KeyEvent event) {
         if (!vm.getSearch().isBlank()) {
-            filteredList.setPredicate(
-                    vaccineType -> vaccineType.getVaccineName()
-                                              .toLowerCase()
-                                              .contains(vm.getSearch().toLowerCase()) ||
-                                   String.valueOf(vaccineType.getDosesNeeded())
-                                         .equals(vm.getSearch().toLowerCase()));
+            filteredList.setPredicate(vaccineType ->
+                    StringHelper.containsIgnoreCase(
+                            vaccineType.getVaccineName(),
+                            vm.getSearch().toLowerCase()
+                    ) ||
+                    String.valueOf(vaccineType.getDosesNeeded()).equals(vm.getSearch().toLowerCase())
+            );
         } else {
             filteredList.setPredicate(vaccineType -> true);
         }
