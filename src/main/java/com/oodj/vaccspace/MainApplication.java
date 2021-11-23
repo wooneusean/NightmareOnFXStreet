@@ -157,7 +157,7 @@ public class MainApplication extends Application {
                 citizen.getId(),
                 bukitJalil.getId(),
                 sinovacVaccine.getId(),
-                LocalDate.now(),
+                LocalDate.now().plusDays((long) (Math.random() * 365) + 1),
                 AppointmentStatus.CONFIRMED,
                 Dose.FIRST
         ).save();
@@ -166,7 +166,7 @@ public class MainApplication extends Application {
                 noncitizen.getId(),
                 movenpick.getId(),
                 johnsonVaccine.getId(),
-                LocalDate.now(),
+                LocalDate.now().plusDays((long) (Math.random() * 365) + 1),
                 AppointmentStatus.CONFIRMED,
                 Dose.FIRST
         ).save();
