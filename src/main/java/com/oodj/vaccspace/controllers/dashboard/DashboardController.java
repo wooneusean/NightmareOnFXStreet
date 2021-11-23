@@ -1,6 +1,7 @@
 package com.oodj.vaccspace.controllers.dashboard;
 
 import com.oodj.vaccspace.Global;
+import com.oodj.vaccspace.utils.Logging;
 import com.oodj.vaccspace.utils.Navigator;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -21,24 +22,31 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
 
     boolean isNavigationMinimized = false;
+
     @FXML
     private BorderPane bpDashboard;
+
     @FXML
     private MFXButton btnMenu;
+
     @FXML
     private MFXButton btnHome;
+
     @FXML
     private MFXButton btnVaccination;
+
     @FXML
     private MFXButton btnVaccinationCenter;
+
     @FXML
     private MFXButton btnSettings;
+
     @FXML
     private MFXPillButton btnLogout;
+
     @FXML
     private VBox vbxContent;
-    @FXML
-    private VBox vbxNavigation;
+
     List<DashboardIconButton> iconList = Arrays.asList(
             new DashboardIconButton(
                     "fas-home",
@@ -67,12 +75,16 @@ public class DashboardController implements Initializable {
     );
 
     @FXML
+    private VBox vbxNavigation;
+
+    @FXML
     void onNavBtnPress(ActionEvent event, String route) {
         Navigator.navigateInContainer(route, vbxContent);
     }
 
     @FXML
     void onLogoutPressed(ActionEvent event) {
+        Logging.write(String.format("Logout {user_id: %d, committee: %b}", Global.getUserId(), Global.isCommittee()));
         Global.setUserId(-1);
         Navigator.navigate("login");
     }

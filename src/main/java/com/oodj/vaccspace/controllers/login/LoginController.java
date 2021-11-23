@@ -4,6 +4,7 @@ import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.models.Committee;
 import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.models.User;
+import com.oodj.vaccspace.utils.Logging;
 import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.Page;
 import io.github.euseanwoon.MFXPillButton;
@@ -46,8 +47,21 @@ public class LoginController implements Initializable {
         if (user != null) {
             Global.setUserId(user.getId());
             Global.setIsCommittee(vm.isCommittee());
+            Logging.write(String.format(
+                    "Successful login {email: %s, password: %s, committee: %b}, resultant user ID: %d",
+                    vm.getEmail(),
+                    vm.getPassword(),
+                    vm.isCommittee(),
+                    user.getId()
+            ));
             Navigator.navigate("dashboard");
         } else {
+            Logging.write(String.format(
+                    "Invalid login {email: %s, password: %s, committee: %b}",
+                    vm.getEmail(),
+                    vm.getPassword(),
+                    vm.isCommittee()
+            ));
             Page.showDialog(
                     tfEmail.getScene().getWindow(),
                     DialogType.ERROR,

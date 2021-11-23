@@ -1,0 +1,11 @@
+[2021-11-23T07:46:09.552562200Z] Invalid login {email: asd, password: zxc}
+[2021-11-23T07:46:18.135145700Z] Invalid login {email: zxc, password: zxc}
+[2021-11-23T07:46:22.918011800Z] Successful login {email: asd, password: asd}, resultant user ID: 2
+[2021-11-23T07:46:37.484188500Z] Successful login {email: zxc, password: zxc}, resultant user ID: 1
+[2021-11-23T07:47:46.781672600Z] Invalid login {email: asd, password: asd, committee: true}
+[2021-11-23T07:47:54.505065600Z] Successful login {email: zxc, password: zxc, committee: true}, resultant user ID: 1
+[2021-11-23T07:49:12.620026Z] Successful login {email: asd, password: asd, committee: false}, resultant user ID: 2
+[2021-11-23T07:49:13.823101600Z] Logout {user_id: 2, committee: false}
+[2021-11-23T07:49:15.413142300Z] Invalid login {email: zxc, password: zxc, committee: false}
+[2021-11-23T07:49:18.069326300Z] Successful login {email: zxc, password: zxc, committee: true}, resultant user ID: 1
+[2021-11-23T07:49:19.593569400Z] Logout {user_id: 1, committee: true}
