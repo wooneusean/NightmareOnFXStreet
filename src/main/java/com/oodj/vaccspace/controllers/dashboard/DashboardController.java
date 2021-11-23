@@ -41,12 +41,6 @@ public class DashboardController implements Initializable {
     private VBox vbxNavigation;
     List<DashboardIconButton> iconList = Arrays.asList(
             new DashboardIconButton(
-                    "fas-bars",
-                    "btnMenu",
-                    actionEvent -> resizeNavigation(),
-                    false
-            ),
-            new DashboardIconButton(
                     "fas-home",
                     "btnHome",
                     actionEvent -> onNavBtnPress(actionEvent, "home"),
@@ -92,15 +86,9 @@ public class DashboardController implements Initializable {
         initializeIcons();
     }
 
-    private void resizeNavigation() {
-        vbxNavigation.setPrefWidth(isNavigationMinimized ? 120 : 20);
-        isNavigationMinimized = !isNavigationMinimized;
-    }
-
     private void initializeIcons() {
         for (Iterator<DashboardIconButton> iterator = iconList.iterator(); iterator.hasNext(); ) {
             DashboardIconButton fragment = iterator.next();
-
 
             if (!fragment.isRequiresCommittee() || Global.isCommittee()) {
                 vbxNavigation.getChildren().add(createIcon(fragment));
