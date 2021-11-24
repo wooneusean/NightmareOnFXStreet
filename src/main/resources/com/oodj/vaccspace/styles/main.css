@@ -129,3 +129,9 @@
 .body-regular:determinate .label .text {
     -fx-fill: white;
 }
+
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: #4d4d4d;
+}

@@ -1,11 +1,10 @@
 package com.oodj.vaccspace.controllers.vaccinetypes;
 
 import com.oodj.vaccspace.Global;
-import com.oodj.vaccspace.models.Vaccine;
 import com.oodj.vaccspace.models.VaccineType;
 import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.StringHelper;
-import com.oodj.vaccspace.utils.Table;
+import com.oodj.vaccspace.utils.TableHelper;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
@@ -99,7 +98,7 @@ public class VaccineTypesController implements Initializable {
             return row;
         });
 
-        Table.autoSizeColumns(tblVaccineTypes);
+        TableHelper.autoSizeColumns(tblVaccineTypes);
 
         filteredList = new FilteredList<>(FXCollections.observableArrayList(vaccineTypes));
 

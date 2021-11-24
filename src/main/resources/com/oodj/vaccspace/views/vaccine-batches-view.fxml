@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.euseanwoon.MFXPillButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="556.0" prefWidth="1060.0" spacing="14.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.vaccinebatches.VaccineBatchesController">
+    <children>
+          <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Vaccine Batches">
+              <styleClass>
+                  <String fx:value="heading-medium" />
+                  <String fx:value="h1" />
+              </styleClass>
+          </Label>
+          <MFXTextField fx:id="txtSearch" lineStrokeWidth="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Insert keywords here..." styleClass="body-medium" />
+      <VBox fx:id="vbxAdvancedFilters" alignment="CENTER_RIGHT">
+         <children>
+            <HBox alignment="CENTER" spacing="14.0">
+               <children>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="14.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="body-regular" text="Minimum Amount Left (%)" />
+                        <Slider fx:id="sldMinimumAmount" minorTickCount="5" showTickLabels="true" snapToTicks="true" value="100.0" />
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" />
+                  <VBox layoutX="11.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="14.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="body-regular" text="Arrival Start Date" />
+                        <DatePicker fx:id="dtpArrivalStartDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="570.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="14.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="body-regular" text="Arrival End Date" />
+                        <DatePicker fx:id="dtpArrivalEndDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+                  <Separator layoutX="444.0" layoutY="10.0" orientation="VERTICAL" />
+                  <VBox layoutX="368.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="14.0">
+                     <children>
+                        <Label styleClass="body-regular" text="Expiry Start Date" />
+                        <DatePicker fx:id="dtpExpiryStartDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="726.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="14.0">
+                     <children>
+                        <Label styleClass="body-regular" text="Expiry End Date" />
+                        <DatePicker fx:id="dtpExpiryEndDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="14.0">
+               <children>
+                  <MFXPillButton fx:id="btnReset" onAction="#onResetPressed" rippleArc="40.0" text="Reset">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-secondary" />
+                        <String fx:value="body-medium" />
+                     </styleClass>
+                  </MFXPillButton>
+                  <MFXPillButton fx:id="btnSearch" layoutX="981.0" layoutY="10.0" onAction="#onSearchPressed" rippleArc="40.0" text="Apply">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                        <String fx:value="body-medium" />
+                     </styleClass>
+                  </MFXPillButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Hyperlink fx:id="lnkShowAdvanced" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" onAction="#onShowAdvancedFiltersPressed" text="Show Advanced Filters">
+         <VBox.margin>
+            <Insets bottom="-7.0" top="-14.0" />
+         </VBox.margin>
+         <styleClass>
+            <String fx:value="body-regular" />
+            <String fx:value="h6" />
+         </styleClass>
+      </Hyperlink>
+        <VBox VBox.vgrow="ALWAYS">
+            <children>
+                <TableView fx:id="tblVaccineBatches" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-regular" VBox.vgrow="ALWAYS" />
+            </children>
+        </VBox>
+      <MFXPillButton fx:id="btnAddBatch" onAction="#onAddBatchPressed" rippleArc="40.0" text="New Batch">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-primary" />
+            <String fx:value="body-medium" />
+            <String fx:value="h4" />
+         </styleClass>
+      </MFXPillButton>
+    </children>
+</VBox>

@@ -2,7 +2,7 @@ package com.oodj.vaccspace.controllers.appointments;
 
 import com.oodj.vaccspace.models.*;
 import com.oodj.vaccspace.utils.StringHelper;
-import com.oodj.vaccspace.utils.Table;
+import com.oodj.vaccspace.utils.TableHelper;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -116,7 +116,7 @@ public class AppointmentsController implements Initializable {
             return row;
         });
 
-        Table.autoSizeColumns(tblAppointments);
+        TableHelper.autoSizeColumns(tblAppointments);
 
         List<Appointment> appointments = TextORM.getAll(Appointment.class, hashMap -> true);
 

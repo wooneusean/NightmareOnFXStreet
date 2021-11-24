@@ -6,7 +6,7 @@ import com.oodj.vaccspace.models.Appointment;
 import com.oodj.vaccspace.models.AppointmentStatus;
 import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.utils.Navigator;
-import com.oodj.vaccspace.utils.Table;
+import com.oodj.vaccspace.utils.TableHelper;
 import io.github.euseanwoon.MFXPillButton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -97,7 +97,7 @@ public class HomeController implements Initializable {
                        .addAll(appointmentLocation, appointmentVaccine, appointmentDate, appointmentStatus, dose);
 
         // Autosize all columns
-        Table.autoSizeColumns(tblAppointments);
+        TableHelper.autoSizeColumns(tblAppointments);
 
         if (person.getAppointments() == null || person.getAppointments().size() == 0) return;
 
