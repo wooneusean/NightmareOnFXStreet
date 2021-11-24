@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="556.0" prefWidth="1060.0" spacing="14.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.vaccinebatches.VaccineBatchesController">
+<VBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="556.0" prefWidth="1060.0" spacing="14.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.vaccinebatches.VaccineBatchesController">
     <children>
           <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Vaccine Batches">
               <styleClass>
@@ -94,5 +94,13 @@
                 <TableView fx:id="tblVaccineBatches" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-regular" VBox.vgrow="ALWAYS" />
             </children>
         </VBox>
+      <MFXPillButton fx:id="btnAddBatch" onAction="#onAddBatchPressed" rippleArc="40.0" text="New Batch">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-primary" />
+            <String fx:value="body-medium" />
+            <String fx:value="h4" />
+         </styleClass>
+      </MFXPillButton>
     </children>
 </VBox>

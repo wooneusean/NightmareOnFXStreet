@@ -73,6 +73,8 @@ public class VaccineBatch extends Model {
             throw new NoSuchElementException("There are no batches that belong to vaccine '" + vaccineName + "'.");
         }
 
+        // TODO: 24/11/2021 Filter out expired batches
+
         vaccineBatches.sort(Comparator.comparing(VaccineBatch::getExpiryDate));
 
         return vaccineBatches.get(0);

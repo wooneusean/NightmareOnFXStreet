@@ -3,6 +3,7 @@ package com.oodj.vaccspace.controllers.vaccinebatches;
 import com.oodj.vaccspace.models.VaccinationCenter;
 import com.oodj.vaccspace.models.VaccineBatch;
 import com.oodj.vaccspace.models.VaccineType;
+import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.StringHelper;
 import com.oodj.vaccspace.utils.TableHelper;
 import io.github.euseanwoon.MFXPillButton;
@@ -35,6 +36,9 @@ public class VaccineBatchesController implements Initializable {
     FilteredList<VaccineBatch> filteredData;
 
     SortedList<VaccineBatch> sortableData;
+
+    @FXML
+    private MFXPillButton btnAddBatch;
 
     @FXML
     private MFXPillButton btnReset;
@@ -75,6 +79,11 @@ public class VaccineBatchesController implements Initializable {
     }
 
     @FXML
+    void onAddBatchPressed(ActionEvent event) {
+        Navigator.showInDialog(btnAddBatch.getScene().getWindow(), "new_batch", this);
+    }
+
+    @FXML
     void onResetPressed(ActionEvent event) {
         vm.setSearch("");
         vm.setMinimumValue(100);
@@ -97,8 +106,9 @@ public class VaccineBatchesController implements Initializable {
 
         setupTable();
 
-        vm.searchProperty()
-          .addListener((observableValue, oldValue, newValue) -> filteredData.setPredicate(getSearchPredicate()));
+        vm.searchProperty().addListener((observableValue, oldValue, newValue) -> filteredData.setPredicate(
+                getSearchPredicate()
+        ));
     }
 
     private void setupViewModel() {
@@ -145,28 +155,32 @@ public class VaccineBatchesController implements Initializable {
         TableColumn<VaccineBatch, LocalDate> expiryDateColumn = new TableColumn<>("Expiry Date");
         expiryDateColumn.setCellValueFactory(new PropertyValueFactory<>("expiryDate"));
 
-        tblVaccineBatches.getColumns()
-                         .addAll(vaccineTypeColumn,
-                                 amountColumn,
-                                 vaccineCenterNameColumn,
-                                 arrivalDateColumn,
-                                 expiryDateColumn
-                         );
+        tblVaccineBatches.getColumns().addAll(vaccineTypeColumn,
+                                              amountColumn,
+                                              vaccineCenterNameColumn,
+                                              arrivalDateColumn,
+                                              expiryDateColumn
+        );
 
-        List<VaccineBatch> vaccineBatches = TextORM.getAll(VaccineBatch.class, hashMap -> true);
+        refresh();
 
-        if (vaccineBatches == null) {
-            return;
-        }
-
-        masterData = FXCollections.observableList(vaccineBatches);
-        filteredData = new FilteredList<>(masterData);
-        sortableData = new SortedList<>(filteredData);
-
-        tblVaccineBatches.setItems(sortableData);
         sortableData.comparatorProperty().bind(tblVaccineBatches.comparatorProperty());
 
         TableHelper.autoSizeColumns(tblVaccineBatches);
+    }
+
+    public void refresh() {
+        List<VaccineBatch> vaccineBatches = TextORM.getAll(VaccineBatch.class, hashMap -> true);
+
+        if (vaccineBatches == null) {
+            masterData = FXCollections.emptyObservableList();
+        } else {
+            masterData = FXCollections.observableList(vaccineBatches);
+        }
+
+        filteredData = new FilteredList<>(masterData);
+        sortableData = new SortedList<>(filteredData);
+        tblVaccineBatches.setItems(sortableData);
     }
 
     Predicate<VaccineBatch> getSearchPredicate() {
