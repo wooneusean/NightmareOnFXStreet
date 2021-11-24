@@ -1,11 +1,16 @@
-package com.oodj.vaccspace.controllers.vaccines;
+package com.oodj.vaccspace.controllers.vaccinetypes;
 
+import com.oodj.vaccspace.Global;
+import com.oodj.vaccspace.models.Vaccine;
 import com.oodj.vaccspace.models.VaccineType;
+import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.StringHelper;
 import com.oodj.vaccspace.utils.Table;
+import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -19,16 +24,26 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class VaccinesController implements Initializable {
-    VaccinesViewModel vm = new VaccinesViewModel();
+public class VaccineTypesController implements Initializable {
+    VaccineTypesViewModel vm = new VaccineTypesViewModel();
 
     FilteredList<VaccineType> filteredList;
 
+    VaccineType selectedVaccineType;
+
     @FXML
-    private TableView<VaccineType> tblVaccines;
+    private TableView<VaccineType> tblVaccineTypes;
 
     @FXML
     private MFXTextField txtSearch;
+
+    @FXML
+    private MFXPillButton btnAddVaccineType;
+
+    @FXML
+    void onAddVaccineTypePressed(ActionEvent event) {
+        Navigator.showInDialog(btnAddVaccineType.getScene().getWindow(), "new_vaccine_type", this);
+    }
 
     @FXML
     void onSearchChanged(KeyEvent event) {
@@ -45,36 +60,50 @@ public class VaccinesController implements Initializable {
         }
     }
 
+    public void refresh() {
+        List<VaccineType> vaccineTypes = TextORM.getAll(VaccineType.class, hashMap -> true);
+        filteredList = new FilteredList<>(FXCollections.observableArrayList(vaccineTypes));
+
+        tblVaccineTypes.setItems(filteredList);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!Global.isCommittee()) {
+            btnAddVaccineType.setManaged(false);
+        }
+
         vm.searchProperty().bindBidirectional(txtSearch.textProperty());
 
         TableColumn<VaccineType, String> vaccineNameColumn = new TableColumn<>("Vaccine Name");
         vaccineNameColumn.setCellValueFactory(new PropertyValueFactory<>("vaccineName"));
+
+        TableColumn<VaccineType, String> ManufacturingCompanyColumn = new TableColumn<>("Manufacturing Company");
+        ManufacturingCompanyColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturingCompany"));
 
         TableColumn<VaccineType, Integer> vaccineDoseColumn = new TableColumn<>("Doses Needed");
         vaccineDoseColumn.setCellValueFactory(new PropertyValueFactory<>("dosesNeeded"));
 
         List<VaccineType> vaccineTypes = TextORM.getAll(VaccineType.class, hashMap -> true);
 
-        tblVaccines.getColumns().addAll(vaccineNameColumn, vaccineDoseColumn);
+        tblVaccineTypes.getColumns().addAll(vaccineNameColumn, vaccineDoseColumn);
 
-        tblVaccines.setRowFactory(tableView -> {
+        tblVaccineTypes.setRowFactory(tableView -> {
             TableRow<VaccineType> row = new TableRow<>();
             row.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
-                    VaccineType vaccineType = row.getItem();
-                    System.out.println(vaccineType.getVaccineName());
+                    selectedVaccineType = row.getItem();
+                    Navigator.showInDialog(tblVaccineTypes.getScene().getWindow(), "view_vaccine_type", this);
                 }
             });
             return row;
         });
 
-        Table.autoSizeColumns(tblVaccines);
+        Table.autoSizeColumns(tblVaccineTypes);
 
         filteredList = new FilteredList<>(FXCollections.observableArrayList(vaccineTypes));
 
-        tblVaccines.setItems(filteredList);
+        tblVaccineTypes.setItems(filteredList);
     }
 }
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.euseanwoon.MFXPillButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="556.0" prefWidth="1060.0" spacing="14.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.vaccinetypes.VaccineTypesController">
+   <children>
+      <VBox alignment="CENTER_RIGHT" spacing="14.0">
+         <children>
+            <Label text="Vaccines" underline="true">
+               <styleClass>
+                  <String fx:value="body-medium" />
+                  <String fx:value="h2" />
+               </styleClass>
+            </Label>
+            <MFXTextField fx:id="txtSearch" lineStrokeWidth="1.0" onKeyTyped="#onSearchChanged" prefHeight="30.0" prefWidth="450.0" promptText="Insert keywords here..." styleClass="body-medium" />
+         </children>
+      </VBox>
+      <VBox prefHeight="391.0" prefWidth="1060.0">
+         <children>
+            <TableView fx:id="tblVaccineTypes" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="383.0" prefWidth="1060.0" styleClass="body-regular" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="41.0" prefWidth="513.0" style="-fx-padding: 0 15 0 0;">
+         <children>
+            <MFXPillButton fx:id="btnAddVaccineType" onAction="#onAddVaccineTypePressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Add New Vaccine">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-primary" />
+                  <String fx:value="body-medium" />
+                  <String fx:value="h4" />
+               </styleClass>
+            </MFXPillButton>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+   </children>
+</VBox>

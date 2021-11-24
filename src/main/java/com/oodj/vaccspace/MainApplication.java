@@ -91,13 +91,13 @@ public class MainApplication extends Application {
 
         // Types
 
-        VaccineType sinovac = new VaccineType("Sinovac", 2);
+        VaccineType sinovac = new VaccineType("Sinovac", "Sinovac Biotech Ltd", 2);
         sinovac.save();
 
-        VaccineType pfizer = new VaccineType("Pfizer", 2);
+        VaccineType pfizer = new VaccineType("Pfizer", "Pfizer Inc.", 2);
         pfizer.save();
 
-        VaccineType johnson = new VaccineType("Johnson & Johnson", 2);
+        VaccineType johnson = new VaccineType("Johnson & Johnson", "Janssen Pharmaceutica", 2);
         johnson.save();
 
         // Batches

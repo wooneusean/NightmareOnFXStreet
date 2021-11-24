@@ -49,10 +49,14 @@
                   <String fx:value="body-regular" />
                   <String fx:value="h4" />
                </styleClass></MFXPasswordField>
-                <HBox alignment="CENTER_RIGHT" spacing="14.0">
+                <HBox alignment="CENTER_LEFT" spacing="14.0">
                     <children>
                   <MFXCheckbox fx:id="chkIsCommittee" styleClass="body-regular" text="Committee" />
-                        <MFXPillButton fx:id="btnLogin" buttonType="RAISED" onAction="#onLoginPressed" rippleArc="40" rippleColor="WHITE" text="Login">
+                    </children>
+                </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="234.0">
+               <children>
+                        <MFXPillButton fx:id="btnLogin" buttonType="RAISED" onAction="#onLoginPressed" prefHeight="41.0" prefWidth="106.0" rippleArc="40" rippleColor="WHITE" text="Login">
                             <styleClass>
                                 <String fx:value="btn-primary" />
                                 <String fx:value="btn" />
@@ -60,8 +64,8 @@
                                 <String fx:value="h4" />
                             </styleClass>
                         </MFXPillButton>
-                    </children>
-                </HBox>
+               </children>
+            </HBox>
             </children>
             <padding>
                 <Insets left="50.0" right="50.0" />

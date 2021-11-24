@@ -1,10 +1,9 @@
-package com.oodj.vaccspace.controllers.vaccines;
+package com.oodj.vaccspace.controllers.vaccinetypes;
 
-import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class VaccinesViewModel {
+public class VaccineTypesViewModel {
     private final StringProperty search = new SimpleStringProperty();
 
     public String getSearch() {

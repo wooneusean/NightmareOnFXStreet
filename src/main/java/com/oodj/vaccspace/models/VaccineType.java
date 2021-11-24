@@ -14,6 +14,9 @@ public class VaccineType extends Model {
     private String vaccineName;
 
     @Column
+    private String manufacturingCompany;
+
+    @Column
     private int dosesNeeded;
 
     @HasMany(targetKey = "vaccineTypeId")
@@ -22,8 +25,9 @@ public class VaccineType extends Model {
     public VaccineType() {
     }
 
-    public VaccineType(String vaccineName, int dosesNeeded) {
+    public VaccineType(String vaccineName, String manufacturingCompany, int dosesNeeded) {
         this.vaccineName = vaccineName;
+        this.manufacturingCompany = manufacturingCompany;
         this.dosesNeeded = dosesNeeded;
     }
 
@@ -42,6 +46,14 @@ public class VaccineType extends Model {
 
     public void setVaccineName(String vaccineName) {
         this.vaccineName = vaccineName;
+    }
+
+    public String getManufacturingCompany() {
+        return manufacturingCompany;
+    }
+
+    public void setManufacturingCompany(String manufacturingCompany) {
+        this.manufacturingCompany = manufacturingCompany;
     }
 
     public int getDosesNeeded() {

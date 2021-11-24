@@ -30,7 +30,9 @@ public class Navigator {
         put("home", new Page("views/home-view.fxml", "Home"));
         put("new_appointment", new Page("views/new-appointment-view.fxml", "New Appointment"));
         put("view_appointment", new Page("views/view-appointment-view.fxml", "View Appointment"));
-        put("vaccines", new Page("views/vaccines-view.fxml", "Vaccines"));
+        put("vaccines", new Page("views/vaccines-type-view.fxml", "Vaccines"));
+        put("new_vaccine_type", new Page("views/new-vaccine-type-view.fxml", "New Vaccine"));
+        put("view_vaccine_type", new Page("views/view-vaccine-type-view.fxml", "View Vaccine"));
         put("vaccine_centers", new Page("views/vaccine-centers-view.fxml", "Vaccine Centers"));
         put("people", new Page("views/people-view.fxml", "People"));
     }};
