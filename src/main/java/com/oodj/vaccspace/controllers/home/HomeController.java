@@ -1,7 +1,9 @@
 package com.oodj.vaccspace.controllers.home;
 
 import com.oodj.vaccspace.Global;
+import com.oodj.vaccspace.controllers.appointments.AppointmentStatusIndicatorCell;
 import com.oodj.vaccspace.models.Appointment;
+import com.oodj.vaccspace.models.AppointmentStatus;
 import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.Table;
@@ -84,10 +86,9 @@ public class HomeController implements Initializable {
         TableColumn<Appointment, LocalDate> appointmentDate = new TableColumn<>("Appointment Date");
         appointmentDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDate"));
 
-        TableColumn<Appointment, String> appointmentStatus = new TableColumn<>("Status");
-        appointmentStatus.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue()
-                                                                                     .getAppointmentStatus()
-                                                                                     .getValue()));
+        TableColumn<Appointment, AppointmentStatus> appointmentStatus = new TableColumn<>("Status");
+        appointmentStatus.setCellValueFactory(new PropertyValueFactory<>("appointmentStatus"));
+        appointmentStatus.setCellFactory(statusColumn -> new AppointmentStatusIndicatorCell());
 
         TableColumn<Appointment, String> dose = new TableColumn<>("Dose");
         dose.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getDose().getValue()));

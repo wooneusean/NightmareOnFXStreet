@@ -16,8 +16,6 @@ public class Vaccine extends Model {
     @HasOne(foreignKey = "vaccineBatchId")
     private VaccineBatch vaccineBatch;
 
-
-
     @Column
     private VaccineStatus vaccineStatus;
 

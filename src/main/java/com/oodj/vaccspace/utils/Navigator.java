@@ -35,6 +35,7 @@ public class Navigator {
         put("view_vaccine_type", new Page("views/view-vaccine-type-view.fxml", "View Vaccine"));
         put("vaccine_centers", new Page("views/vaccine-centers-view.fxml", "Vaccine Centers"));
         put("people", new Page("views/people-view.fxml", "People"));
+        put("appointments", new Page("views/appointments-view.fxml", "Appointments"));
     }};
 
     private static Stage primaryStage;
