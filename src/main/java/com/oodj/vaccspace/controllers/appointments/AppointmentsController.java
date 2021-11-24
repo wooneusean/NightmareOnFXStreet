@@ -6,7 +6,9 @@ import com.oodj.vaccspace.utils.TableHelper;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -18,15 +20,19 @@ import textorm.TextORM;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class AppointmentsController implements Initializable {
 
     AppointmentsViewModel vm = new AppointmentsViewModel();
 
-    FilteredList<Appointment> appointmentsList;
+    ObservableList<Appointment> masterData;
+
+    FilteredList<Appointment> filteredData;
+
+    SortedList<Appointment> sortableData;
 
     @FXML
     private TableView<Appointment> tblAppointments;
@@ -36,31 +42,35 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     void onSearchChanged(KeyEvent event) {
-        if (!vm.getSearch().isBlank()) {
-            appointmentsList.setPredicate(appointment -> {
-                appointment.include(Person.class);
-                appointment.include(Vaccine.class);
-                appointment.include(VaccinationCenter.class);
-                appointment.getVaccine().include(VaccineBatch.class);
-                appointment.getVaccine().getVaccineBatch().include(VaccineType.class);
-                String vaccineName = appointment.getVaccine().getVaccineBatch().getVaccineType().getVaccineName();
 
-                String vaccinationCenterName = appointment.getVaccinationCenter().getVaccinationCenterName();
+    }
 
-                return StringHelper.containsIgnoreCase(appointment.getPerson().getName(), vm.getSearch()) ||
-                       StringHelper.containsIgnoreCase(vaccinationCenterName, vm.getSearch()) ||
-                       StringHelper.containsIgnoreCase(vaccineName, vm.getSearch()) ||
-                       StringHelper.containsIgnoreCase(appointment.getAppointmentStatus().getValue(), vm.getSearch()) ||
-                       StringHelper.containsIgnoreCase(appointment.getDose().getValue(), vm.getSearch());
-            });
-        } else {
-            appointmentsList.setPredicate(appointment -> true);
-        }
+    private Predicate<Appointment> getFilterAppointmentPredicate() {
+        return appointment -> {
+            appointment.include(Person.class);
+            appointment.include(Vaccine.class);
+            appointment.include(VaccinationCenter.class);
+            appointment.getVaccine().include(VaccineBatch.class);
+            appointment.getVaccine().getVaccineBatch().include(VaccineType.class);
+            String vaccineName = appointment.getVaccine().getVaccineBatch().getVaccineType().getVaccineName();
+
+            String vaccinationCenterName = appointment.getVaccinationCenter().getVaccinationCenterName();
+
+            return StringHelper.containsIgnoreCase(appointment.getPerson().getName(), vm.getSearch()) ||
+                   StringHelper.containsIgnoreCase(vaccinationCenterName, vm.getSearch()) ||
+                   StringHelper.containsIgnoreCase(vaccineName, vm.getSearch()) ||
+                   StringHelper.containsIgnoreCase(appointment.getAppointmentStatus().getValue(), vm.getSearch()) ||
+                   StringHelper.containsIgnoreCase(appointment.getDose().getValue(), vm.getSearch());
+        };
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         vm.searchProperty().bindBidirectional(txtSearch.textProperty());
+
+        vm.searchProperty().addListener((observableValue, s, t1) -> {
+            filteredData.setPredicate(getFilterAppointmentPredicate());
+        });
 
         TableColumn<Appointment, String> personColumn = new TableColumn<>("Registered Person");
         personColumn.setCellValueFactory(rowData -> {
@@ -95,15 +105,14 @@ public class AppointmentsController implements Initializable {
         TableColumn<Appointment, String> doseColumn = new TableColumn<>("Dose");
         doseColumn.setCellValueFactory(rowData -> new SimpleStringProperty(rowData.getValue().getDose().getValue()));
 
-        tblAppointments.getColumns()
-                       .addAll(
-                               personColumn,
-                               vaccinationCenterColumn,
-                               vaccinationTypeColumn,
-                               appointmentDateColumn,
-                               vaccineCenterStatusColumn,
-                               doseColumn
-                       );
+        tblAppointments.getColumns().addAll(
+                personColumn,
+                vaccinationCenterColumn,
+                vaccinationTypeColumn,
+                appointmentDateColumn,
+                vaccineCenterStatusColumn,
+                doseColumn
+        );
 
         tblAppointments.setRowFactory(tableView -> {
             TableRow<Appointment> row = new TableRow<>();
@@ -120,14 +129,12 @@ public class AppointmentsController implements Initializable {
 
         List<Appointment> appointments = TextORM.getAll(Appointment.class, hashMap -> true);
 
-        if (appointments == null) {
-            return;
-        }
+        masterData = FXCollections.observableArrayList(appointments);
+        filteredData = new FilteredList<>(masterData);
+        sortableData = new SortedList<>(filteredData);
 
-        appointments.sort(Comparator.comparing(Appointment::getAppointmentDate));
+        tblAppointments.setItems(sortableData);
 
-        appointmentsList = new FilteredList<>(FXCollections.observableArrayList(appointments));
-
-        tblAppointments.setItems(appointmentsList);
+        sortableData.comparatorProperty().bind(tblAppointments.comparatorProperty());
     }
 }

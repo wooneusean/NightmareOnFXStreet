@@ -77,12 +77,6 @@ public class DashboardController implements Initializable {
                     "btnVaccinationCenter",
                     actionEvent -> onNavBtnPress(actionEvent, "vaccine_centers"),
                     false
-            ),
-            new DashboardIconButton(
-                    "fas-cog",
-                    "btnSettings",
-                    actionEvent -> onNavBtnPress(actionEvent, "base"),
-                    false
             )
     );
 
@@ -109,22 +103,11 @@ public class DashboardController implements Initializable {
     }
 
     private void initializeIcons() {
-        for (Iterator<DashboardIconButton> iterator = iconList.iterator(); iterator.hasNext(); ) {
-            DashboardIconButton fragment = iterator.next();
-
+        for (DashboardIconButton fragment : iconList) {
             if (!fragment.isRequiresCommittee() || Global.isCommittee()) {
                 vbxNavigation.getChildren().add(createIcon(fragment));
             }
-//            if (iterator.hasNext()) {
-//                vbNavigation.getChildren().add(createSpacer());
-//            }
         }
-    }
-
-    private Region createSpacer() {
-        Region region = new Region();
-        VBox.setVgrow(region, Priority.ALWAYS);
-        return region;
     }
 
     private MFXButton createIcon(DashboardIconButton iconButton) {

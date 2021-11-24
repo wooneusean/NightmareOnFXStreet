@@ -8,7 +8,9 @@ import com.oodj.vaccspace.utils.TableHelper;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,11 +24,16 @@ import textorm.TextORM;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class VaccineTypesController implements Initializable {
     VaccineTypesViewModel vm = new VaccineTypesViewModel();
 
-    FilteredList<VaccineType> filteredList;
+    ObservableList<VaccineType> masterData;
+
+    FilteredList<VaccineType> filteredData;
+
+    SortedList<VaccineType> sortableData;
 
     VaccineType selectedVaccineType;
 
@@ -46,24 +53,24 @@ public class VaccineTypesController implements Initializable {
 
     @FXML
     void onSearchChanged(KeyEvent event) {
-        if (!vm.getSearch().isBlank()) {
-            filteredList.setPredicate(vaccineType ->
-                    StringHelper.containsIgnoreCase(
-                            vaccineType.getVaccineName(),
-                            vm.getSearch().toLowerCase()
-                    ) ||
-                    String.valueOf(vaccineType.getDosesNeeded()).equals(vm.getSearch().toLowerCase())
-            );
-        } else {
-            filteredList.setPredicate(vaccineType -> true);
-        }
+
+    }
+
+    private Predicate<VaccineType> getFilterVaccineTypePredicate() {
+        return vaccineType -> {
+            return StringHelper.containsIgnoreCase(vaccineType.getVaccineName(), vm.getSearch().toLowerCase()) ||
+                   String.valueOf(vaccineType.getDosesNeeded()).equals(vm.getSearch().toLowerCase());
+        };
     }
 
     public void refresh() {
         List<VaccineType> vaccineTypes = TextORM.getAll(VaccineType.class, hashMap -> true);
-        filteredList = new FilteredList<>(FXCollections.observableArrayList(vaccineTypes));
 
-        tblVaccineTypes.setItems(filteredList);
+        masterData = FXCollections.observableArrayList(vaccineTypes);
+        filteredData = new FilteredList<>(masterData);
+        sortableData = new SortedList<>(filteredData);
+
+        tblVaccineTypes.setItems(sortableData);
     }
 
     @Override
@@ -74,6 +81,10 @@ public class VaccineTypesController implements Initializable {
 
         vm.searchProperty().bindBidirectional(txtSearch.textProperty());
 
+        vm.searchProperty().addListener((observableValue, s, t1) -> {
+            filteredData.setPredicate(getFilterVaccineTypePredicate());
+        });
+
         TableColumn<VaccineType, String> vaccineNameColumn = new TableColumn<>("Vaccine Name");
         vaccineNameColumn.setCellValueFactory(new PropertyValueFactory<>("vaccineName"));
 
@@ -82,8 +93,6 @@ public class VaccineTypesController implements Initializable {
 
         TableColumn<VaccineType, Integer> vaccineDoseColumn = new TableColumn<>("Doses Needed");
         vaccineDoseColumn.setCellValueFactory(new PropertyValueFactory<>("dosesNeeded"));
-
-        List<VaccineType> vaccineTypes = TextORM.getAll(VaccineType.class, hashMap -> true);
 
         tblVaccineTypes.getColumns().addAll(vaccineNameColumn, vaccineDoseColumn);
 
@@ -100,9 +109,10 @@ public class VaccineTypesController implements Initializable {
 
         TableHelper.autoSizeColumns(tblVaccineTypes);
 
-        filteredList = new FilteredList<>(FXCollections.observableArrayList(vaccineTypes));
+        refresh();
 
-        tblVaccineTypes.setItems(filteredList);
+        sortableData.comparatorProperty().bind(tblVaccineTypes.comparatorProperty());
+
     }
 }
 
