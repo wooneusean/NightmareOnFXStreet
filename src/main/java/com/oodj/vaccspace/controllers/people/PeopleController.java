@@ -3,7 +3,7 @@ package com.oodj.vaccspace.controllers.people;
 import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.models.VaccinationStatus;
 import com.oodj.vaccspace.utils.StringHelper;
-import com.oodj.vaccspace.utils.Table;
+import com.oodj.vaccspace.utils.TableHelper;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -90,7 +90,7 @@ public class PeopleController implements Initializable {
             return row;
         });
 
-        Table.autoSizeColumns(tblPeople);
+        TableHelper.autoSizeColumns(tblPeople);
 
         filteredList = new FilteredList<>(FXCollections.observableArrayList(people));
 

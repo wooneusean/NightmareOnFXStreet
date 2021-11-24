@@ -41,7 +41,14 @@ public class VaccineBatch extends Model {
     public VaccineBatch() {
     }
 
-    public VaccineBatch(int vaccineTypeId, int amount, int availableAmount, int vaccinationCenterId, LocalDate arrivalDate, LocalDate expiryDate) {
+    public VaccineBatch(
+            int vaccineTypeId,
+            int amount,
+            int availableAmount,
+            int vaccinationCenterId,
+            LocalDate arrivalDate,
+            LocalDate expiryDate
+    ) {
         this.vaccineTypeId = vaccineTypeId;
         this.amount = amount;
         this.availableAmount = availableAmount;
@@ -51,12 +58,16 @@ public class VaccineBatch extends Model {
     }
 
     public static VaccineBatch getNextAvailableVaccineBatch(String vaccineName) {
-        VaccineType typeToFind = TextORM.getOne(VaccineType.class, hashMap -> Objects.equals(hashMap.get("vaccineName"), vaccineName));
+        VaccineType typeToFind = TextORM.getOne(VaccineType.class,
+                hashMap -> Objects.equals(hashMap.get("vaccineName"), vaccineName)
+        );
         if (typeToFind == null) {
             throw new IllegalArgumentException("Vaccine batch for '" + vaccineName + "' not found.");
         }
 
-        List<VaccineBatch> vaccineBatches = TextORM.getAll(VaccineBatch.class, hashMap -> Integer.parseInt(hashMap.get("vaccineTypeId")) == typeToFind.getId());
+        List<VaccineBatch> vaccineBatches = TextORM.getAll(VaccineBatch.class,
+                hashMap -> Integer.parseInt(hashMap.get("vaccineTypeId")) == typeToFind.getId()
+        );
 
         if (vaccineBatches == null) {
             throw new NoSuchElementException("There are no batches that belong to vaccine '" + vaccineName + "'.");
@@ -135,5 +146,9 @@ public class VaccineBatch extends Model {
 
     public void setExpiryDate(LocalDate expiryDate) {
         this.expiryDate = expiryDate;
+    }
+
+    public double getPercentRemaining() {
+        return (double) getAvailableAmount() / getAmount() * 100;
     }
 }

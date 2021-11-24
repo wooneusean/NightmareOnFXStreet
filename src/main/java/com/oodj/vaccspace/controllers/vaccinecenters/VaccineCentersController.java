@@ -3,7 +3,7 @@ package com.oodj.vaccspace.controllers.vaccinecenters;
 import com.oodj.vaccspace.models.CenterStatus;
 import com.oodj.vaccspace.models.VaccinationCenter;
 import com.oodj.vaccspace.utils.StringHelper;
-import com.oodj.vaccspace.utils.Table;
+import com.oodj.vaccspace.utils.TableHelper;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
@@ -76,7 +76,7 @@ public class VaccineCentersController implements Initializable {
             return row;
         });
 
-        Table.autoSizeColumns(tblVaccineCenters);
+        TableHelper.autoSizeColumns(tblVaccineCenters);
 
         filteredList = new FilteredList<>(FXCollections.observableArrayList(vaccineCenters));
 

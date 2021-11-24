@@ -69,7 +69,7 @@ public class DashboardController implements Initializable {
             new DashboardIconButton(
                     "fas-boxes",
                     "btnBatches",
-                    actionEvent -> onNavBtnPress(actionEvent, "home"),
+                    actionEvent -> onNavBtnPress(actionEvent, "vaccine_batches"),
                     true
             ),
             new DashboardIconButton(

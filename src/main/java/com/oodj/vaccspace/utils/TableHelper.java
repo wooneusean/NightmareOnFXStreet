@@ -2,7 +2,7 @@ package com.oodj.vaccspace.utils;
 
 import javafx.scene.control.TableView;
 
-public class Table {
+public class TableHelper {
     public static void autoSizeColumns(TableView<?> table) {
         table.widthProperty().addListener((observableValue, number, t1) -> {
             int numCol = table.getColumns().size();
