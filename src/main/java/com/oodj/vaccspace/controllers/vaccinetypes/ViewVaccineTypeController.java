@@ -11,11 +11,14 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonType;
 
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class ViewVaccineTypeController extends BaseController {
+public class ViewVaccineTypeController extends BaseController implements Initializable {
     NewOrEditVaccineTypeViewModel vm = null;
     VaccineTypesController vaccineTypesController = null;
     VaccineType vaccineType = new VaccineType();
@@ -60,15 +63,9 @@ public class ViewVaccineTypeController extends BaseController {
                 tfDose.textProperty()
         );
 
-        tfDose.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable, String oldValue,
-                    String newValue
-            ) {
-                if (!newValue.matches("\\d*")) {
-                    tfDose.setText(newValue.replaceAll("[^\\d]", ""));
-                }
+        tfDose.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfDose.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
     }
@@ -127,6 +124,7 @@ public class ViewVaccineTypeController extends BaseController {
         vaccineType.setDosesNeeded(Integer.parseInt(vm.getNumberOfDoses()));
 
         vaccineType.save();
+        vaccineTypesController.refresh();
 
         Page.showDialog(
                 btnSaveVaccineType.getScene().getWindow(),
@@ -135,7 +133,6 @@ public class ViewVaccineTypeController extends BaseController {
                 "Successfully added new vaccine."
         );
         getStageDialog().close();
-        vaccineTypesController.refresh();
     }
 
     @FXML
@@ -153,7 +150,6 @@ public class ViewVaccineTypeController extends BaseController {
         );
         if (result.isPresent() && result.get() == ButtonType.OK) {
             vaccineType.delete();
-
         }
 
         vaccineTypesController.refresh();
@@ -177,4 +173,10 @@ public class ViewVaccineTypeController extends BaseController {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!Global.isCommittee()) {
+            btnDeleteVaccineType.setManaged(false);
+        }
+    }
 }

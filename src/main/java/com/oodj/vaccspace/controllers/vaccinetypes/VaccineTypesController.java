@@ -48,7 +48,7 @@ public class VaccineTypesController implements Initializable {
 
     @FXML
     void onAddVaccineTypePressed(ActionEvent event) {
-        Navigator.showInDialog(btnAddVaccineType.getScene().getWindow(), "new_vaccine_center", this);
+        Navigator.showInDialog(btnAddVaccineType.getScene().getWindow(), "new_vaccine_type", this);
     }
 
     @FXML
@@ -71,6 +71,8 @@ public class VaccineTypesController implements Initializable {
         sortableData = new SortedList<>(filteredData);
 
         tblVaccineTypes.setItems(sortableData);
+
+        sortableData.comparatorProperty().bind(tblVaccineTypes.comparatorProperty());
     }
 
     @Override
@@ -94,7 +96,7 @@ public class VaccineTypesController implements Initializable {
         TableColumn<VaccineType, Integer> vaccineDoseColumn = new TableColumn<>("Doses Needed");
         vaccineDoseColumn.setCellValueFactory(new PropertyValueFactory<>("dosesNeeded"));
 
-        tblVaccineTypes.getColumns().addAll(vaccineNameColumn, vaccineDoseColumn);
+        tblVaccineTypes.getColumns().addAll(vaccineNameColumn, ManufacturingCompanyColumn, vaccineDoseColumn);
 
         tblVaccineTypes.setRowFactory(tableView -> {
             TableRow<VaccineType> row = new TableRow<>();
@@ -110,9 +112,6 @@ public class VaccineTypesController implements Initializable {
         TableHelper.autoSizeColumns(tblVaccineTypes);
 
         refresh();
-
-        sortableData.comparatorProperty().bind(tblVaccineTypes.comparatorProperty());
-
     }
 }
 
