@@ -37,6 +37,8 @@ public class VaccineBatchesController implements Initializable {
 
     SortedList<VaccineBatch> sortableData;
 
+    VaccineBatch selectedVaccineBatch = new VaccineBatch();
+
     @FXML
     private MFXPillButton btnAddBatch;
 
@@ -166,6 +168,17 @@ public class VaccineBatchesController implements Initializable {
         );
 
         refresh();
+
+        tblVaccineBatches.setRowFactory(tableView -> {
+            TableRow<VaccineBatch> row = new TableRow<>();
+            row.setOnMouseClicked(mouseEvent -> {
+                if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
+                    selectedVaccineBatch = row.getItem();
+                    Navigator.showInDialog(tblVaccineBatches.getScene().getWindow(), "view_batch", this);
+                }
+            });
+            return row;
+        });
 
         sortableData.comparatorProperty().bind(tblVaccineBatches.comparatorProperty());
 
