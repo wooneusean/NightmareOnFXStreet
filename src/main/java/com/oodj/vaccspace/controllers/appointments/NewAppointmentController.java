@@ -17,10 +17,7 @@ import textorm.TextORM;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class NewAppointmentController extends BaseController implements Initializable {
     private final NewAppointmentViewModel vm = new NewAppointmentViewModel();
@@ -67,11 +64,23 @@ public class NewAppointmentController extends BaseController implements Initiali
             return;
         }
 
-        VaccineBatch nextVaccineBatch = VaccineBatch.getNextAvailableVaccineBatch(
-                vm.getSelectedVaccineTypeProperty()
-                  .getSelectedItem()
-                  .getVaccineName()
-        );
+        VaccineBatch nextVaccineBatch;
+
+        try {
+            nextVaccineBatch = VaccineBatch.getNextAvailableVaccineBatch(
+                    vm.getSelectedVaccineTypeProperty()
+                      .getSelectedItem()
+                      .getVaccineName()
+            );
+        } catch (IndexOutOfBoundsException | NoSuchElementException | IllegalArgumentException ex) {
+            Page.showDialog(
+                    cbCenter.getScene().getWindow(),
+                    DialogType.ERROR,
+                    "Error: No Batches Available",
+                    ex.getMessage()
+            );
+            return;
+        }
 
         nextVaccineBatch.setAvailableAmount(nextVaccineBatch.getAmount() - 1);
         nextVaccineBatch.save();

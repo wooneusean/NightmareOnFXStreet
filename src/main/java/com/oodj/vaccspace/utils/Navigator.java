@@ -187,6 +187,7 @@ public class Navigator {
         try {
             FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(destination.getPath()));
             root = loader.load();
+            setWindowTitle(null, destination.getDisplayName());
         } catch (IOException e) {
             e.printStackTrace();
             System.err.printf("Unable to load route '%s'.%n", route);

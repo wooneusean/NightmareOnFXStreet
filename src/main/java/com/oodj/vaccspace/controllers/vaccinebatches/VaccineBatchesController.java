@@ -89,7 +89,7 @@ public class VaccineBatchesController implements Initializable {
         vm.setMinimumValue(100);
         vm.setArrivalStartDate(null);
         vm.setArrivalEndDate(null);
-        vm.setExpiryStartDate(null);
+        vm.setExpiryStartDate(LocalDate.now().minusDays(1));
         vm.setExpiryEndDate(null);
 
         onSearchPressed(event);
@@ -118,6 +118,8 @@ public class VaccineBatchesController implements Initializable {
         vm.arrivalEndDateProperty().bindBidirectional(dtpArrivalEndDate.valueProperty());
         vm.expiryStartDateProperty().bindBidirectional(dtpExpiryStartDate.valueProperty());
         vm.expiryEndDateProperty().bindBidirectional(dtpExpiryEndDate.valueProperty());
+
+        vm.setExpiryStartDate(LocalDate.now().minusDays(1));
 
         vbxAdvancedFilters.managedProperty().bindBidirectional(vm.advancedFiltersShownProperty());
         vbxAdvancedFilters.visibleProperty().bindBidirectional(vm.advancedFiltersShownProperty());

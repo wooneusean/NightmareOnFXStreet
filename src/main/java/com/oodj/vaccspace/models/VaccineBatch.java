@@ -57,7 +57,10 @@ public class VaccineBatch extends Model {
         this.expiryDate = expiryDate;
     }
 
-    public static VaccineBatch getNextAvailableVaccineBatch(String vaccineName) {
+    public static VaccineBatch getNextAvailableVaccineBatch(String vaccineName) throws
+                                                                                IllegalArgumentException,
+                                                                                NoSuchElementException,
+                                                                                IndexOutOfBoundsException {
         VaccineType typeToFind = TextORM.getOne(
                 VaccineType.class,
                 hashMap -> Objects.equals(hashMap.get("vaccineName"), vaccineName)
@@ -68,14 +71,14 @@ public class VaccineBatch extends Model {
 
         List<VaccineBatch> vaccineBatches = TextORM.getAll(
                 VaccineBatch.class,
-                hashMap -> Integer.parseInt(hashMap.get("vaccineTypeId")) == typeToFind.getId()
+                hashMap -> Integer.parseInt(hashMap.get("vaccineTypeId")) == typeToFind.getId() &&
+                           LocalDate.parse(hashMap.get("expiryDate")).isAfter(LocalDate.now())
         );
 
-        if (vaccineBatches == null) {
-            throw new NoSuchElementException("There are no batches that belong to vaccine '" + vaccineName + "'.");
+        if (vaccineBatches == null || vaccineBatches.size() == 0) {
+            throw new NoSuchElementException("There are no usable batches that belong to vaccine '" + vaccineName +
+                                             "'. Please select a different vaccine.");
         }
-
-        // TODO: 24/11/2021 Filter out expired batches
 
         vaccineBatches.sort(Comparator.comparing(VaccineBatch::getExpiryDate));
 
@@ -154,5 +157,9 @@ public class VaccineBatch extends Model {
 
     public double getPercentRemaining() {
         return (double) getAvailableAmount() / getAmount() * 100;
+    }
+
+    public boolean isExpired() {
+        return LocalDate.now().isAfter(expiryDate);
     }
 }

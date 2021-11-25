@@ -6,6 +6,7 @@ import textorm.Model;
 import textorm.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class VaccineType extends Model {
@@ -62,5 +63,18 @@ public class VaccineType extends Model {
 
     public void setDosesNeeded(int dosesNeeded) {
         this.dosesNeeded = dosesNeeded;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VaccineType that = (VaccineType) o;
+        return vaccineName.equals(that.vaccineName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(vaccineName);
     }
 }
