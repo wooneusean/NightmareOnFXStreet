@@ -34,6 +34,8 @@ public class Navigator {
         put("new_vaccine_type", new Page("views/new-vaccine-type-view.fxml", "New Vaccine"));
         put("view_vaccine_type", new Page("views/view-vaccine-type-view.fxml", "View Vaccine"));
         put("vaccine_centers", new Page("views/vaccine-centers-view.fxml", "Vaccine Centers"));
+        put("new_vaccine_center", new Page("views/new-center-view.fxml", "New Vaccine Center"));
+        put("view_vaccine_center", new Page("views/view-center-view.fxml", "View Vaccine Center"));
         put("people", new Page("views/people-view.fxml", "People"));
         put("appointments", new Page("views/appointments-view.fxml", "Appointments"));
         put("vaccine_batches", new Page("views/vaccine-batches-view.fxml", "Vaccine Batches"));

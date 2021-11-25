@@ -48,7 +48,7 @@ public class VaccineTypesController implements Initializable {
 
     @FXML
     void onAddVaccineTypePressed(ActionEvent event) {
-        Navigator.showInDialog(btnAddVaccineType.getScene().getWindow(), "new_vaccine_type", this);
+        Navigator.showInDialog(btnAddVaccineType.getScene().getWindow(), "new_vaccine_center", this);
     }
 
     @FXML

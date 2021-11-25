@@ -11,6 +11,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 public class ViewVaccineTypeController extends BaseController {
     NewOrEditVaccineTypeViewModel vm = null;
@@ -22,6 +25,9 @@ public class ViewVaccineTypeController extends BaseController {
 
     @FXML
     private MFXPillButton btnSaveVaccineType;
+
+    @FXML
+    private MFXPillButton btnDeleteVaccineType;
 
     @FXML
     private MFXPillButton btnEditVaccineType;
@@ -115,8 +121,8 @@ public class ViewVaccineTypeController extends BaseController {
             );
             return;
         }
-
-        vaccineType.setVaccineName(vm.getVaccineName());
+        vaccineType.setVaccineName(tfVaccineName.getText());
+        vaccineType.setVaccineName(vm.getVaccineName().trim());
         vaccineType.setManufacturingCompany(vm.getManufacturingCompany());
         vaccineType.setDosesNeeded(Integer.parseInt(vm.getNumberOfDoses()));
 
@@ -137,6 +143,23 @@ public class ViewVaccineTypeController extends BaseController {
         getStageDialog().close();
     }
 
+    @FXML
+    public void onDeleteVaccineTypePressed(ActionEvent actionEvent) {
+        Optional<ButtonType> result = Page.showDialogAndWait(
+                btnDeleteVaccineType.getScene().getWindow(),
+                "Deletion of Vaccine Type",
+                "You are about to delete the vaccine type '" + vaccineType.getVaccineName() + "'.",
+                "Do you want to proceed?"
+        );
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            vaccineType.delete();
+
+        }
+
+        vaccineTypesController.refresh();
+        getStageDialog().close();
+    }
+
     @Override
     public void onLoaded() {
         if (!Global.isCommittee()) {
@@ -152,5 +175,6 @@ public class ViewVaccineTypeController extends BaseController {
         tfCompany.setText(vaccineType.getManufacturingCompany());
         tfDose.setText(String.valueOf(vaccineType.getDosesNeeded()));
     }
+
 
 }

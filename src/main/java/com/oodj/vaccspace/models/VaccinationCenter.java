@@ -16,14 +16,23 @@ public class VaccinationCenter extends Model {
     @Column
     private CenterStatus centerStatus;
 
-    //    @Column
-//    private Address address;
+    @Column
+    private String centerAddress;
+
+    @Column
+    private String centerPostcode;
+
+    @Column
+    private String centerState;
 
     @HasMany(targetKey = "vaccinationCenterId")
     private List<VaccineBatch> vaccineBatches;
 
-    public VaccinationCenter(String vaccinationCenterName, CenterStatus centerStatus) {
+    public VaccinationCenter(String vaccinationCenterName, String centerAddress, String centerPostcode, String centerState, CenterStatus centerStatus) {
         this.vaccinationCenterName = vaccinationCenterName;
+        this.centerAddress = centerAddress;
+        this.centerPostcode = centerPostcode;
+        this.centerState = centerState;
         this.centerStatus = centerStatus;
     }
 
@@ -53,5 +62,29 @@ public class VaccinationCenter extends Model {
 
     public void setCenterStatus(CenterStatus centerStatus) {
         this.centerStatus = centerStatus;
+    }
+
+    public String getCenterAddress() {
+        return centerAddress;
+    }
+
+    public void setCenterAddress(String centerAddress) {
+        this.centerAddress = centerAddress;
+    }
+
+    public String getCenterPostcode() {
+        return centerPostcode;
+    }
+
+    public void setCenterPostcode(String centerPostcode) {
+        this.centerPostcode = centerPostcode;
+    }
+
+    public String getCenterState() {
+        return centerState;
+    }
+
+    public void setCenterState(String centerState) {
+        this.centerState = centerState;
     }
 }

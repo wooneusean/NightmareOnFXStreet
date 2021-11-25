@@ -80,13 +80,13 @@ public class MainApplication extends Application {
 
         // Center
 
-        VaccinationCenter bukitJalil = new VaccinationCenter("Bukit Jalil", CenterStatus.OPEN);
+        VaccinationCenter bukitJalil = new VaccinationCenter("Bukit Jalil", "123", "123123", "Labuan", CenterStatus.OPEN);
         bukitJalil.save();
 
-        VaccinationCenter movenpick = new VaccinationCenter("Movenpick", CenterStatus.CLOSED);
+        VaccinationCenter movenpick = new VaccinationCenter("Movenpick", "123", "123123", "Labuan", CenterStatus.CLOSED);
         movenpick.save();
 
-        VaccinationCenter serdangHospital = new VaccinationCenter("Serdang Hospital", CenterStatus.CLOSED_COVID);
+        VaccinationCenter serdangHospital = new VaccinationCenter("Serdang Hospital", "123", "123123", "Labuan", CenterStatus.CLOSED_COVID);
         serdangHospital.save();
 
         // Types

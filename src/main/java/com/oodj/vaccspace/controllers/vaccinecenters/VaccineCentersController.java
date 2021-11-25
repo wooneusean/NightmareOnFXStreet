@@ -2,12 +2,16 @@ package com.oodj.vaccspace.controllers.vaccinecenters;
 
 import com.oodj.vaccspace.models.CenterStatus;
 import com.oodj.vaccspace.models.VaccinationCenter;
+import com.oodj.vaccspace.models.VaccineType;
+import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.StringHelper;
 import com.oodj.vaccspace.utils.TableHelper;
+import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,6 +37,8 @@ public class VaccineCentersController implements Initializable {
 
     SortedList<VaccinationCenter> sortableData;
 
+    VaccinationCenter selectedVaccinationCenter = new VaccinationCenter();
+
     @FXML
     private TableView<VaccinationCenter> tblVaccineCenters;
 
@@ -40,14 +46,22 @@ public class VaccineCentersController implements Initializable {
     private MFXTextField txtSearch;
 
     @FXML
-    void onSearchChanged(KeyEvent event) {
+    private MFXPillButton btnAddCenter;
 
+    @FXML
+    void onAddCenterPressed(ActionEvent event) {
+        Navigator.showInDialog(btnAddCenter.getScene().getWindow(), "new_vaccine_center", this);
+    }
+
+    @FXML
+    void onSearchChanged(KeyEvent event) {
     }
 
     private Predicate<VaccinationCenter> getFilterVaccinationCenterPredicate() {
         return vaccinationCenter -> {
             return StringHelper.containsIgnoreCase(vaccinationCenter.getVaccinationCenterName(), vm.getSearch()) ||
-                   StringHelper.containsIgnoreCase(vaccinationCenter.getCenterStatus().getValue(), vm.getSearch());
+                   StringHelper.containsIgnoreCase(vaccinationCenter.getCenterStatus().getValue(), vm.getSearch())||
+                    StringHelper.containsIgnoreCase(vaccinationCenter.getCenterState(), vm.getSearch());
         };
     }
 
@@ -66,14 +80,18 @@ public class VaccineCentersController implements Initializable {
         vaccineCenterStatusColumn.setCellValueFactory(new PropertyValueFactory<>("centerStatus"));
         vaccineCenterStatusColumn.setCellFactory(statusColumn -> new CenterStatusIndicatorCell());
 
-        tblVaccineCenters.getColumns().addAll(vaccineCenterNameColumn, vaccineCenterStatusColumn);
+
+        TableColumn<VaccinationCenter, String> vaccineCenterStateColumn = new TableColumn<>("State");
+        vaccineCenterStateColumn.setCellValueFactory(new PropertyValueFactory<>("centerState"));
+
+        tblVaccineCenters.getColumns().addAll(vaccineCenterNameColumn, vaccineCenterStateColumn, vaccineCenterStatusColumn);
 
         tblVaccineCenters.setRowFactory(tableView -> {
             TableRow<VaccinationCenter> row = new TableRow<>();
             row.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
-                    VaccinationCenter vaccinationCenter = row.getItem();
-                    System.out.println(vaccinationCenter.getVaccinationCenterName());
+                    selectedVaccinationCenter = row.getItem();
+                    Navigator.showInDialog(tblVaccineCenters.getScene().getWindow(), "view_vaccine_center", this);
                 }
             });
             return row;
@@ -90,6 +108,13 @@ public class VaccineCentersController implements Initializable {
         tblVaccineCenters.setItems(sortableData);
 
         sortableData.comparatorProperty().bind(tblVaccineCenters.comparatorProperty());
+    }
+
+    public void refresh() {
+        List<VaccinationCenter> vaccineCenters = TextORM.getAll(VaccinationCenter.class, hashMap -> true);
+        filteredData = new FilteredList<>(FXCollections.observableArrayList(vaccineCenters));
+
+        tblVaccineCenters.setItems(filteredData);
     }
 }
 

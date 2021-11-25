@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.euseanwoon.MFXPillButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.vaccinecenters.NewCenterController">
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+    </padding>
+    <HBox alignment="TOP_RIGHT" prefHeight="42.0" prefWidth="420.0">
+      <VBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="192.0">
+         <children>
+              <Label alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="172.0" text="New Center">
+                  <styleClass>
+                      <String fx:value="heading-medium" />
+                      <String fx:value="h1" />
+                  </styleClass>
+              </Label>
+            <HBox prefHeight="2.0" prefWidth="192.0" style="-fx-background-color: white;">
+               <VBox.margin>
+                  <Insets top="3.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+    </HBox>
+   <VBox spacing="8.0">
+      <children>
+          <Label text="Name of Vaccine Center">
+              <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+              </styleClass>
+          </Label>
+         <MFXTextField fx:id="tfCenterName" prefHeight="25.0" prefWidth="424.0">
+            <styleClass>
+               <String fx:value="h4" />
+               <String fx:value="body-medium" />
+            </styleClass></MFXTextField>
+      </children>
+   </VBox>
+   <VBox spacing="8.0">
+      <children>
+          <Label text="Address">
+              <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+              </styleClass>
+          </Label>
+         <MFXTextField fx:id="tfAddress" prefHeight="25.0" prefWidth="448.0">
+            <styleClass>
+               <String fx:value="h4" />
+               <String fx:value="body-medium" />
+            </styleClass></MFXTextField>
+      </children>
+   </VBox>
+   <VBox spacing="8.0">
+      <children>
+          <Label prefHeight="25.0" prefWidth="171.0" text="Postcode">
+              <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+              </styleClass>
+          </Label>
+         <MFXTextField fx:id="tfPostcode" prefHeight="25.0" prefWidth="479.0">
+            <styleClass>
+               <String fx:value="h4" />
+               <String fx:value="body-medium" />
+            </styleClass></MFXTextField>
+      </children>
+   </VBox>
+   <VBox spacing="8.0">
+      <children>
+         <Label text="State">
+            <styleClass>
+               <String fx:value="body-regular" />
+               <String fx:value="h4" />
+            </styleClass>
+         </Label>
+      </children>
+   </VBox>
+   <ComboBox fx:id="cbState" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" styleClass="body-medium" />
+    <HBox alignment="TOP_RIGHT" spacing="14.0">
+        <children>
+            <MFXPillButton fx:id="btnClose" onAction="#onClosePressed" rippleArc="40.0" text="Close">
+                <styleClass>
+                    <String fx:value="btn" />
+                    <String fx:value="btn-secondary" />
+                    <String fx:value="body-medium" />
+                    <String fx:value="h4" />
+                </styleClass>
+            </MFXPillButton>
+         <MFXPillButton fx:id="btnSaveCenter" onAction="#onSaveCenterPressed" prefHeight="41.0" prefWidth="105.0" rippleArc="40.0" text="Save">
+            <styleClass>
+               <String fx:value="btn" />
+               <String fx:value="btn-primary" />
+               <String fx:value="body-medium" />
+               <String fx:value="h4" />
+            </styleClass>
+         </MFXPillButton>
+        </children>
+    </HBox>
+</VBox>

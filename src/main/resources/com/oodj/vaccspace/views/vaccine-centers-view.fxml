@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.euseanwoon.MFXPillButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
@@ -24,5 +25,17 @@
         </VBox>
         <TableView fx:id="tblVaccineCenters" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                    styleClass="body-regular" VBox.vgrow="ALWAYS"/>
+      <VBox alignment="TOP_RIGHT" prefHeight="67.0" prefWidth="1060.0">
+         <children>
+            <MFXPillButton fx:id="btnAddCenter" onAction="#onAddCenterPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Add New Center">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-primary" />
+                  <String fx:value="body-medium" />
+                  <String fx:value="h4" />
+               </styleClass>
+            </MFXPillButton>
+         </children>
+      </VBox>
     </children>
 </VBox>
