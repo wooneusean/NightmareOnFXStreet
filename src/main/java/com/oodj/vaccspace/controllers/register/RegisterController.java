@@ -4,6 +4,7 @@ import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.models.VaccinationStatus;
 import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.Page;
+import com.oodj.vaccspace.utils.ValidationHelper;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
@@ -19,15 +20,8 @@ import textorm.TextORM;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterController implements Initializable {
-
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile(
-            "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
-            Pattern.CASE_INSENSITIVE
-    );
 
     @FXML
     public BorderPane container;
@@ -60,11 +54,6 @@ public class RegisterController implements Initializable {
 
     @FXML
     private MFXCheckbox cbIsNotCitizen;
-
-    public static boolean validateEmail(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
-        return matcher.find();
-    }
 
     @FXML
     void onBackToLoginPressed(ActionEvent event) {
@@ -132,7 +121,7 @@ public class RegisterController implements Initializable {
         }
 
         //Phone Validation
-        if (!vm.getPhoneNumber().matches("^[0-9]*$")) {
+        if (!vm.getPhoneNumber().matches("^[0-9]{4,}$")) {
             Page.showDialog(
                     container.getScene().getWindow(),
                     DialogType.ERROR,
@@ -154,7 +143,7 @@ public class RegisterController implements Initializable {
         }
 
         //Email Validation
-        if (!validateEmail(vm.getEmail())) {
+        if (!ValidationHelper.isValidEmail(vm.getEmail())) {
             Page.showDialog(
                     container.getScene().getWindow(),
                     DialogType.ERROR,

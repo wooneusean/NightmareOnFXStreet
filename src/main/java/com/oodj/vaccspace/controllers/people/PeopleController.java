@@ -2,14 +2,17 @@ package com.oodj.vaccspace.controllers.people;
 
 import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.models.VaccinationStatus;
+import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.StringHelper;
 import com.oodj.vaccspace.utils.TableHelper;
+import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -35,10 +38,18 @@ public class PeopleController implements Initializable {
     SortedList<Person> sortableData;
 
     @FXML
+    private MFXPillButton btnRegisterUser;
+
+    @FXML
     private TableView<Person> tblPeople;
 
     @FXML
     private MFXTextField txtSearch;
+
+    @FXML
+    void onRegisterUserPressed(ActionEvent event) {
+        Navigator.showInDialog(btnRegisterUser.getScene().getWindow(), "new_people", this);
+    }
 
     @FXML
     void onSearchChanged(KeyEvent event) {
@@ -90,6 +101,12 @@ public class PeopleController implements Initializable {
 
         TableHelper.autoSizeColumns(tblPeople);
 
+        refresh();
+
+        sortableData.comparatorProperty().bind(tblPeople.comparatorProperty());
+    }
+
+    public void refresh() {
         List<Person> people = TextORM.getAll(Person.class, hashMap -> true);
 
         masterData = FXCollections.observableArrayList(people);
@@ -97,8 +114,6 @@ public class PeopleController implements Initializable {
         sortableData = new SortedList<>(filteredData);
 
         tblPeople.setItems(sortableData);
-
-        sortableData.comparatorProperty().bind(tblPeople.comparatorProperty());
     }
 
     private Predicate<Person> getFilterPersonPredicate() {

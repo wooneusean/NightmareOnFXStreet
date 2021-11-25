@@ -126,7 +126,7 @@
     -mfx-checked-color: rgb(100, 134, 221);
 }
 
-.body-regular:determinate .label .text {
+.mfx-checkbox .label .text {
     -fx-fill: white;
 }
 

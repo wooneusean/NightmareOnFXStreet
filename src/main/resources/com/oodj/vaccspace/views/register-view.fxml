@@ -183,7 +183,7 @@
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" spacing="14.0">
                     <children>
-                        <MFXCheckbox fx:id="cbIsNotCitizen" onAction="#onToggleIdentification" styleClass="body-regular"
+                        <MFXCheckbox fx:id="cbIsNotCitizen" onAction="#onToggleIdentification" styleClass="body-medium"
                                      text="I am NOT a citizen of Malaysia"/>
                         <MFXPillButton onAction="#onRegisterPressed" rippleArc="40.0" text="Register">
                             <styleClass>

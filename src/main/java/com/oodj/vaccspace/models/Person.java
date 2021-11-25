@@ -21,6 +21,18 @@ public class Person extends User {
     @HasMany(targetKey = "personId")
     private List<Appointment> appointments;
 
+    /**
+     * Creates a new Person object
+     *
+     * @param name              name for the user
+     * @param phone             phone number of the user
+     * @param email             email for the user
+     * @param password          password to login, if {@code null} value provided, defaults to {@code email#xxxx} where
+     *                          {@code xxxx} is the last 4 digits of phone number
+     * @param vaccinationStatus status of vaccination
+     * @param identification    IC number if citizen and passport number if non-citizen
+     * @param isNonCitizen      flag to differentiate citizen to non-citizen
+     */
     public Person(
             String name,
             String phone,

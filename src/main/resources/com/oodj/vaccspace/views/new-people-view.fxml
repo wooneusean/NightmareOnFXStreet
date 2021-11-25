@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.euseanwoon.MFXPillButton?>
+<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.people.NewPeopleController">
+   <children>
+      <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="New Person">
+         <styleClass>
+            <String fx:value="heading-medium" />
+            <String fx:value="h1" />
+         </styleClass>
+      </Label>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Name">
+               <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+               </styleClass>
+            </Label>
+            <MFXTextField fx:id="txtName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
+         </children>
+      </VBox>
+      <VBox layoutX="50.0" layoutY="109.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Phone Number">
+               <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+               </styleClass>
+            </Label>
+            <MFXTextField fx:id="txtPhoneNumber" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
+         </children>
+      </VBox>
+      <VBox layoutX="50.0" layoutY="190.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Identification Number">
+               <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+               </styleClass>
+            </Label>
+            <MFXTextField fx:id="txtIdentificationNumber" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
+         </children>
+      </VBox>
+      <VBox layoutX="50.0" layoutY="271.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Email">
+               <styleClass>
+                  <String fx:value="body-regular" />
+                  <String fx:value="h4" />
+               </styleClass>
+            </Label>
+            <MFXTextField fx:id="txtEmail" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
+         </children>
+      </VBox>
+      <VBox layoutX="50.0" layoutY="352.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
+         <children>
+            <MFXCheckbox fx:id="chkIsNonCitizen" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" text="Non-citizen" />
+         </children>
+      </VBox>
+      <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="14.0">
+         <children>
+            <MFXPillButton fx:id="btnCancel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onCancelPressed" rippleArc="40.0" text="Cancel">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-secondary" />
+                  <String fx:value="h4" />
+                  <String fx:value="body-medium" />
+               </styleClass>
+            </MFXPillButton>
+            <MFXPillButton fx:id="btnAddPerson" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onAddPersonPressed" rippleArc="40.0" text="Add Person">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-primary" />
+                  <String fx:value="h4" />
+                  <String fx:value="body-medium" />
+               </styleClass>
+            </MFXPillButton>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+   </padding>
+</VBox>
