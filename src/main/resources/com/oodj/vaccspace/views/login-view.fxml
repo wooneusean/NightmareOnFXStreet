@@ -54,7 +54,7 @@
                 </MFXPasswordField>
                 <HBox alignment="CENTER_LEFT" spacing="14.0">
                     <children>
-                        <MFXCheckbox fx:id="chkIsCommittee" styleClass="body-regular" text="Committee"/>
+                        <MFXCheckbox fx:id="chkIsCommittee" styleClass="body-medium" text="Committee"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="234.0">
