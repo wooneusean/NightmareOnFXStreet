@@ -6,8 +6,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
       styleClass="bg-color" stylesheets="@../styles/main.css"
       fx:controller="com.oodj.vaccspace.controllers.home.HomeController"
       prefHeight="556.0" prefWidth="1060.0" spacing="14.0">

@@ -1,6 +1,7 @@
 package com.oodj.vaccspace.controllers.vaccinetypes;
 
-import javafx.beans.property.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class NewOrEditVaccineTypeViewModel {
     private final StringProperty vaccineName = new SimpleStringProperty("");
@@ -21,35 +22,35 @@ public class NewOrEditVaccineTypeViewModel {
         return vaccineName.get();
     }
 
-    public StringProperty vaccineNameProperty() {
-        return vaccineName;
-    }
-
     public void setVaccineName(String vaccineName) {
         this.vaccineName.set(vaccineName);
+    }
+
+    public StringProperty vaccineNameProperty() {
+        return vaccineName;
     }
 
     public String getManufacturingCompany() {
         return manufacturingCompany.get();
     }
 
-    public StringProperty manufacturingCompanyProperty() {
-        return manufacturingCompany;
-    }
-
     public void setManufacturingCompany(String manufacturingCompany) {
         this.manufacturingCompany.set(manufacturingCompany);
+    }
+
+    public StringProperty manufacturingCompanyProperty() {
+        return manufacturingCompany;
     }
 
     public String getNumberOfDoses() {
         return numberOfDoses.get();
     }
 
-    public StringProperty numberOfDosesProperty() {
-        return numberOfDoses;
-    }
-
     public void setNumberOfDoses(String numberOfDoses) {
         this.numberOfDoses.set(numberOfDoses);
+    }
+
+    public StringProperty numberOfDosesProperty() {
+        return numberOfDoses;
     }
 }

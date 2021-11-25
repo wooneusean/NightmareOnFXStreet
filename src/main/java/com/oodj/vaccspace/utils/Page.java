@@ -2,7 +2,6 @@ package com.oodj.vaccspace.utils;
 
 import io.github.palexdev.materialfx.controls.MFXStageDialog;
 import io.github.palexdev.materialfx.controls.enums.DialogType;
-import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Window;
 
@@ -15,27 +14,12 @@ public class Page {
         this.displayName = displayName;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
     /**
      * Shows a dialog over the owner window with specified type, title and content
-     * @param owner {@link Window} to instantiate the dialog.
-     * @param type {@link DialogType} of the dialog.
-     * @param title Title for the dialog.
+     *
+     * @param owner   {@link Window} to instantiate the dialog.
+     * @param type    {@link DialogType} of the dialog.
+     * @param title   Title for the dialog.
      * @param content Content of the dialog.
      */
     public static void showDialog(Window owner, DialogType type, String title, String content) {
@@ -52,5 +36,21 @@ public class Page {
 
         dialog.setCenterInOwner(true);
         dialog.show();
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 }

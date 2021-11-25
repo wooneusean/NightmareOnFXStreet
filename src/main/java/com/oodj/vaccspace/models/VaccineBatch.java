@@ -58,14 +58,16 @@ public class VaccineBatch extends Model {
     }
 
     public static VaccineBatch getNextAvailableVaccineBatch(String vaccineName) {
-        VaccineType typeToFind = TextORM.getOne(VaccineType.class,
+        VaccineType typeToFind = TextORM.getOne(
+                VaccineType.class,
                 hashMap -> Objects.equals(hashMap.get("vaccineName"), vaccineName)
         );
         if (typeToFind == null) {
             throw new IllegalArgumentException("Vaccine batch for '" + vaccineName + "' not found.");
         }
 
-        List<VaccineBatch> vaccineBatches = TextORM.getAll(VaccineBatch.class,
+        List<VaccineBatch> vaccineBatches = TextORM.getAll(
+                VaccineBatch.class,
                 hashMap -> Integer.parseInt(hashMap.get("vaccineTypeId")) == typeToFind.getId()
         );
 

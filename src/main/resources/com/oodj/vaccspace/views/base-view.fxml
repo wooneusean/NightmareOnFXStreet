@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
-
-<BorderPane fx:id="bpMain" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <Label text="Page not found" textFill="WHITE" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="System Bold" size="26.0" />
-         </font>
-         <styleClass>
-            <String fx:value="body-medium" />
-            <String fx:value="h1" />
-         </styleClass>
-      </Label>
-   </center>
+<?import java.lang.String?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="bpMain" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            minHeight="-Infinity" minWidth="-Infinity" styleClass="bg-color"
+            stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17">
+    <center>
+        <Label text="Page not found" textFill="WHITE" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="System Bold" size="26.0"/>
+            </font>
+            <styleClass>
+                <String fx:value="body-medium"/>
+                <String fx:value="h1"/>
+            </styleClass>
+        </Label>
+    </center>
 </BorderPane>

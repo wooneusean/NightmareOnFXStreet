@@ -9,13 +9,15 @@ import io.github.palexdev.materialfx.effects.DepthLevel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -103,9 +105,9 @@ public class DashboardController implements Initializable {
     }
 
     private void initializeIcons() {
-        for (DashboardIconButton fragment : iconList) {
-            if (!fragment.isRequiresCommittee() || Global.isCommittee()) {
-                vbxNavigation.getChildren().add(createIcon(fragment));
+        for (DashboardIconButton icon : iconList) {
+            if (!icon.isRequiresCommittee() || Global.isCommittee()) {
+                vbxNavigation.getChildren().add(createIcon(icon));
             }
         }
     }

@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class NewAppointmentController extends BaseController implements Initializable {
-    private NewAppointmentViewModel vm = new NewAppointmentViewModel();
+    private final NewAppointmentViewModel vm = new NewAppointmentViewModel();
 
     @FXML
     private MFXPillButton btnClose;
@@ -84,7 +84,8 @@ public class NewAppointmentController extends BaseController implements Initiali
         LocalDate appointmentDate = vm.getLocalDateObjectProperty();
 
         // TODO: 24/11/2021 Update this to make it not always give the first dose
-        Appointment appointment = new Appointment(Global.getUserId(),
+        Appointment appointment = new Appointment(
+                Global.getUserId(),
                 vaccinationCenter.getId(),
                 bookedVaccine.getId(),
                 appointmentDate,
@@ -103,7 +104,8 @@ public class NewAppointmentController extends BaseController implements Initiali
 
     boolean validateInputs() {
         if (cbCenter.getSelectionModel().getSelectedItem() == null) {
-            Page.showDialog(cbCenter.getScene().getWindow(),
+            Page.showDialog(
+                    cbCenter.getScene().getWindow(),
                     DialogType.ERROR,
                     "Error: No Vaccination Center Selected",
                     "Please ensure you select a vaccination center!"
@@ -112,7 +114,8 @@ public class NewAppointmentController extends BaseController implements Initiali
         }
 
         if (cbVaccine.getSelectionModel().getSelectedItem() == null) {
-            Page.showDialog(cbCenter.getScene().getWindow(),
+            Page.showDialog(
+                    cbCenter.getScene().getWindow(),
                     DialogType.ERROR,
                     "Error: No Vaccine Selected",
                     "Please ensure you select a vaccine!"
@@ -121,7 +124,8 @@ public class NewAppointmentController extends BaseController implements Initiali
         }
 
         if (dpDate.getValue() == null) {
-            Page.showDialog(cbCenter.getScene().getWindow(),
+            Page.showDialog(
+                    cbCenter.getScene().getWindow(),
                     DialogType.ERROR,
                     "Error: No Date Selected",
                     "Please ensure you select an appointment date!"

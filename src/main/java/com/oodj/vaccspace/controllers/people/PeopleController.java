@@ -108,7 +108,9 @@ public class PeopleController implements Initializable {
                          StringHelper.containsIgnoreCase(person.getVaccinationStatus().getValue(), vm.getSearch()) ||
                          StringHelper.containsIgnoreCase(person.getEmail(), vm.getSearch()) ||
                          StringHelper.containsIgnoreCase(person.getPhone(), vm.getSearch()) ||
-                         StringHelper.containsIgnoreCase(person.isNonCitizen() ? "Non-citizen" : "Citizen",
-                                                         vm.getSearch());
+                         StringHelper.containsIgnoreCase(
+                                 person.isNonCitizen() ? "Non-citizen" : "Citizen",
+                                 vm.getSearch()
+                         );
     }
 }

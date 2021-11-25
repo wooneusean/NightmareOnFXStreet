@@ -2,91 +2,96 @@
 
 <?import io.github.euseanwoon.MFXPillButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.vaccinetypes.NewVaccineTypeController">
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="467.0" prefWidth="500.0" spacing="20.0" styleClass="bg-color"
+      stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17"
+      fx:controller="com.oodj.vaccspace.controllers.vaccinetypes.NewVaccineTypeController">
     <padding>
-        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
     </padding>
     <HBox alignment="TOP_RIGHT">
         <Label prefHeight="39.0" prefWidth="191.0" text="New Vaccine">
             <styleClass>
-                <String fx:value="heading-medium" />
-                <String fx:value="h1" />
+                <String fx:value="heading-medium"/>
+                <String fx:value="h1"/>
             </styleClass>
             <HBox.margin>
-                <Insets bottom="14.0" />
+                <Insets bottom="14.0"/>
             </HBox.margin>
         </Label>
     </HBox>
-   <VBox spacing="8.0">
-      <children>
-          <Label text="Name of Vaccine">
-              <styleClass>
-                  <String fx:value="body-regular" />
-                  <String fx:value="h4" />
-              </styleClass>
-          </Label>
-         <MFXTextField fx:id="tfVaccineName" prefHeight="25.0" prefWidth="424.0">
-            <styleClass>
-               <String fx:value="h4" />
-               <String fx:value="body-medium" />
-            </styleClass></MFXTextField>
-      </children>
-   </VBox>
-   <VBox spacing="8.0">
-      <children>
-          <Label text="Manufacturing Company">
-              <styleClass>
-                  <String fx:value="body-regular" />
-                  <String fx:value="h4" />
-              </styleClass>
-          </Label>
-         <MFXTextField fx:id="tfCompany" prefHeight="25.0" prefWidth="448.0">
-            <styleClass>
-               <String fx:value="h4" />
-               <String fx:value="body-medium" />
-            </styleClass></MFXTextField>
-      </children>
-   </VBox>
-   <VBox spacing="8.0">
-      <children>
-          <Label prefHeight="25.0" prefWidth="171.0" text="Number of Doses">
-              <styleClass>
-                  <String fx:value="body-regular" />
-                  <String fx:value="h4" />
-              </styleClass>
-          </Label>
-         <MFXTextField fx:id="tfDose" prefHeight="25.0" prefWidth="479.0">
-            <styleClass>
-               <String fx:value="h4" />
-               <String fx:value="body-medium" />
-            </styleClass></MFXTextField>
-      </children>
-   </VBox>
-   <VBox spacing="8.0" />
+    <VBox spacing="8.0">
+        <children>
+            <Label text="Name of Vaccine">
+                <styleClass>
+                    <String fx:value="body-regular"/>
+                    <String fx:value="h4"/>
+                </styleClass>
+            </Label>
+            <MFXTextField fx:id="tfVaccineName" prefHeight="25.0" prefWidth="424.0">
+                <styleClass>
+                    <String fx:value="h4"/>
+                    <String fx:value="body-medium"/>
+                </styleClass>
+            </MFXTextField>
+        </children>
+    </VBox>
+    <VBox spacing="8.0">
+        <children>
+            <Label text="Manufacturing Company">
+                <styleClass>
+                    <String fx:value="body-regular"/>
+                    <String fx:value="h4"/>
+                </styleClass>
+            </Label>
+            <MFXTextField fx:id="tfCompany" prefHeight="25.0" prefWidth="448.0">
+                <styleClass>
+                    <String fx:value="h4"/>
+                    <String fx:value="body-medium"/>
+                </styleClass>
+            </MFXTextField>
+        </children>
+    </VBox>
+    <VBox spacing="8.0">
+        <children>
+            <Label prefHeight="25.0" prefWidth="171.0" text="Number of Doses">
+                <styleClass>
+                    <String fx:value="body-regular"/>
+                    <String fx:value="h4"/>
+                </styleClass>
+            </Label>
+            <MFXTextField fx:id="tfDose" prefHeight="25.0" prefWidth="479.0">
+                <styleClass>
+                    <String fx:value="h4"/>
+                    <String fx:value="body-medium"/>
+                </styleClass>
+            </MFXTextField>
+        </children>
+    </VBox>
+    <VBox spacing="8.0"/>
     <HBox alignment="TOP_RIGHT" spacing="14.0">
         <children>
             <MFXPillButton fx:id="btnClose" onAction="#onClosePressed" rippleArc="40.0" text="Close">
                 <styleClass>
-                    <String fx:value="btn" />
-                    <String fx:value="btn-secondary" />
-                    <String fx:value="body-medium" />
-                    <String fx:value="h4" />
+                    <String fx:value="btn"/>
+                    <String fx:value="btn-secondary"/>
+                    <String fx:value="body-medium"/>
+                    <String fx:value="h4"/>
                 </styleClass>
             </MFXPillButton>
-         <MFXPillButton fx:id="btnSaveVaccineType" onAction="#onSaveVaccineTypePressed" prefHeight="41.0" prefWidth="105.0" rippleArc="40.0" text="Save">
-            <styleClass>
-               <String fx:value="btn" />
-               <String fx:value="btn-primary" />
-               <String fx:value="body-medium" />
-               <String fx:value="h4" />
-            </styleClass>
-         </MFXPillButton>
+            <MFXPillButton fx:id="btnSaveVaccineType" onAction="#onSaveVaccineTypePressed" prefHeight="41.0"
+                           prefWidth="105.0" rippleArc="40.0" text="Save">
+                <styleClass>
+                    <String fx:value="btn"/>
+                    <String fx:value="btn-primary"/>
+                    <String fx:value="body-medium"/>
+                    <String fx:value="h4"/>
+                </styleClass>
+            </MFXPillButton>
         </children>
     </HBox>
 </VBox>

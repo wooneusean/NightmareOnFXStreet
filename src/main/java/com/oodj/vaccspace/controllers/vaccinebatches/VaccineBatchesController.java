@@ -155,11 +155,12 @@ public class VaccineBatchesController implements Initializable {
         TableColumn<VaccineBatch, LocalDate> expiryDateColumn = new TableColumn<>("Expiry Date");
         expiryDateColumn.setCellValueFactory(new PropertyValueFactory<>("expiryDate"));
 
-        tblVaccineBatches.getColumns().addAll(vaccineTypeColumn,
-                                              amountColumn,
-                                              vaccineCenterNameColumn,
-                                              arrivalDateColumn,
-                                              expiryDateColumn
+        tblVaccineBatches.getColumns().addAll(
+                vaccineTypeColumn,
+                amountColumn,
+                vaccineCenterNameColumn,
+                arrivalDateColumn,
+                expiryDateColumn
         );
 
         refresh();
@@ -204,12 +205,9 @@ public class VaccineBatchesController implements Initializable {
 
             boolean isRemainingEnough = vaccineBatch.getPercentRemaining() <= vm.getMinimumValue();
 
-            return (
-                           StringHelper.containsIgnoreCase(vaccineName, vm.getSearch()) ||
-                           StringHelper.containsIgnoreCase(vaccineCenterName, vm.getSearch())
-                   ) && (
-                           isRemainingEnough && isExpiryDateInRange && isArrivalDateInRange
-                   );
+            return (StringHelper.containsIgnoreCase(vaccineName, vm.getSearch()) ||
+                    StringHelper.containsIgnoreCase(vaccineCenterName, vm.getSearch())) &&
+                   (isRemainingEnough && isExpiryDateInRange && isArrivalDateInRange);
         };
     }
 }

@@ -179,13 +179,13 @@ public class Appointment extends Model {
 
         boolean hasFulfilledAppointments = appointments.stream()
                                                        .anyMatch(appointment ->
-                                                               appointment.getAppointmentStatus() ==
-                                                               AppointmentStatus.FULFILLED);
+                                                                         appointment.getAppointmentStatus() ==
+                                                                         AppointmentStatus.FULFILLED);
 
         boolean hasConfirmedAppointments = appointments.stream()
                                                        .anyMatch(appointment ->
-                                                               appointment.getAppointmentStatus() ==
-                                                               AppointmentStatus.CONFIRMED);
+                                                                         appointment.getAppointmentStatus() ==
+                                                                         AppointmentStatus.CONFIRMED);
 
         if (hasFulfilledAppointments) {
             person.setVaccinationStatus(VaccinationStatus.AWAITING_SECOND_DOSE);

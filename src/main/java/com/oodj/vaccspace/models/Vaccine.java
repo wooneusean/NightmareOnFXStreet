@@ -5,8 +5,6 @@ import textorm.HasOne;
 import textorm.Model;
 import textorm.Repository;
 
-import java.time.LocalDate;
-
 @Repository
 public class Vaccine extends Model {
 

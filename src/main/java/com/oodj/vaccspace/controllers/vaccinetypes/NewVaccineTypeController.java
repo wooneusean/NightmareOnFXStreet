@@ -38,8 +38,8 @@ public class NewVaccineTypeController extends BaseController implements Initiali
     void onSaveVaccineTypePressed(ActionEvent event) {
         //Empty Fields Validation
         if (vm.getVaccineName().equals("") ||
-                vm.getManufacturingCompany().equals("") ||
-                vm.getNumberOfDoses().equals("")
+            vm.getManufacturingCompany().equals("") ||
+            vm.getNumberOfDoses().equals("")
         ) {
             Page.showDialog(
                     btnSaveVaccineType.getScene().getWindow(),
@@ -51,7 +51,7 @@ public class NewVaccineTypeController extends BaseController implements Initiali
         }
 
         //Doses validation
-        if (Integer.parseInt(vm.getNumberOfDoses()) <= 0 ) {
+        if (Integer.parseInt(vm.getNumberOfDoses()) <= 0) {
             Page.showDialog(
                     btnSaveVaccineType.getScene().getWindow(),
                     DialogType.ERROR,
@@ -91,7 +91,12 @@ public class NewVaccineTypeController extends BaseController implements Initiali
 
         newVaccineType.save();
 
-        Page.showDialog(btnSaveVaccineType.getScene().getWindow(), DialogType.INFO, "Success", "Successfully added new vaccine.");
+        Page.showDialog(
+                btnSaveVaccineType.getScene().getWindow(),
+                DialogType.INFO,
+                "Success",
+                "Successfully added new vaccine."
+        );
         getStageDialog().close();
         ((VaccineTypesController) getUserData()).refresh();
     }
@@ -111,8 +116,10 @@ public class NewVaccineTypeController extends BaseController implements Initiali
 
         tfDose.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
+            public void changed(
+                    ObservableValue<? extends String> observable, String oldValue,
+                    String newValue
+            ) {
                 if (!newValue.matches("\\d*")) {
                     tfDose.setText(newValue.replaceAll("[^\\d]", ""));
                 }
