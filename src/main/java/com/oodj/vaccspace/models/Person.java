@@ -2,12 +2,20 @@ package com.oodj.vaccspace.models;
 
 import textorm.Column;
 import textorm.HasMany;
+import textorm.Model;
 import textorm.Repository;
 
 import java.util.List;
 
 @Repository
 public class Person extends User {
+
+    @Override
+    public boolean delete() {
+        include(Appointment.class);
+        getAppointments().forEach(Model::delete);
+        return super.delete();
+    }
 
     @Column
     VaccinationStatus vaccinationStatus;

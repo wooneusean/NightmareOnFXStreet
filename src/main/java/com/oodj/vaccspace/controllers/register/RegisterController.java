@@ -169,6 +169,22 @@ public class RegisterController implements Initializable {
             return;
         }
 
+        //Email Duplication Validation
+        duplicate = TextORM.getOne(
+                Person.class,
+                data -> Objects.equals(data.get("email"), vm.getEmail())
+        );
+
+        if (duplicate != null) {
+            Page.showDialog(
+                    container.getScene().getWindow(),
+                    DialogType.ERROR,
+                    "Error: Duplicate Email",
+                    "The given email is already registered!"
+            );
+            return;
+        }
+
         Person newPerson = new Person(
                 vm.getName(),
                 vm.getPhoneNumber(),

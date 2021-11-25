@@ -1,9 +1,13 @@
 package com.oodj.vaccspace.utils;
 
 import io.github.palexdev.materialfx.controls.MFXStageDialog;
+import io.github.palexdev.materialfx.controls.enums.ButtonType;
 import io.github.palexdev.materialfx.controls.enums.DialogType;
+import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Window;
+
+import java.util.Optional;
 
 public class Page {
     private String path;
@@ -36,6 +40,16 @@ public class Page {
 
         dialog.setCenterInOwner(true);
         dialog.show();
+    }
+
+    public static <R> Optional<R> showDialogAndWait(Window owner,String title, String header, String content){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.initOwner(owner);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        return (Optional<R>) alert.showAndWait();
     }
 
     public String getPath() {

@@ -37,6 +37,8 @@ public class PeopleController implements Initializable {
 
     SortedList<Person> sortableData;
 
+    private Person selectedPerson;
+
     @FXML
     private MFXPillButton btnRegisterUser;
 
@@ -45,6 +47,14 @@ public class PeopleController implements Initializable {
 
     @FXML
     private MFXTextField txtSearch;
+
+    public Person getSelectedPerson() {
+        return selectedPerson;
+    }
+
+    public void setSelectedPerson(Person selectedPerson) {
+        this.selectedPerson = selectedPerson;
+    }
 
     @FXML
     void onRegisterUserPressed(ActionEvent event) {
@@ -92,8 +102,8 @@ public class PeopleController implements Initializable {
             TableRow<Person> row = new TableRow<>();
             row.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
-                    Person person = row.getItem();
-                    System.out.println(person.getName());
+                    selectedPerson = row.getItem();
+                    Navigator.showInDialog(btnRegisterUser.getScene().getWindow(), "view_people", this);
                 }
             });
             return row;

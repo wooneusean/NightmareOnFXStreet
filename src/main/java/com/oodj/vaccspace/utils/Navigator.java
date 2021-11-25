@@ -39,6 +39,7 @@ public class Navigator {
         put("vaccine_batches", new Page("views/vaccine-batches-view.fxml", "Vaccine Batches"));
         put("new_batch", new Page("views/new-vaccine-batches-view.fxml", "Add Vaccine Batch"));
         put("new_people", new Page("views/new-people-view.fxml", "Add Person"));
+        put("view_people", new Page("views/view-people-view.fxml", "View Person"));
     }};
 
     private static Stage primaryStage;

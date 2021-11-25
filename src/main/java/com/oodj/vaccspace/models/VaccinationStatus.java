@@ -6,7 +6,6 @@ public enum VaccinationStatus {
     AWAITING_SECOND_DOSE("Awaiting Second Dose", "#E7FF87", "fas-syringe"),
     FULLY_VACCINATED("Fully Vaccinated", "#8EFF58", "far-check-circle");
 
-
     private final String value;
     private final String color;
     private final String icon;

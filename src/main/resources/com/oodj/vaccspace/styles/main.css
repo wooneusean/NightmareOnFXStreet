@@ -38,6 +38,11 @@
     -fx-text-fill: rgba(255, 255, 255, 1);
 }
 
+.btn-danger {
+    -fx-background-color: rgba(242, 80, 80, 1);
+    -fx-text-fill: rgba(255, 255, 255, 1);
+}
+
 .btn-secondary {
     -fx-background-color: #343434;
     -fx-text-fill: white;
@@ -134,4 +139,31 @@
     -fx-border-style: solid;
     -fx-border-width: 1px;
     -fx-border-color: #4d4d4d;
+}
+
+.combo-box {
+    -fx-background-color: red;
+}
+
+
+.combo-box {
+    -fx-background-color: #404040;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #404040;
+    -fx-fill: white;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #525252;
+    -fx-fill: white;
+}
+
+.combo-box .arrow {
+    -fx-background-color: white;
+}
+
+.combo-box .text {
+    -fx-fill: white;
 }
