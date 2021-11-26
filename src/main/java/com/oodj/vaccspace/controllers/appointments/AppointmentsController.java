@@ -1,5 +1,6 @@
 package com.oodj.vaccspace.controllers.appointments;
 
+import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.*;
 import com.oodj.vaccspace.utils.StringHelper;
 import com.oodj.vaccspace.utils.TableHelper;
@@ -24,7 +25,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-public class AppointmentsController implements Initializable {
+public class AppointmentsController extends BaseController implements Initializable {
 
     AppointmentsViewModel vm = new AppointmentsViewModel();
 

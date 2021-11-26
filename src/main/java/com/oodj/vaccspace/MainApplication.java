@@ -165,7 +165,7 @@ public class MainApplication extends Application {
         new Appointment(
                 noncitizen.getId(),
                 movenpick.getId(),
-                johnsonVaccine.getId(),
+                pfizer.getId(),
                 LocalDate.now().plusDays((long) (Math.random() * 365) + 1),
                 AppointmentStatus.CONFIRMED,
                 Dose.FIRST

@@ -38,6 +38,9 @@ public class VaccineBatch extends Model {
     @Column
     private LocalDate expiryDate;
 
+    @Column
+    private Boolean isVoided = false;
+
     public VaccineBatch() {
     }
 
@@ -161,5 +164,25 @@ public class VaccineBatch extends Model {
 
     public boolean isExpired() {
         return LocalDate.now().isAfter(expiryDate);
+    }
+
+    public void setVoided() {
+        isVoided = true;
+        save();
+
+        include(Vaccine.class);
+        getVaccines().forEach(vaccine -> {
+            Appointment appointment = TextORM.getOne(
+                    Appointment.class,
+                    hashMap -> Integer.parseInt(hashMap.get("vaccineId")) == vaccine.getId()
+            );
+
+            if (appointment != null && appointment.getAppointmentStatus() != AppointmentStatus.FULFILLED) {
+                appointment.cancel();
+            }
+
+            vaccine.setVaccineStatus(VaccineStatus.VOIDED);
+            vaccine.save();
+        });
     }
 }

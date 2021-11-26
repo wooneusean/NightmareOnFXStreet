@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -65,10 +66,14 @@ public abstract class Model {
 
     private void saveIncludedModels() {
         // Save one-to-one models
-        List<Field> hasOneAnnotatedFields = TextORM.getAllFieldsWhere(this.getClass(), field -> field.getAnnotation(HasOne.class) != null);
+        List<Field> hasOneAnnotatedFields = TextORM.getAllFieldsWhere(
+                this.getClass(),
+                field -> field.getAnnotation(HasOne.class) != null
+        );
         for (Field field : hasOneAnnotatedFields) {
             if (!Model.class.isAssignableFrom(field.getType())) {
-                System.err.println("The Foreign Key annotated object '" + field.getName() + "' on class '" + this.getClass().getSimpleName() + "' does not extend the Model class.%n");
+                System.err.println("The Foreign Key annotated object '" + field.getName() + "' on class '" +
+                                   this.getClass().getSimpleName() + "' does not extend the Model class.%n");
                 return;
             }
 
@@ -83,7 +88,10 @@ public abstract class Model {
         }
 
         // Save one-to-many models
-        List<Field> hasManyAnnotatedFields = TextORM.getAllFieldsWhere(this.getClass(), field -> field.getAnnotation(HasMany.class) != null);
+        List<Field> hasManyAnnotatedFields = TextORM.getAllFieldsWhere(
+                this.getClass(),
+                field -> field.getAnnotation(HasMany.class) != null
+        );
         for (Field field : hasManyAnnotatedFields) {
             field.setAccessible(true);
             try {
@@ -129,15 +137,26 @@ public abstract class Model {
     }
 
     public <T extends Model> void include(Class<T> toInclude) {
-        List<Field> modelFields = TextORM.getAllFieldsWhere(this.getClass(), field -> field.getType() == toInclude || TextORM.getParameterizedClass(field) == toInclude);
+        List<Field> modelFields = TextORM.getAllFieldsWhere(
+                this.getClass(),
+                field -> field.getType() == toInclude || TextORM.getParameterizedClass(field) == toInclude
+        );
 
         if (modelFields.size() > 1) {
-            System.err.printf("There are multiple fields with the type '%s' when trying to include it into %s%n", toInclude.getSimpleName(), this.getClass().getSimpleName());
+            System.err.printf(
+                    "There are multiple fields with the type '%s' when trying to include it into %s%n",
+                    toInclude.getSimpleName(),
+                    this.getClass().getSimpleName()
+            );
             return;
         }
 
         if (modelFields.size() == 0) {
-            System.err.printf("There are no fields with type '%s' on model %s.%n", toInclude.getSimpleName(), this.getClass().getSimpleName());
+            System.err.printf(
+                    "There are no fields with type '%s' on model %s.%n",
+                    toInclude.getSimpleName(),
+                    this.getClass().getSimpleName()
+            );
             return;
         }
 
@@ -155,7 +174,10 @@ public abstract class Model {
     }
 
     private <T extends Model> void includeOne(Class<T> toInclude) {
-        List<Field> includeHasOne = TextORM.getAllFieldsWhere(this.getClass(), field -> field.getType() == toInclude && field.getAnnotation(HasOne.class) != null);
+        List<Field> includeHasOne = TextORM.getAllFieldsWhere(
+                this.getClass(),
+                field -> field.getType() == toInclude && field.getAnnotation(HasOne.class) != null
+        );
 
         if (includeHasOne.size() <= 0) {
             System.err.println("This model has no relations with '" + toInclude.getSimpleName() + "'!\n");
@@ -163,7 +185,8 @@ public abstract class Model {
         }
 
         if (includeHasOne.size() > 1) {
-            System.err.println("This model has more than one one-to-one relations with '" + toInclude.getSimpleName() + "'!\n");
+            System.err.println(
+                    "This model has more than one one-to-one relations with '" + toInclude.getSimpleName() + "'!\n");
             return;
         }
 
@@ -177,22 +200,35 @@ public abstract class Model {
                 otherKeyField.setAccessible(true);
                 int otherKeyValue = (int) otherKeyField.get(this);
 
-                T includedObject = TextORM.getOne(toInclude, dataMap -> Integer.parseInt(dataMap.get("id")) == otherKeyValue);
+                T includedObject = TextORM.getOne(
+                        toInclude,
+                        dataMap -> Integer.parseInt(dataMap.get("id")) == otherKeyValue
+                );
 
                 if (includedObject == null) {
-                    System.err.printf("Error when trying to include '%s' to '%s'. There are no '%s' models that has id == %d.%n", toInclude.getSimpleName(), this.getClass().getSimpleName(), toInclude.getSimpleName(), otherKeyValue);
-                    return;
+                    System.err.printf(
+                            "Error when trying to include '%s' to '%s'. There are no '%s' models that has id == %d.%n",
+                            toInclude.getSimpleName(),
+                            this.getClass().getSimpleName(),
+                            toInclude.getSimpleName(),
+                            otherKeyValue
+                    );
+                    includedObject = toInclude.getConstructor().newInstance();
                 }
 
                 field.set(this, includedObject);
-            } catch (NoSuchFieldException | IllegalAccessException e) {
+            } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | InstantiationException e) {
                 e.printStackTrace();
             }
         }
     }
 
     private <T extends Model> void includeMany(Class<T> toInclude) {
-        List<Field> includeHasMany = TextORM.getAllFieldsWhere(this.getClass(), field -> field.getType() == List.class && TextORM.getParameterizedClass(field) == toInclude && field.getAnnotation(HasMany.class) != null);
+        List<Field> includeHasMany = TextORM.getAllFieldsWhere(
+                this.getClass(),
+                field -> field.getType() == List.class && TextORM.getParameterizedClass(field) == toInclude &&
+                         field.getAnnotation(HasMany.class) != null
+        );
 
 
         if (includeHasMany.size() == 0) {
@@ -201,7 +237,8 @@ public abstract class Model {
         }
 
         if (includeHasMany.size() > 1) {
-            System.err.println("This model has more than one one-to-many relations with '" + toInclude.getSimpleName() + "'!\n");
+            System.err.println(
+                    "This model has more than one one-to-many relations with '" + toInclude.getSimpleName() + "'!\n");
             return;
         }
 
@@ -210,7 +247,13 @@ public abstract class Model {
 
         HasMany hasManyAnnotation = hasManyField.getAnnotation(HasMany.class);
 
-        List<T> toIncludeObjects = TextORM.getAll(toInclude, dataMap -> Objects.equals(dataMap.get(hasManyAnnotation.targetKey()), String.valueOf(this.getId())));
+        List<T> toIncludeObjects = TextORM.getAll(
+                toInclude,
+                dataMap -> Objects.equals(
+                        dataMap.get(hasManyAnnotation.targetKey()),
+                        String.valueOf(this.getId())
+                )
+        );
 
         if (toIncludeObjects != null) {
             try {

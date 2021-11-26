@@ -1,5 +1,6 @@
 package com.oodj.vaccspace.controllers.people;
 
+import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.models.VaccinationStatus;
 import com.oodj.vaccspace.utils.Navigator;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-public class PeopleController implements Initializable {
+public class PeopleController extends BaseController implements Initializable {
 
     PeopleViewModel vm = new PeopleViewModel();
 

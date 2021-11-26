@@ -1,5 +1,6 @@
 package com.oodj.vaccspace.controllers.vaccinebatches;
 
+import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.VaccinationCenter;
 import com.oodj.vaccspace.models.VaccineBatch;
 import com.oodj.vaccspace.models.VaccineType;
@@ -24,10 +25,11 @@ import textorm.TextORM;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-public class VaccineBatchesController implements Initializable {
+public class VaccineBatchesController extends BaseController implements Initializable {
 
     VaccineBatchesViewModel vm = new VaccineBatchesViewModel();
 
@@ -167,8 +169,6 @@ public class VaccineBatchesController implements Initializable {
                 expiryDateColumn
         );
 
-        refresh();
-
         tblVaccineBatches.setRowFactory(tableView -> {
             TableRow<VaccineBatch> row = new TableRow<>();
             row.setOnMouseClicked(mouseEvent -> {
@@ -180,15 +180,16 @@ public class VaccineBatchesController implements Initializable {
             return row;
         });
 
-        sortableData.comparatorProperty().bind(tblVaccineBatches.comparatorProperty());
-
         TableHelper.autoSizeColumns(tblVaccineBatches);
 
         refresh();
     }
 
     public void refresh() {
-        List<VaccineBatch> vaccineBatches = TextORM.getAll(VaccineBatch.class, hashMap -> true);
+        List<VaccineBatch> vaccineBatches = TextORM.getAll(
+                VaccineBatch.class,
+                hashMap -> Objects.equals(hashMap.get("isVoided"), "false")
+        );
 
         masterData = FXCollections.observableArrayList(vaccineBatches);
         filteredData = new FilteredList<>(masterData);

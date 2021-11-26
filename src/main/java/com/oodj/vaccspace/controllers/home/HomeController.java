@@ -1,6 +1,7 @@
 package com.oodj.vaccspace.controllers.home;
 
 import com.oodj.vaccspace.Global;
+import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.controllers.appointments.AppointmentStatusIndicatorCell;
 import com.oodj.vaccspace.models.Appointment;
 import com.oodj.vaccspace.models.AppointmentStatus;
@@ -25,7 +26,7 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 
-public class HomeController implements Initializable {
+public class HomeController extends BaseController implements Initializable {
 
     Person person = null;
 
