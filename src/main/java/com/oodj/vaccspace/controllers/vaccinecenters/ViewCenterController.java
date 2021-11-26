@@ -72,8 +72,7 @@ public class ViewCenterController extends BaseController {
                 "Do you want to proceed?"
         );
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            vaccinationCenter.delete();
-
+            vaccinationCenter.setVoided();
         }
 
         vaccineCentersController.refresh();
@@ -166,13 +165,9 @@ public class ViewCenterController extends BaseController {
 
     @Override
     public void onLoaded() {
-        tfPostcode.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    tfPostcode.setText(newValue.replaceAll("[^\\d]", ""));
-                }
+        tfPostcode.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfPostcode.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
 

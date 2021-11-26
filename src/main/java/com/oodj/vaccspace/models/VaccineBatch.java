@@ -38,6 +38,9 @@ public class VaccineBatch extends Model {
     @Column
     private LocalDate expiryDate;
 
+    @Column
+    private Boolean isVoided = false;
+
     public VaccineBatch() {
     }
 
@@ -161,5 +164,13 @@ public class VaccineBatch extends Model {
 
     public boolean isExpired() {
         return LocalDate.now().isAfter(expiryDate);
+    }
+
+    public void setVoided() {
+        include(Vaccine.class);
+        getVaccines().forEach(vaccine -> vaccine.setVaccineStatus(VaccineStatus.VOIDED));
+
+        isVoided = true;
+        save();
     }
 }

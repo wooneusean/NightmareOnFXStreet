@@ -24,6 +24,7 @@ import textorm.TextORM;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -186,7 +187,10 @@ public class VaccineBatchesController implements Initializable {
     }
 
     public void refresh() {
-        List<VaccineBatch> vaccineBatches = TextORM.getAll(VaccineBatch.class, hashMap -> true);
+        List<VaccineBatch> vaccineBatches = TextORM.getAll(
+                VaccineBatch.class,
+                hashMap -> Objects.equals(hashMap.get("isVoided"), "false")
+        );
 
         if (vaccineBatches == null) {
             masterData = FXCollections.emptyObservableList();
