@@ -1,9 +1,6 @@
 package com.oodj.vaccspace.models;
 
-import textorm.Column;
-import textorm.HasMany;
-import textorm.Model;
-import textorm.Repository;
+import textorm.*;
 
 import java.util.List;
 
@@ -25,10 +22,19 @@ public class VaccinationCenter extends Model {
     @Column
     private String centerState;
 
+    @Column
+    private Boolean isVoided = false;
+
     @HasMany(targetKey = "vaccinationCenterId")
     private List<VaccineBatch> vaccineBatches;
 
-    public VaccinationCenter(String vaccinationCenterName, String centerAddress, String centerPostcode, String centerState, CenterStatus centerStatus) {
+    public VaccinationCenter(
+            String vaccinationCenterName,
+            String centerAddress,
+            String centerPostcode,
+            String centerState,
+            CenterStatus centerStatus
+    ) {
         this.vaccinationCenterName = vaccinationCenterName;
         this.centerAddress = centerAddress;
         this.centerPostcode = centerPostcode;
@@ -86,5 +92,28 @@ public class VaccinationCenter extends Model {
 
     public void setCenterState(String centerState) {
         this.centerState = centerState;
+    }
+
+    public void setVoided() {
+        isVoided = true;
+        save();
+
+        include(VaccineBatch.class);
+        getVaccineBatches().forEach(VaccineBatch::setVoided);
+
+        List<Appointment> appointments = TextORM.getAll(
+                Appointment.class,
+                hashMap ->
+                        Integer.parseInt(hashMap.get("vaccinationCenterId")) ==
+                        getId()
+        );
+
+        if (appointments != null) {
+            appointments.forEach(appointment -> {
+                if (appointment.getAppointmentStatus() != AppointmentStatus.FULFILLED) {
+                    appointment.cancel();
+                }
+            });
+        }
     }
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.euseanwoon.MFXPillButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.vaccinebatches.ViewVaccineBatchesController">
+    <children>
+        <Label prefHeight="39.0" prefWidth="173.0" text="View Batch">
+            <styleClass>
+                <String fx:value="heading-medium" />
+                <String fx:value="h1" />
+            </styleClass>
+        </Label>
+        <VBox maxWidth="1.7976931348623157E308" spacing="8.0">
+            <children>
+                <Label text="Vaccination Center">
+                    <styleClass>
+                        <String fx:value="body-regular" />
+                        <String fx:value="h4" />
+                    </styleClass>
+                </Label>
+                <ComboBox fx:id="cmbVaccinationCenter" disable="true" maxWidth="1.7976931348623157E308" promptText="Choose Vaccination Center" styleClass="body-medium" />
+            </children>
+        </VBox>
+        <VBox layoutX="30.0" layoutY="89.0" maxWidth="1.7976931348623157E308" spacing="8.0">
+            <children>
+                <Label text="Vaccine Type">
+                    <styleClass>
+                        <String fx:value="body-regular" />
+                        <String fx:value="h4" />
+                    </styleClass>
+                </Label>
+                <ComboBox fx:id="cmbVaccineType" disable="true" maxWidth="1.7976931348623157E308" promptText="Choose Vaccine Type" styleClass="body-medium" />
+            </children>
+        </VBox>
+        <VBox layoutX="30.0" layoutY="170.0" maxWidth="1.7976931348623157E308" spacing="8.0">
+            <children>
+                <Label text="Amount">
+                    <styleClass>
+                        <String fx:value="body-regular" />
+                        <String fx:value="h4" />
+                    </styleClass>
+                </Label>
+                <MFXTextField fx:id="txtBatchAmount" disable="true" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
+            </children>
+        </VBox>
+        <VBox layoutX="30.0" layoutY="251.0" maxWidth="1.7976931348623157E308" spacing="8.0">
+            <children>
+                <Label text="Expiry Date">
+                    <styleClass>
+                        <String fx:value="body-regular" />
+                        <String fx:value="h4" />
+                    </styleClass>
+                </Label>
+                <DatePicker fx:id="dtpExpiryDate" disable="true" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
+            </children>
+        </VBox>
+        <HBox alignment="TOP_RIGHT" spacing="14.0">
+            <children>
+                <MFXPillButton fx:id="btnCancel" onAction="#onCancelPressed" rippleArc="40.0" text="Cancel">
+                    <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-secondary" />
+                        <String fx:value="h4" />
+                        <String fx:value="body-medium" />
+                    </styleClass>
+                </MFXPillButton>
+            <MFXPillButton fx:id="btnDeleteBatch" onAction="#onDeleteBatchPressed" rippleArc="40.0" text="Delete">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-danger" />
+                  <String fx:value="h4" />
+                  <String fx:value="body-medium" />
+               </styleClass>
+            </MFXPillButton>
+                <MFXPillButton fx:id="btnEditBatch" onAction="#onEditBatchPressed" rippleArc="40.0" text="Edit">
+                    <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                        <String fx:value="h4" />
+                        <String fx:value="body-medium" />
+                    </styleClass>
+                </MFXPillButton>
+            <MFXPillButton fx:id="btnSaveBatch" onAction="#onSaveBatchPressed" rippleArc="40.0" text="Save">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-primary" />
+                  <String fx:value="h4" />
+                  <String fx:value="body-medium" />
+               </styleClass>
+            </MFXPillButton>
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>

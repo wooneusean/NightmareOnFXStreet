@@ -162,10 +162,10 @@ public class Appointment extends Model {
         getVaccineName();
 
         setAppointmentStatus(AppointmentStatus.VOIDED);
-        getVaccine().getVaccineBatch().setAvailableAmount(getVaccine().getVaccineBatch().getAvailableAmount() - 1);
+        getVaccine().getVaccineBatch().setAvailableAmount(getVaccine().getVaccineBatch().getAvailableAmount() + 1);
         save();
 
-        getVaccine().setVaccineStatus(VaccineStatus.AVAILABLE);
+        getVaccine().setVaccineStatus(VaccineStatus.VOIDED);
 
         include(Person.class);
         Person person = getPerson();

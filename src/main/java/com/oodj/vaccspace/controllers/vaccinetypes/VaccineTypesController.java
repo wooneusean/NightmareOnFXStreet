@@ -1,6 +1,7 @@
 package com.oodj.vaccspace.controllers.vaccinetypes;
 
 import com.oodj.vaccspace.Global;
+import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.VaccineType;
 import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.StringHelper;
@@ -23,10 +24,11 @@ import textorm.TextORM;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-public class VaccineTypesController implements Initializable {
+public class VaccineTypesController extends BaseController implements Initializable {
     VaccineTypesViewModel vm = new VaccineTypesViewModel();
 
     ObservableList<VaccineType> masterData;
@@ -64,7 +66,10 @@ public class VaccineTypesController implements Initializable {
     }
 
     public void refresh() {
-        List<VaccineType> vaccineTypes = TextORM.getAll(VaccineType.class, hashMap -> true);
+        List<VaccineType> vaccineTypes = TextORM.getAll(
+                VaccineType.class,
+                hashMap -> Objects.equals(hashMap.get("isVoided"), "false")
+        );
 
         masterData = FXCollections.observableArrayList(vaccineTypes);
         filteredData = new FilteredList<>(masterData);

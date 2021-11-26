@@ -1,5 +1,6 @@
 package com.oodj.vaccspace.controllers.vaccinebatches;
 
+import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.VaccinationCenter;
 import com.oodj.vaccspace.models.VaccineBatch;
 import com.oodj.vaccspace.models.VaccineType;
@@ -24,10 +25,11 @@ import textorm.TextORM;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-public class VaccineBatchesController implements Initializable {
+public class VaccineBatchesController extends BaseController implements Initializable {
 
     VaccineBatchesViewModel vm = new VaccineBatchesViewModel();
 
@@ -36,6 +38,8 @@ public class VaccineBatchesController implements Initializable {
     FilteredList<VaccineBatch> filteredData;
 
     SortedList<VaccineBatch> sortableData;
+
+    VaccineBatch selectedVaccineBatch = new VaccineBatch();
 
     @FXML
     private MFXPillButton btnAddBatch;
@@ -165,13 +169,27 @@ public class VaccineBatchesController implements Initializable {
                 expiryDateColumn
         );
 
+        tblVaccineBatches.setRowFactory(tableView -> {
+            TableRow<VaccineBatch> row = new TableRow<>();
+            row.setOnMouseClicked(mouseEvent -> {
+                if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
+                    selectedVaccineBatch = row.getItem();
+                    Navigator.showInDialog(tblVaccineBatches.getScene().getWindow(), "view_batch", this);
+                }
+            });
+            return row;
+        });
+
         TableHelper.autoSizeColumns(tblVaccineBatches);
 
         refresh();
     }
 
     public void refresh() {
-        List<VaccineBatch> vaccineBatches = TextORM.getAll(VaccineBatch.class, hashMap -> true);
+        List<VaccineBatch> vaccineBatches = TextORM.getAll(
+                VaccineBatch.class,
+                hashMap -> Objects.equals(hashMap.get("isVoided"), "false")
+        );
 
         masterData = FXCollections.observableArrayList(vaccineBatches);
         filteredData = new FilteredList<>(masterData);

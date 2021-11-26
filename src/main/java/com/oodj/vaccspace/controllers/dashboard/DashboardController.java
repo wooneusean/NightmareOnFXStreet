@@ -87,7 +87,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     void onNavBtnPress(ActionEvent event, String route) {
-        Navigator.navigateInContainer(route, vbxContent);
+        Navigator.navigateInContainer(route, vbxContent, null);
     }
 
     @FXML
@@ -99,7 +99,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Navigator.navigateInContainer(Global.isCommittee() ? "appointments" : "home", vbxContent);
+        Navigator.navigateInContainer(Global.isCommittee() ? "appointments" : "home", vbxContent, null);
 
         initializeIcons();
     }
