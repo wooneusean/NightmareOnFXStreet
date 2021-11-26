@@ -113,8 +113,6 @@ public class PeopleController extends BaseController implements Initializable {
         TableHelper.autoSizeColumns(tblPeople);
 
         refresh();
-
-        sortableData.comparatorProperty().bind(tblPeople.comparatorProperty());
     }
 
     public void refresh() {
@@ -125,6 +123,8 @@ public class PeopleController extends BaseController implements Initializable {
         sortableData = new SortedList<>(filteredData);
 
         tblPeople.setItems(sortableData);
+
+        sortableData.comparatorProperty().bind(tblPeople.comparatorProperty());
     }
 
     private Predicate<Person> getFilterPersonPredicate() {

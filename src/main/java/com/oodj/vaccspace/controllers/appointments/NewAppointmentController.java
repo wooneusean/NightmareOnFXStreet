@@ -142,7 +142,76 @@ public class NewAppointmentController extends BaseController implements Initiali
             return false;
         }
 
+        if (dpDate.getValue().isBefore(LocalDate.now())) {
+            Page.showDialog(
+                    cbCenter.getScene().getWindow(),
+                    DialogType.ERROR,
+                    "Error: Date Selected is Before Today",
+                    "Please ensure you select a date after today!"
+            );
+            return false;
+        }
+
+        if (hasPendingAppointments()) return false;
+
+        if (isVaccineTypeMismatch()) return false;
+
         return true;
+    }
+
+    private boolean isVaccineTypeMismatch() {
+        Person loggedInUser = Global.getLoggedInUser();
+        loggedInUser.include(Appointment.class);
+        Optional<Appointment> possibleAppointment = loggedInUser.getAppointments()
+                                                                .stream()
+                                                                .filter(appointment ->
+                                                                                appointment.getAppointmentStatus() ==
+                                                                                AppointmentStatus.FULFILLED)
+                                                                .findFirst();
+
+        if (possibleAppointment.isEmpty()) {
+            return false;
+        }
+
+        Appointment previousFulfilledAppointment = possibleAppointment.get();
+        previousFulfilledAppointment.include(Vaccine.class);
+        previousFulfilledAppointment.getVaccine().include(VaccineBatch.class);
+        previousFulfilledAppointment.getVaccine().getVaccineBatch().include(VaccineType.class);
+        VaccineType previousVaccineType = previousFulfilledAppointment.getVaccine().getVaccineBatch().getVaccineType();
+        if (cbVaccine.getSelectionModel().getSelectedItem().getId() != previousVaccineType.getId()) {
+            Page.showDialog(
+                    cbCenter.getScene().getWindow(),
+                    DialogType.ERROR,
+                    "Error: Vaccine Type Does Not Match",
+                    "You have a fulfilled appointment with a different vaccine type! " +
+                    "We strongly advise against mixing your vaccines! " +
+                    "Please go select your previous vaccine, which is '" + previousVaccineType.getVaccineName() + "'."
+            );
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasPendingAppointments() {
+        Person loggedInUser = Global.getLoggedInUser();
+        loggedInUser.include(Appointment.class);
+
+        boolean hasPendingAppointments = loggedInUser
+                .getAppointments()
+                .stream()
+                .anyMatch(appointment ->
+                                  appointment.getAppointmentStatus() == AppointmentStatus.CONFIRMED
+                );
+        if (hasPendingAppointments) {
+            Page.showDialog(
+                    cbCenter.getScene().getWindow(),
+                    DialogType.ERROR,
+                    "Error: Unfulfilled Appointment Found",
+                    "You already have an unfulfilled appointment! Please fulfill all appointments before creating new appointments!"
+            );
+            return true;
+        }
+        return false;
     }
 
     @Override

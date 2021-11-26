@@ -169,8 +169,6 @@ public class VaccineBatchesController extends BaseController implements Initiali
                 expiryDateColumn
         );
 
-        refresh();
-
         tblVaccineBatches.setRowFactory(tableView -> {
             TableRow<VaccineBatch> row = new TableRow<>();
             row.setOnMouseClicked(mouseEvent -> {
@@ -182,9 +180,9 @@ public class VaccineBatchesController extends BaseController implements Initiali
             return row;
         });
 
-        sortableData.comparatorProperty().bind(tblVaccineBatches.comparatorProperty());
-
         TableHelper.autoSizeColumns(tblVaccineBatches);
+
+        refresh();
     }
 
     public void refresh() {
@@ -193,15 +191,12 @@ public class VaccineBatchesController extends BaseController implements Initiali
                 hashMap -> Objects.equals(hashMap.get("isVoided"), "false")
         );
 
-        if (vaccineBatches == null) {
-            masterData = FXCollections.emptyObservableList();
-        } else {
-            masterData = FXCollections.observableList(vaccineBatches);
-        }
-
+        masterData = FXCollections.observableArrayList(vaccineBatches);
         filteredData = new FilteredList<>(masterData);
         sortableData = new SortedList<>(filteredData);
         tblVaccineBatches.setItems(sortableData);
+
+        sortableData.comparatorProperty().bind(tblVaccineBatches.comparatorProperty());
     }
 
     Predicate<VaccineBatch> getSearchPredicate() {

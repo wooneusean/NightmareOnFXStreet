@@ -50,7 +50,7 @@ public class VaccineTypesController extends BaseController implements Initializa
 
     @FXML
     void onAddVaccineTypePressed(ActionEvent event) {
-        Navigator.showInDialog(btnAddVaccineType.getScene().getWindow(), "new_vaccine_center", this);
+        Navigator.showInDialog(btnAddVaccineType.getScene().getWindow(), "new_vaccine_type", this);
     }
 
     @FXML
@@ -101,7 +101,7 @@ public class VaccineTypesController extends BaseController implements Initializa
         TableColumn<VaccineType, Integer> vaccineDoseColumn = new TableColumn<>("Doses Needed");
         vaccineDoseColumn.setCellValueFactory(new PropertyValueFactory<>("dosesNeeded"));
 
-        tblVaccineTypes.getColumns().addAll(vaccineNameColumn, vaccineDoseColumn);
+        tblVaccineTypes.getColumns().addAll(vaccineNameColumn, ManufacturingCompanyColumn, vaccineDoseColumn);
 
         tblVaccineTypes.setRowFactory(tableView -> {
             TableRow<VaccineType> row = new TableRow<>();

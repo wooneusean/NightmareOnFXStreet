@@ -1,6 +1,7 @@
 package com.oodj.vaccspace.controllers.vaccinecenters;
 
 import com.oodj.vaccspace.controllers.BaseController;
+import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.models.CenterStatus;
 import com.oodj.vaccspace.models.VaccinationCenter;
 import com.oodj.vaccspace.utils.Navigator;
@@ -68,6 +69,10 @@ public class VaccineCentersController extends BaseController implements Initiali
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!Global.isCommittee()) {
+            btnAddCenter.setManaged(false);
+        }
+
         vm.searchProperty().bindBidirectional(txtSearch.textProperty());
 
         vm.searchProperty().addListener((observableValue, s, t1) -> {
@@ -105,24 +110,18 @@ public class VaccineCentersController extends BaseController implements Initiali
         TableHelper.autoSizeColumns(tblVaccineCenters);
 
         refresh();
-
-        sortableData.comparatorProperty().bind(tblVaccineCenters.comparatorProperty());
     }
 
     public void refresh() {
-        List<VaccinationCenter> vaccineCenters = TextORM.getAll(
-                VaccinationCenter.class,
-                hashMap -> Objects.equals(
-                        hashMap.get("isVoided"),
-                        "false"
-                )
-        );
+        List<VaccinationCenter> vaccineCenters = TextORM.getAll(VaccinationCenter.class, hashMap -> true);
 
         masterData = FXCollections.observableArrayList(vaccineCenters);
         filteredData = new FilteredList<>(masterData);
         sortableData = new SortedList<>(filteredData);
 
         tblVaccineCenters.setItems(sortableData);
+
+        sortableData.comparatorProperty().bind(tblVaccineCenters.comparatorProperty());
     }
 }
 

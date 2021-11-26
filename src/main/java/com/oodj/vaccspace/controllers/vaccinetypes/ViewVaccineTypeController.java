@@ -9,11 +9,14 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.enums.DialogType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonType;
 
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class ViewVaccineTypeController extends BaseController {
+public class ViewVaccineTypeController extends BaseController implements Initializable {
     NewOrEditVaccineTypeViewModel vm = null;
     VaccineTypesController vaccineTypesController = null;
     VaccineType vaccineType = new VaccineType();
@@ -119,6 +122,7 @@ public class ViewVaccineTypeController extends BaseController {
         vaccineType.setDosesNeeded(Integer.parseInt(vm.getNumberOfDoses()));
 
         vaccineType.save();
+        vaccineTypesController.refresh();
 
         Page.showDialog(
                 btnSaveVaccineType.getScene().getWindow(),
@@ -127,7 +131,6 @@ public class ViewVaccineTypeController extends BaseController {
                 "Successfully added new vaccine."
         );
         getStageDialog().close();
-        vaccineTypesController.refresh();
     }
 
     @FXML
@@ -168,4 +171,10 @@ public class ViewVaccineTypeController extends BaseController {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!Global.isCommittee()) {
+            btnDeleteVaccineType.setManaged(false);
+        }
+    }
 }
