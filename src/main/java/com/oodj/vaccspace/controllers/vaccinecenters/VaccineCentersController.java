@@ -1,5 +1,6 @@
 package com.oodj.vaccspace.controllers.vaccinecenters;
 
+import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.CenterStatus;
 import com.oodj.vaccspace.models.VaccinationCenter;
 import com.oodj.vaccspace.utils.Navigator;
@@ -27,7 +28,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-public class VaccineCentersController implements Initializable {
+public class VaccineCentersController extends BaseController implements Initializable {
 
     VaccineCentersViewModel vm = new VaccineCentersViewModel();
 

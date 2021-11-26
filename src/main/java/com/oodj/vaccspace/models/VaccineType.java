@@ -1,9 +1,6 @@
 package com.oodj.vaccspace.models;
 
-import textorm.Column;
-import textorm.HasMany;
-import textorm.Model;
-import textorm.Repository;
+import textorm.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +16,9 @@ public class VaccineType extends Model {
 
     @Column
     private int dosesNeeded;
+
+    @Column
+    private Boolean isVoided = false;
 
     @HasMany(targetKey = "vaccineTypeId")
     private List<VaccineBatch> vaccineBatches;
@@ -76,5 +76,20 @@ public class VaccineType extends Model {
     @Override
     public int hashCode() {
         return Objects.hash(vaccineName);
+    }
+
+    public void setVoided() {
+        isVoided = true;
+        save();
+
+        include(VaccineBatch.class);
+        List<VaccineBatch> vaccineBatches = TextORM.getAll(
+                VaccineBatch.class,
+                hashMap -> Integer.parseInt(hashMap.get("vaccineTypeId")) == getId()
+        );
+
+        if (vaccineBatches != null) {
+            vaccineBatches.forEach(VaccineBatch::setVoided);
+        }
     }
 }

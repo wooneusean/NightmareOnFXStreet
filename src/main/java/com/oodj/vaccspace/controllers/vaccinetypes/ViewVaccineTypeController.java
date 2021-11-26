@@ -7,8 +7,6 @@ import com.oodj.vaccspace.utils.Page;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.enums.DialogType;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
@@ -60,15 +58,9 @@ public class ViewVaccineTypeController extends BaseController {
                 tfDose.textProperty()
         );
 
-        tfDose.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable, String oldValue,
-                    String newValue
-            ) {
-                if (!newValue.matches("\\d*")) {
-                    tfDose.setText(newValue.replaceAll("[^\\d]", ""));
-                }
+        tfDose.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfDose.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
     }
@@ -152,8 +144,7 @@ public class ViewVaccineTypeController extends BaseController {
                 "Do you want to proceed?"
         );
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            vaccineType.delete();
-
+            vaccineType.setVoided();
         }
 
         vaccineTypesController.refresh();

@@ -167,10 +167,22 @@ public class VaccineBatch extends Model {
     }
 
     public void setVoided() {
-        include(Vaccine.class);
-        getVaccines().forEach(vaccine -> vaccine.setVaccineStatus(VaccineStatus.VOIDED));
-
         isVoided = true;
         save();
+
+        include(Vaccine.class);
+        getVaccines().forEach(vaccine -> {
+            Appointment appointment = TextORM.getOne(
+                    Appointment.class,
+                    hashMap -> Integer.parseInt(hashMap.get("vaccineId")) == vaccine.getId()
+            );
+
+            if (appointment != null && appointment.getAppointmentStatus() != AppointmentStatus.FULFILLED) {
+                appointment.cancel();
+            }
+
+            vaccine.setVaccineStatus(VaccineStatus.VOIDED);
+            vaccine.save();
+        });
     }
 }

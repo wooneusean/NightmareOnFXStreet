@@ -1,5 +1,6 @@
 package com.oodj.vaccspace.controllers.vaccinebatches;
 
+import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.VaccinationCenter;
 import com.oodj.vaccspace.models.VaccineBatch;
 import com.oodj.vaccspace.models.VaccineType;
@@ -28,7 +29,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-public class VaccineBatchesController implements Initializable {
+public class VaccineBatchesController extends BaseController implements Initializable {
 
     VaccineBatchesViewModel vm = new VaccineBatchesViewModel();
 

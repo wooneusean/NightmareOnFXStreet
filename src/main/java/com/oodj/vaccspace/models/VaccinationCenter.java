@@ -95,6 +95,9 @@ public class VaccinationCenter extends Model {
     }
 
     public void setVoided() {
+        isVoided = true;
+        save();
+
         include(VaccineBatch.class);
         getVaccineBatches().forEach(VaccineBatch::setVoided);
 
@@ -107,12 +110,10 @@ public class VaccinationCenter extends Model {
 
         if (appointments != null) {
             appointments.forEach(appointment -> {
-                appointment.setAppointmentStatus(AppointmentStatus.VOIDED);
-                appointment.save();
+                if (appointment.getAppointmentStatus() != AppointmentStatus.FULFILLED) {
+                    appointment.cancel();
+                }
             });
         }
-
-        isVoided = true;
-        save();
     }
 }

@@ -6,7 +6,6 @@ import com.oodj.vaccspace.mfx.CustomMFXDialog;
 import io.github.palexdev.materialfx.controls.MFXStageDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -97,8 +96,23 @@ public class Navigator {
         }
     }
 
-    public static void navigateInContainer(String route, Pane container) {
-        Node root = loadPageFromFXML(route);
+    public static <T extends BaseController> void navigateInContainer(String route, Pane container, Object userData) {
+        Page destination = routeMap.get(route);
+
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(destination.getPath()));
+            root = loader.load();
+
+            // This is such a hacky way to do this.
+            T controller = loader.getController();
+            controller.setUserData(userData);
+            controller.onLoaded();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.printf("Unable to load route '%s'.%n", route);
+            return;
+        }
         container.getChildren().setAll(root);
     }
 
