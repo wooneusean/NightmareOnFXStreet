@@ -82,14 +82,6 @@
                     <String fx:value="h4" />
                 </styleClass>
             </MFXPillButton>
-         <MFXPillButton fx:id="btnDeleteVaccineType" onAction="#onDeleteVaccineTypePressed" prefHeight="41.0" prefWidth="105.0" rippleArc="40.0" text="Delete">
-            <styleClass>
-               <String fx:value="btn" />
-               <String fx:value="btn-danger" />
-               <String fx:value="body-medium" />
-               <String fx:value="h4" />
-            </styleClass>
-         </MFXPillButton>
             <MFXPillButton fx:id="btnEditVaccineType" layoutX="324.0" layoutY="10.0" onAction="#onEditVaccineTypePressed" prefHeight="41.0" prefWidth="105.0" rippleArc="40.0" text="Edit">
                 <styleClass>
                     <String fx:value="btn" />
@@ -106,6 +98,14 @@
                     <String fx:value="h4" />
                 </styleClass>
             </MFXPillButton>
+         <MFXPillButton fx:id="btnDeleteVaccineType" onAction="#onDeleteVaccineTypePressed" prefHeight="41.0" prefWidth="105.0" rippleArc="40.0" text="Delete">
+            <styleClass>
+               <String fx:value="btn" />
+               <String fx:value="btn-danger" />
+               <String fx:value="body-medium" />
+               <String fx:value="h4" />
+            </styleClass>
+         </MFXPillButton>
         </children>
     </HBox>
 </VBox>

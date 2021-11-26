@@ -1,8 +1,10 @@
 package com.oodj.vaccspace.controllers.people;
 
+import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.Person;
 import com.oodj.vaccspace.models.VaccinationStatus;
+import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.Page;
 import com.oodj.vaccspace.utils.ValidationHelper;
 import io.github.euseanwoon.MFXPillButton;
@@ -37,6 +39,12 @@ public class ViewPeopleController extends BaseController implements Initializabl
     private MFXPillButton btnSaveChanges;
 
     @FXML
+    private MFXPillButton btnEditPerson;
+
+    @FXML
+    private MFXPillButton btnViewAppointments;
+
+    @FXML
     private MFXPillButton btnDelete;
 
     @FXML
@@ -53,6 +61,28 @@ public class ViewPeopleController extends BaseController implements Initializabl
 
     @FXML
     private MFXTextField txtPhoneNumber;
+
+    @FXML
+    void onEditPersonPressed(ActionEvent event) {
+        btnEditPerson.setManaged(false);
+        btnSaveChanges.setManaged(true);
+
+        txtName.setDisable(false);
+        txtPhoneNumber.setDisable(false);
+        txtEmail.setDisable(false);
+        cmbVaccinationStatus.setDisable(false);
+        chkIsNonCitizen.setDisable(false);
+
+        txtName.setStyle("-fx-opacity: 0.99");
+        txtPhoneNumber.setStyle("-fx-opacity: 0.99");
+        txtEmail.setStyle("-fx-opacity: 0.99");
+    }
+
+    @FXML
+    public void onViewAppointmentPressed(ActionEvent actionEvent) {
+        Navigator.navigateInContainer("home", Global.getDashboardReference().getVbxContent(), person);
+        getStageDialog().close();
+    }
 
     @FXML
     void onDeletePressed(ActionEvent event) {
@@ -180,6 +210,8 @@ public class ViewPeopleController extends BaseController implements Initializabl
 
     @Override
     public void onLoaded() {
+        btnSaveChanges.setManaged(false);
+
         peopleController = (PeopleController) getUserData();
         person = peopleController.getSelectedPerson();
 
@@ -201,4 +233,6 @@ public class ViewPeopleController extends BaseController implements Initializabl
             }
         });
     }
+
+
 }

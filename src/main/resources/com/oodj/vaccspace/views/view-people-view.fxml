@@ -12,12 +12,38 @@
 
 <VBox alignment="TOP_RIGHT" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.people.ViewPeopleController">
    <children>
-      <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="View Person">
-         <styleClass>
-            <String fx:value="heading-medium" />
-            <String fx:value="h1" />
-         </styleClass>
-      </Label>
+      <HBox alignment="TOP_RIGHT" prefHeight="42.0" prefWidth="420.0">
+         <children>
+            <VBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="192.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="206.0" text="View Person">
+                     <styleClass>
+                        <String fx:value="heading-medium" />
+                        <String fx:value="h1" />
+                     </styleClass>
+                  </Label>
+                  <HBox prefHeight="2.0" prefWidth="192.0" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="3.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="420.0">
+         <children>
+            <MFXPillButton fx:id="btnViewAppointments" onAction="#onViewAppointmentPressed" text="View Appointments">
+               <styleClass>
+                  <String fx:value="btn-tertiary" />
+                  <String fx:value="h4" />
+               </styleClass>
+            </MFXPillButton>
+         </children>
+         <VBox.margin>
+            <Insets top="-5.0" />
+         </VBox.margin>
+      </HBox>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
          <children>
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Name">
@@ -26,7 +52,7 @@
                   <String fx:value="h4" />
                </styleClass>
             </Label>
-            <MFXTextField fx:id="txtName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
+            <MFXTextField fx:id="txtName" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
          </children>
       </VBox>
       <VBox layoutX="50.0" layoutY="109.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
@@ -37,7 +63,7 @@
                   <String fx:value="h4" />
                </styleClass>
             </Label>
-            <MFXTextField fx:id="txtPhoneNumber" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
+            <MFXTextField fx:id="txtPhoneNumber" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
          </children>
       </VBox>
       <VBox layoutX="50.0" layoutY="190.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
@@ -48,7 +74,7 @@
                   <String fx:value="h4" />
                </styleClass>
             </Label>
-            <ComboBox fx:id="cmbVaccinationStatus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Choose Vaccination Status" styleClass="body-medium" />
+            <ComboBox fx:id="cmbVaccinationStatus" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Choose Vaccination Status" styleClass="body-medium" />
          </children>
       </VBox>
       <VBox layoutX="50.0" layoutY="271.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
@@ -59,12 +85,12 @@
                   <String fx:value="h4" />
                </styleClass>
             </Label>
-            <MFXTextField fx:id="txtEmail" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
+            <MFXTextField fx:id="txtEmail" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
          </children>
       </VBox>
       <VBox layoutX="50.0" layoutY="352.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
          <children>
-            <MFXCheckbox fx:id="chkIsNonCitizen" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Non-citizen">
+            <MFXCheckbox fx:id="chkIsNonCitizen" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Non-citizen">
                <styleClass>
                   <String fx:value="body-medium" />
                   <String fx:value="h4" />
@@ -77,6 +103,14 @@
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-secondary" />
+                  <String fx:value="h4" />
+                  <String fx:value="body-medium" />
+               </styleClass>
+            </MFXPillButton>
+            <MFXPillButton fx:id="btnEditPerson" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onEditPersonPressed" rippleArc="40.0" text="Edit">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-primary" />
                   <String fx:value="h4" />
                   <String fx:value="body-medium" />
                </styleClass>

@@ -57,6 +57,31 @@
     -fx-text-fill: rgba(255, 255, 255, 1);
 }
 
+.btn-tertiary {
+    -fx-background-color: white;
+    -fx-text-fill: rgba(0, 0, 0, 1);
+    -fx-font-family: 'Poppins Medium';
+    -fx-font-size: 14;
+    -fx-padding: 8 24;
+    -fx-background-radius: 50em;
+}
+
+.btn-green {
+    -fx-background-color: "#0acf00";
+   -fx-font-family: 'Poppins Medium';
+   -fx-font-size: 14;
+   -fx-padding: 8 24;
+   -fx-background-radius: 50em;
+}
+
+.btn-yellow {
+    -fx-background-color: "#ffc124";
+   -fx-font-family: 'Poppins Medium';
+   -fx-font-size: 14;
+   -fx-padding: 8 24;
+   -fx-background-radius: 50em;
+}
+
 .text-fill-primary {
     -fx-text-fill: rgba(100, 134, 221, 1);
 }

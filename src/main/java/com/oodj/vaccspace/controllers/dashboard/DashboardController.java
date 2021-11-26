@@ -102,6 +102,7 @@ public class DashboardController implements Initializable {
         Navigator.navigateInContainer(Global.isCommittee() ? "appointments" : "home", vbxContent, null);
 
         initializeIcons();
+        Global.setDashboardReference(this);
     }
 
     private void initializeIcons() {
@@ -129,6 +130,10 @@ public class DashboardController implements Initializable {
         VBox.setVgrow(button, Priority.ALWAYS);
 
         return button;
+    }
+
+    public VBox getVbxContent() {
+        return vbxContent;
     }
 }
 

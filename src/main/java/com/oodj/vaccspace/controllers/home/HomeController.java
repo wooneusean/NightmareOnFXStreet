@@ -14,10 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -26,7 +23,7 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 
-public class HomeController extends BaseController implements Initializable {
+public class HomeController extends BaseController {
 
     Person person = null;
 
@@ -34,7 +31,13 @@ public class HomeController extends BaseController implements Initializable {
     private MFXPillButton btnNewAppointment;
 
     @FXML
+    private Hyperlink lblBack;
+
+    @FXML
     private Label lblGreeting;
+
+    @FXML
+    private Label lblName;
 
     @FXML
     private Label lblVaccinationStatus;
@@ -47,9 +50,24 @@ public class HomeController extends BaseController implements Initializable {
         Navigator.showInDialog(btnNewAppointment.getScene().getWindow(), "new_appointment", this);
     }
 
+    @FXML
+    void onLblBack(ActionEvent event) {
+        Navigator.navigateInContainer("people", Global.getDashboardReference().getVbxContent(), null);
+    }
+
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        person = Global.getLoggedInUser();
+    public void onLoaded() {
+
+        if (Global.isCommittee()) {
+            person = (Person) getUserData();
+            lblGreeting.setManaged(false);
+        } else {
+            person = Global.getLoggedInUser();
+            lblBack.setManaged(false);
+            lblBack.setVisible(false);
+            lblName.setVisible(false);
+        }
+
         Global.setHomeReference(this);
 
         if (person == null) {
@@ -127,6 +145,7 @@ public class HomeController extends BaseController implements Initializable {
                 person.getVaccinationStatus().getColor()
         ));
         lblGreeting.setText(getGreetingText(person.getName()));
+        lblName.setText("Appointments of " + person.getName());
     }
 
     private String getGreetingText(String name) {
@@ -145,4 +164,6 @@ public class HomeController extends BaseController implements Initializable {
 
         return String.format(timeGreeting, name);
     }
+
+
 }

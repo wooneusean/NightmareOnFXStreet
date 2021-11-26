@@ -1,11 +1,14 @@
 package com.oodj.vaccspace;
 
+import com.oodj.vaccspace.controllers.dashboard.DashboardController;
 import com.oodj.vaccspace.controllers.home.HomeController;
 import com.oodj.vaccspace.models.Person;
 import textorm.TextORM;
 
 public class Global {
     private static HomeController homeReference;
+
+    private static DashboardController dashboardReference;
 
     private static int userId;
 
@@ -33,6 +36,14 @@ public class Global {
 
     public static void setUserId(int userId) {
         Global.userId = userId;
+    }
+
+    public static DashboardController getDashboardReference() {
+        return dashboardReference;
+    }
+
+    public static void setDashboardReference(DashboardController dashboardReference) {
+        Global.dashboardReference = dashboardReference;
     }
 
     public static Person getLoggedInUser() {
