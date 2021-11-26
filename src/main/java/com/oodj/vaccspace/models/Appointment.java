@@ -132,6 +132,7 @@ public class Appointment extends Model {
 
     public void fulfillAppointment() {
         appointmentStatus = AppointmentStatus.FULFILLED;
+        save();
     }
 
     public void voidAppointment() {
@@ -140,6 +141,7 @@ public class Appointment extends Model {
 
     public void absentAppointment() {
         appointmentStatus = AppointmentStatus.ABSENT;
+        save();
     }
 
     //

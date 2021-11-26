@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.appointments.ViewAppointmentController">
+<VBox alignment="TOP_RIGHT" maxHeight="572.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.appointments.ViewAppointmentController">
     <padding>
-        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
     </padding>
     <Label fx:id="lblClose" onMouseClicked="#onClosePressed" styleClass="body-medium">
         <VBox.margin>
@@ -104,9 +104,20 @@
             </MFXTextField>
         </children>
     </VBox>
-   <VBox alignment="CENTER" spacing="8.0">
+   <HBox fx:id="boxCitizenView" alignment="TOP_RIGHT" prefHeight="41.0" prefWidth="447.0" spacing="14.0">
       <children>
-         <Label text="Appointment Status Controls">
+         <MFXPillButton fx:id="btnCancelAppointment" layoutX="324.0" layoutY="10.0" onAction="#onCancelAppointmentPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Cancel Appointment">
+            <styleClass>
+               <String fx:value="btn" />
+               <String fx:value="btn-warning" />
+               <String fx:value="h4" />
+            </styleClass>
+         </MFXPillButton>
+      </children>
+   </HBox>
+   <VBox fx:id="boxCommitteeView" alignment="CENTER" spacing="8.0">
+      <children>
+         <Label fx:id="lblControls" text="Appointment Status Controls">
             <styleClass>
                <String fx:value="body-regular" />
                <String fx:value="h4" />
@@ -114,21 +125,21 @@
          </Label>
           <HBox alignment="TOP_RIGHT" prefHeight="41.0" prefWidth="447.0" spacing="14.0">
               <children>
-                  <MFXPillButton fx:id="btnCancelAppointment" layoutX="324.0" layoutY="10.0" onAction="#onCancelAppointmentPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Void">
+                  <MFXPillButton fx:id="btnVoidAppointment" layoutX="324.0" layoutY="10.0" onAction="#onCancelAppointmentPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Void">
                       <styleClass>
                           <String fx:value="btn" />
                           <String fx:value="btn-danger" />
                           <String fx:value="h4" />
                       </styleClass>
                   </MFXPillButton>
-               <MFXPillButton fx:id="btnCancelAppointment2" onAction="#onCancelAppointmentPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Absent">
+               <MFXPillButton fx:id="btnAbsent" onAction="#onAbsentPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Absent">
                   <styleClass>
                      <String fx:value="btn" />
                      <String fx:value="btn-yellow" />
                      <String fx:value="h4" />
                   </styleClass>
                </MFXPillButton>
-               <MFXPillButton fx:id="btnCancelAppointment1" onAction="#onCancelAppointmentPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Fulfilled">
+               <MFXPillButton fx:id="btnFulfilled" onAction="#onFulfilledPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Fulfilled">
                   <styleClass>
                      <String fx:value="btn" />
                      <String fx:value="btn-green" />
@@ -139,16 +150,4 @@
           </HBox>
       </children>
    </VBox>
-   <HBox prefHeight="100.0" prefWidth="200.0">
-      <children>
-            <MFXPillButton fx:id="btnClose" onAction="#onClosePressed" rippleArc="40.0" text="Close">
-                <styleClass>
-                    <String fx:value="btn" />
-                    <String fx:value="btn-secondary" />
-                    <String fx:value="body-medium" />
-                    <String fx:value="h4" />
-                </styleClass>
-            </MFXPillButton>
-      </children>
-   </HBox>
 </VBox>

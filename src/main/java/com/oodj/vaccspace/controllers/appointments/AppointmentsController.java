@@ -2,6 +2,7 @@ package com.oodj.vaccspace.controllers.appointments;
 
 import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.*;
+import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.StringHelper;
 import com.oodj.vaccspace.utils.TableHelper;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -119,8 +120,8 @@ public class AppointmentsController extends BaseController implements Initializa
             TableRow<Appointment> row = new TableRow<>();
             row.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
-                    Appointment Appointment = row.getItem();
-                    System.out.println(Appointment.getPerson().getName());
+                    Appointment appointment = row.getItem();
+                    Navigator.showInDialog(tblAppointments.getScene().getWindow(), "view_appointment", appointment);
                 }
             });
             return row;

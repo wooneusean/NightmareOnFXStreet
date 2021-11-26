@@ -86,14 +86,6 @@
         </VBox>
         <HBox alignment="TOP_RIGHT" spacing="14.0">
             <children>
-                <MFXPillButton fx:id="btnCancel" onAction="#onCancelPressed" rippleArc="40.0" text="Cancel">
-                    <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn-secondary" />
-                        <String fx:value="h4" />
-                        <String fx:value="body-medium" />
-                    </styleClass>
-                </MFXPillButton>
                 <MFXPillButton fx:id="btnEditBatch" onAction="#onEditBatchPressed" rippleArc="40.0" text="Edit">
                     <styleClass>
                         <String fx:value="btn" />

@@ -108,14 +108,6 @@
       </VBox>
       <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="14.0">
          <children>
-            <MFXPillButton fx:id="btnCancel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onCancelPressed" rippleArc="40.0" text="Close">
-               <styleClass>
-                  <String fx:value="btn" />
-                  <String fx:value="btn-secondary" />
-                  <String fx:value="h4" />
-                  <String fx:value="body-medium" />
-               </styleClass>
-            </MFXPillButton>
             <MFXPillButton fx:id="btnEditPerson" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onEditPersonPressed" rippleArc="40.0" text="Edit">
                <styleClass>
                   <String fx:value="btn" />
