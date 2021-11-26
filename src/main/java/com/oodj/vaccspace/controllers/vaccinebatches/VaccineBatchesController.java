@@ -183,20 +183,19 @@ public class VaccineBatchesController implements Initializable {
         sortableData.comparatorProperty().bind(tblVaccineBatches.comparatorProperty());
 
         TableHelper.autoSizeColumns(tblVaccineBatches);
+
+        refresh();
     }
 
     public void refresh() {
         List<VaccineBatch> vaccineBatches = TextORM.getAll(VaccineBatch.class, hashMap -> true);
 
-        if (vaccineBatches == null) {
-            masterData = FXCollections.emptyObservableList();
-        } else {
-            masterData = FXCollections.observableList(vaccineBatches);
-        }
-
+        masterData = FXCollections.observableArrayList(vaccineBatches);
         filteredData = new FilteredList<>(masterData);
         sortableData = new SortedList<>(filteredData);
         tblVaccineBatches.setItems(sortableData);
+
+        sortableData.comparatorProperty().bind(tblVaccineBatches.comparatorProperty());
     }
 
     Predicate<VaccineBatch> getSearchPredicate() {

@@ -67,10 +67,9 @@ public class VaccineType extends Model {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VaccineType that = (VaccineType) o;
-        return vaccineName.equals(that.vaccineName);
+        return getId() == that.getId();
     }
 
     @Override

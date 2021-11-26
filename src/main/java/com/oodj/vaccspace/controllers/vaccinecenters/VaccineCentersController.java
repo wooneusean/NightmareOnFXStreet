@@ -1,8 +1,8 @@
 package com.oodj.vaccspace.controllers.vaccinecenters;
 
+import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.models.CenterStatus;
 import com.oodj.vaccspace.models.VaccinationCenter;
-import com.oodj.vaccspace.models.VaccineType;
 import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.StringHelper;
 import com.oodj.vaccspace.utils.TableHelper;
@@ -11,8 +11,8 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -60,13 +60,17 @@ public class VaccineCentersController implements Initializable {
     private Predicate<VaccinationCenter> getFilterVaccinationCenterPredicate() {
         return vaccinationCenter -> {
             return StringHelper.containsIgnoreCase(vaccinationCenter.getVaccinationCenterName(), vm.getSearch()) ||
-                   StringHelper.containsIgnoreCase(vaccinationCenter.getCenterStatus().getValue(), vm.getSearch())||
-                    StringHelper.containsIgnoreCase(vaccinationCenter.getCenterState(), vm.getSearch());
+                   StringHelper.containsIgnoreCase(vaccinationCenter.getCenterStatus().getValue(), vm.getSearch()) ||
+                   StringHelper.containsIgnoreCase(vaccinationCenter.getCenterState(), vm.getSearch());
         };
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!Global.isCommittee()) {
+            btnAddCenter.setManaged(false);
+        }
+
         vm.searchProperty().bindBidirectional(txtSearch.textProperty());
 
         vm.searchProperty().addListener((observableValue, s, t1) -> {
@@ -84,7 +88,11 @@ public class VaccineCentersController implements Initializable {
         TableColumn<VaccinationCenter, String> vaccineCenterStateColumn = new TableColumn<>("State");
         vaccineCenterStateColumn.setCellValueFactory(new PropertyValueFactory<>("centerState"));
 
-        tblVaccineCenters.getColumns().addAll(vaccineCenterNameColumn, vaccineCenterStateColumn, vaccineCenterStatusColumn);
+        tblVaccineCenters.getColumns().addAll(
+                vaccineCenterNameColumn,
+                vaccineCenterStateColumn,
+                vaccineCenterStatusColumn
+        );
 
         tblVaccineCenters.setRowFactory(tableView -> {
             TableRow<VaccinationCenter> row = new TableRow<>();
@@ -99,6 +107,10 @@ public class VaccineCentersController implements Initializable {
 
         TableHelper.autoSizeColumns(tblVaccineCenters);
 
+        refresh();
+    }
+
+    public void refresh() {
         List<VaccinationCenter> vaccineCenters = TextORM.getAll(VaccinationCenter.class, hashMap -> true);
 
         masterData = FXCollections.observableArrayList(vaccineCenters);
@@ -108,13 +120,6 @@ public class VaccineCentersController implements Initializable {
         tblVaccineCenters.setItems(sortableData);
 
         sortableData.comparatorProperty().bind(tblVaccineCenters.comparatorProperty());
-    }
-
-    public void refresh() {
-        List<VaccinationCenter> vaccineCenters = TextORM.getAll(VaccinationCenter.class, hashMap -> true);
-        filteredData = new FilteredList<>(FXCollections.observableArrayList(vaccineCenters));
-
-        tblVaccineCenters.setItems(filteredData);
     }
 }
 

@@ -2,32 +2,28 @@
 
 <?import io.github.euseanwoon.MFXPillButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
-<?import java.lang.String?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="556.0"
-      prefWidth="1060.0" spacing="14.0" styleClass="bg-color" stylesheets="@../styles/main.css"
-      xmlns="http://javafx.com/javafx/17"
-      fx:controller="com.oodj.vaccspace.controllers.vaccinecenters.VaccineCentersController">
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="556.0" prefWidth="1060.0" spacing="14.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.vaccinecenters.VaccineCentersController">
     <children>
-        <VBox alignment="CENTER_RIGHT" spacing="14.0">
+        <VBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="14.0">
             <children>
-                <Label text="Vaccine Centers">
+                <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Vaccine Centers">
                     <styleClass>
-                        <String fx:value="heading-medium"/>
-                        <String fx:value="h1"/>
+                        <String fx:value="heading-medium" />
+                        <String fx:value="h1" />
                     </styleClass>
                 </Label>
-                <MFXTextField fx:id="txtSearch" lineStrokeWidth="1.0" onKeyTyped="#onSearchChanged" prefHeight="30.0"
-                              prefWidth="450.0" promptText="Insert keywords here..." styleClass="body-medium"/>
+                <MFXTextField fx:id="txtSearch" lineStrokeWidth="1.0" onKeyTyped="#onSearchChanged" prefHeight="30.0" prefWidth="450.0" promptText="Insert keywords here..." styleClass="body-medium" />
             </children>
         </VBox>
-        <TableView fx:id="tblVaccineCenters" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                   styleClass="body-regular" VBox.vgrow="ALWAYS"/>
-      <VBox alignment="TOP_RIGHT" prefHeight="67.0" prefWidth="1060.0">
+        <TableView fx:id="tblVaccineCenters" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body-regular" VBox.vgrow="ALWAYS" />
+      <VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
          <children>
-            <MFXPillButton fx:id="btnAddCenter" onAction="#onAddCenterPressed" prefHeight="41.0" prefWidth="289.0" rippleArc="40.0" text="Add New Center">
+            <MFXPillButton fx:id="btnAddCenter" onAction="#onAddCenterPressed" rippleArc="40.0" text="Add New Center">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-primary" />
