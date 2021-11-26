@@ -5,6 +5,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
@@ -12,11 +13,19 @@
 
 <VBox alignment="TOP_RIGHT" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.people.ViewPeopleController">
    <children>
-      <HBox alignment="TOP_RIGHT" prefHeight="42.0" prefWidth="420.0">
+      <Label fx:id="lblClose" onMouseClicked="#onClosePressed">
+         <VBox.margin>
+            <Insets right="-30.0" top="-30.0" />
+         </VBox.margin>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <HBox alignment="TOP_RIGHT">
          <children>
-            <VBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="192.0">
+            <VBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="223.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="206.0" text="View Person">
+                  <Label alignment="CENTER_RIGHT" prefHeight="39.0" text="View Person">
                      <styleClass>
                         <String fx:value="heading-medium" />
                         <String fx:value="h1" />

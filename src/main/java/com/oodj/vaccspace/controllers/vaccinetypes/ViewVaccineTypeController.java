@@ -11,6 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.util.Optional;
@@ -22,7 +26,7 @@ public class ViewVaccineTypeController extends BaseController implements Initial
     VaccineType vaccineType = new VaccineType();
 
     @FXML
-    private MFXPillButton btnClose;
+    private Label lblClose;
 
     @FXML
     private MFXPillButton btnSaveVaccineType;
@@ -134,7 +138,7 @@ public class ViewVaccineTypeController extends BaseController implements Initial
     }
 
     @FXML
-    void onClosePressed(ActionEvent event) {
+    void onClosePressed(MouseEvent event) {
         getStageDialog().close();
     }
 
@@ -173,6 +177,12 @@ public class ViewVaccineTypeController extends BaseController implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        FontIcon icon = new FontIcon("fas-times");
+        icon.setIconColor(Color.WHITE);
+        icon.setIconSize(18);
+
+        lblClose.setGraphic(icon);
+
         if (!Global.isCommittee()) {
             btnDeleteVaccineType.setManaged(false);
         }

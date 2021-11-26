@@ -13,12 +13,25 @@
     <children>
         <VBox alignment="CENTER_RIGHT" spacing="14.0">
             <children>
-                <Label text="Vaccines">
-                    <styleClass>
-                        <String fx:value="heading-medium" />
-                        <String fx:value="h1" />
-                    </styleClass>
-                </Label>
+            <HBox alignment="TOP_RIGHT">
+               <children>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="312.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="39.0" text="View Vaccine Types">
+                           <styleClass>
+                              <String fx:value="heading-medium" />
+                              <String fx:value="h1" />
+                           </styleClass>
+                        </Label>
+                        <HBox prefHeight="2.0" prefWidth="192.0" style="-fx-background-color: white;">
+                           <VBox.margin>
+                              <Insets top="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
                 <MFXTextField fx:id="txtSearch" lineStrokeWidth="1.0" onKeyTyped="#onSearchChanged" prefHeight="30.0" prefWidth="450.0" promptText="Insert keywords here..." styleClass="body-medium" />
             </children>
         </VBox>
