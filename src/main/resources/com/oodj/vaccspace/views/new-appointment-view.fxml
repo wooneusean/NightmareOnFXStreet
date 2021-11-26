@@ -1,80 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.euseanwoon.MFXPillButton?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import java.lang.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="425.0" prefWidth="500.0" spacing="20.0" styleClass="bg-color"
-      stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17"
-      fx:controller="com.oodj.vaccspace.controllers.appointments.NewAppointmentController">
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.appointments.NewAppointmentController">
     <padding>
-        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
     </padding>
-    <HBox alignment="TOP_RIGHT">
-        <Label text="New Appointment">
-            <styleClass>
-                <String fx:value="heading-medium"/>
-                <String fx:value="h1"/>
-            </styleClass>
-            <HBox.margin>
-                <Insets bottom="14.0"/>
-            </HBox.margin>
-        </Label>
-    </HBox>
+   <HBox alignment="TOP_RIGHT">
+      <children>
+         <VBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="308.0">
+            <children>
+               <Label alignment="CENTER_RIGHT" prefHeight="39.0" text="New Appointment">
+                  <styleClass>
+                     <String fx:value="heading-medium" />
+                     <String fx:value="h1" />
+                  </styleClass>
+               </Label>
+               <HBox prefHeight="2.0" prefWidth="192.0" style="-fx-background-color: white;">
+                  <VBox.margin>
+                     <Insets top="3.0" />
+                  </VBox.margin>
+               </HBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
     <VBox spacing="8.0">
         <children>
             <Label text="Select your preferred vaccination center:">
                 <styleClass>
-                    <String fx:value="body-regular"/>
-                    <String fx:value="h4"/>
+                    <String fx:value="body-regular" />
+                    <String fx:value="h4" />
                 </styleClass>
             </Label>
-            <ComboBox fx:id="cbCenter" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                      onAction="#onVaccinationCenterChanged" prefWidth="150.0" styleClass="body-medium"/>
+            <ComboBox fx:id="cbCenter" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onVaccinationCenterChanged" prefWidth="150.0" styleClass="body-medium" />
         </children>
     </VBox>
     <VBox spacing="8.0">
         <children>
             <Label text="Select your preferred vaccine:">
                 <styleClass>
-                    <String fx:value="body-regular"/>
-                    <String fx:value="h4"/>
+                    <String fx:value="body-regular" />
+                    <String fx:value="h4" />
                 </styleClass>
             </Label>
-            <ComboBox fx:id="cbVaccine" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                      prefWidth="150.0" styleClass="body-medium"/>
+            <ComboBox fx:id="cbVaccine" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="150.0" styleClass="body-medium" />
         </children>
     </VBox>
     <VBox spacing="8.0">
         <children>
             <Label text="Select your preferred date:">
                 <styleClass>
-                    <String fx:value="body-regular"/>
-                    <String fx:value="h4"/>
+                    <String fx:value="body-regular" />
+                    <String fx:value="h4" />
                 </styleClass>
             </Label>
-            <DatePicker fx:id="dpDate" maxWidth="1.7976931348623157E308" styleClass="body-medium"/>
+            <DatePicker fx:id="dpDate" maxWidth="1.7976931348623157E308" styleClass="body-medium" />
         </children>
     </VBox>
     <HBox alignment="TOP_RIGHT" spacing="14.0">
         <children>
             <MFXPillButton fx:id="btnClose" onAction="#onClosePressed" rippleArc="40.0" text="Close">
                 <styleClass>
-                    <String fx:value="btn"/>
-                    <String fx:value="btn-secondary"/>
-                    <String fx:value="body-medium"/>
-                    <String fx:value="h4"/>
+                    <String fx:value="btn" />
+                    <String fx:value="btn-secondary" />
+                    <String fx:value="body-medium" />
+                    <String fx:value="h4" />
                 </styleClass>
             </MFXPillButton>
-            <MFXPillButton fx:id="btnSubmit" layoutX="324.0" layoutY="10.0" onAction="#onSubmitPressed" rippleArc="40.0"
-                           text="Submit">
+            <MFXPillButton fx:id="btnSubmit" layoutX="324.0" layoutY="10.0" onAction="#onSubmitPressed" rippleArc="40.0" text="Submit">
                 <styleClass>
-                    <String fx:value="btn"/>
-                    <String fx:value="btn-primary"/>
-                    <String fx:value="body-medium"/>
-                    <String fx:value="h4"/>
+                    <String fx:value="btn" />
+                    <String fx:value="btn-primary" />
+                    <String fx:value="body-medium" />
+                    <String fx:value="h4" />
                 </styleClass>
             </MFXPillButton>
         </children>

@@ -9,15 +9,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.people.NewPeopleController">
    <children>
-      <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="New Person">
-         <styleClass>
-            <String fx:value="heading-medium" />
-            <String fx:value="h1" />
-         </styleClass>
-      </Label>
+      <HBox alignment="TOP_RIGHT">
+         <children>
+            <VBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="212.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="39.0" text="New Person">
+                     <styleClass>
+                        <String fx:value="heading-medium" />
+                        <String fx:value="h1" />
+                     </styleClass>
+                  </Label>
+                  <HBox prefHeight="2.0" prefWidth="192.0" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="3.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
          <children>
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Name">

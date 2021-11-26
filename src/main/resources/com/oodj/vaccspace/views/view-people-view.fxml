@@ -5,6 +5,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
@@ -12,12 +13,33 @@
 
 <VBox alignment="TOP_RIGHT" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.people.ViewPeopleController">
    <children>
-      <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="View Person">
-         <styleClass>
-            <String fx:value="heading-medium" />
-            <String fx:value="h1" />
-         </styleClass>
+      <Label fx:id="lblClose" onMouseClicked="#onClosePressed">
+         <VBox.margin>
+            <Insets right="-30.0" top="-30.0" />
+         </VBox.margin>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
+      <HBox alignment="TOP_RIGHT">
+         <children>
+            <VBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="223.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" prefHeight="39.0" text="View Person">
+                     <styleClass>
+                        <String fx:value="heading-medium" />
+                        <String fx:value="h1" />
+                     </styleClass>
+                  </Label>
+                  <HBox prefHeight="2.0" prefWidth="192.0" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="3.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
          <children>
             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Name">
@@ -73,14 +95,6 @@
       </VBox>
       <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="14.0">
          <children>
-            <MFXPillButton fx:id="btnCancel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onCancelPressed" rippleArc="40.0" text="Close">
-               <styleClass>
-                  <String fx:value="btn" />
-                  <String fx:value="btn-secondary" />
-                  <String fx:value="h4" />
-                  <String fx:value="body-medium" />
-               </styleClass>
-            </MFXPillButton>
             <MFXPillButton fx:id="btnSaveChanges" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onSaveChangesPressed" rippleArc="40.0" text="Save">
                <styleClass>
                   <String fx:value="btn" />

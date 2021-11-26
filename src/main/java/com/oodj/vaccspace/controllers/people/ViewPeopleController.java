@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
 import org.kordamp.ikonli.javafx.FontIcon;
 import textorm.TextORM;
@@ -31,7 +33,7 @@ public class ViewPeopleController extends BaseController implements Initializabl
     Person person;
 
     @FXML
-    private MFXPillButton btnCancel;
+    private Label lblClose;
 
     @FXML
     private MFXPillButton btnSaveChanges;
@@ -169,13 +171,19 @@ public class ViewPeopleController extends BaseController implements Initializabl
     }
 
     @FXML
-    void onCancelPressed(ActionEvent event) {
+    void onClosePressed(MouseEvent event) {
         getStageDialog().close();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cmbVaccinationStatus.getItems().setAll(VaccinationStatus.values());
+
+        FontIcon icon = new FontIcon("fas-times");
+        icon.setIconColor(Color.WHITE);
+        icon.setIconSize(18);
+
+        lblClose.setGraphic(icon);
     }
 
     @Override

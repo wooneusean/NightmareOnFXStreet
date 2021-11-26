@@ -20,19 +20,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class ViewCenterController extends BaseController {
+public class ViewCenterController extends BaseController implements Initializable {
 
     VaccineCentersController vaccineCentersController = null;
     VaccinationCenter vaccinationCenter = new VaccinationCenter();
 
     @FXML
-    private MFXPillButton btnClose;
+    private Label lblClose;
 
     @FXML
     private MFXPillButton btnEditCenter;
@@ -59,7 +63,7 @@ public class ViewCenterController extends BaseController {
     private MFXTextField tfPostcode;
 
     @FXML
-    void onClosePressed(ActionEvent event) {
+    void onCloseClicked(MouseEvent event) {
         getStageDialog().close();
     }
 
@@ -211,7 +215,7 @@ public class ViewCenterController extends BaseController {
         cbStatus.getItems().setAll(CenterStatus.values());
         cbStatus.getSelectionModel().select(vaccinationCenter.getCenterStatus());
 
-        cbStatus.setConverter(new StringConverter<CenterStatus>() {
+        cbStatus.setConverter(new StringConverter<>() {
             @Override
             public String toString(CenterStatus centerStatus) {
                 return centerStatus.getValue();
@@ -222,5 +226,14 @@ public class ViewCenterController extends BaseController {
                 return CenterStatus.valueOf(string);
             }
         });
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        FontIcon icon = new FontIcon("fas-times");
+        icon.setIconColor(Color.WHITE);
+        icon.setIconSize(18);
+
+        lblClose.setGraphic(icon);
     }
 }

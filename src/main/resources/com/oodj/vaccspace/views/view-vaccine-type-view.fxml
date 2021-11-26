@@ -4,24 +4,39 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.vaccinetypes.ViewVaccineTypeController">
+<VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="20.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.vaccinetypes.ViewVaccineTypeController">
     <padding>
         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
     </padding>
-    <HBox alignment="TOP_RIGHT">
-        <Label prefHeight="39.0" prefWidth="280.0" text="View Vaccine Type">
-            <styleClass>
-                <String fx:value="heading-medium" />
-                <String fx:value="h1" />
-            </styleClass>
-            <HBox.margin>
-                <Insets bottom="14.0" />
-            </HBox.margin>
-        </Label>
+   <Label fx:id="lblClose" onMouseClicked="#onClosePressed">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+      <VBox.margin>
+         <Insets right="-30.0" top="-30.0" />
+      </VBox.margin>
+   </Label>
+    <HBox alignment="TOP_RIGHT" fillHeight="false" prefWidth="420.0">
+      <VBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="320.0">
+         <children>
+            <Label alignment="CENTER_RIGHT" prefHeight="39.0" text="View Vaccine Type">
+               <styleClass>
+                  <String fx:value="heading-medium" />
+                  <String fx:value="h1" />
+               </styleClass>
+            </Label>
+            <HBox prefHeight="2.0" prefWidth="192.0" style="-fx-background-color: white;">
+               <VBox.margin>
+                  <Insets top="3.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
     </HBox>
     <VBox spacing="8.0">
         <children>
@@ -71,17 +86,8 @@
             </MFXTextField>
         </children>
     </VBox>
-    <VBox spacing="8.0" />
     <HBox alignment="TOP_RIGHT" spacing="14.0">
         <children>
-            <MFXPillButton fx:id="btnClose" onAction="#onClosePressed" rippleArc="40.0" text="Close">
-                <styleClass>
-                    <String fx:value="btn" />
-                    <String fx:value="btn-secondary" />
-                    <String fx:value="body-medium" />
-                    <String fx:value="h4" />
-                </styleClass>
-            </MFXPillButton>
          <MFXPillButton fx:id="btnDeleteVaccineType" onAction="#onDeleteVaccineTypePressed" prefHeight="41.0" prefWidth="105.0" rippleArc="40.0" text="Delete">
             <styleClass>
                <String fx:value="btn" />

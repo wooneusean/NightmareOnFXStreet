@@ -1,10 +1,7 @@
 package com.oodj.vaccspace.controllers.vaccinebatches;
 
-import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.controllers.BaseController;
-import com.oodj.vaccspace.controllers.vaccinetypes.VaccineTypesController;
 import com.oodj.vaccspace.models.VaccinationCenter;
-import com.oodj.vaccspace.models.Vaccine;
 import com.oodj.vaccspace.models.VaccineBatch;
 import com.oodj.vaccspace.models.VaccineType;
 import com.oodj.vaccspace.utils.Page;
@@ -18,12 +15,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import org.kordamp.ikonli.javafx.FontIcon;
 import textorm.TextORM;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -36,7 +36,7 @@ public class ViewVaccineBatchesController extends BaseController implements Init
     int registeredVaccines = 0;
 
     @FXML
-    private MFXPillButton btnCancel;
+    private Label lblClose;
 
     @FXML
     private MFXPillButton btnDeleteBatch;
@@ -60,7 +60,7 @@ public class ViewVaccineBatchesController extends BaseController implements Init
     private MFXTextField txtBatchAmount;
 
     @FXML
-    void onCancelPressed(ActionEvent event) {
+    void onClosePressed(MouseEvent event) {
         getStageDialog().close();
     }
 
@@ -93,7 +93,7 @@ public class ViewVaccineBatchesController extends BaseController implements Init
 
     @FXML
     void onSaveBatchPressed(ActionEvent event) {
-        if(!validateInput()) {
+        if (!validateInput()) {
             return;
         }
 
@@ -173,8 +173,9 @@ public class ViewVaccineBatchesController extends BaseController implements Init
                     btnSaveBatch.getScene().getWindow(),
                     DialogType.ERROR,
                     "Error: Vaccine Batch Amount is Less Than " + registeredVaccines,
-                    "There are " + registeredVaccines + " amount of vaccines registered to this batch, please ensure you at least have "
-                            + registeredVaccines + " vaccines in this batch!"
+                    "There are " + registeredVaccines +
+                    " amount of vaccines registered to this batch, please ensure you at least have "
+                    + registeredVaccines + " vaccines in this batch!"
             );
             return false;
         }
@@ -183,6 +184,12 @@ public class ViewVaccineBatchesController extends BaseController implements Init
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        FontIcon icon = new FontIcon("fas-times");
+        icon.setIconColor(Color.WHITE);
+        icon.setIconSize(18);
+
+        lblClose.setGraphic(icon);
+
         List<VaccinationCenter> vaccinationCenters = TextORM.getAll(VaccinationCenter.class, data -> true);
 
         if (vaccinationCenters != null) {

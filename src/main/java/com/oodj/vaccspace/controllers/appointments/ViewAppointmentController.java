@@ -9,6 +9,10 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +24,7 @@ public class ViewAppointmentController extends BaseController implements Initial
     private MFXPillButton btnCancelAppointment;
 
     @FXML
-    private MFXPillButton btnClose;
+    private Label lblClose;
 
     @FXML
     private MFXTextField txtCenter;
@@ -43,14 +47,19 @@ public class ViewAppointmentController extends BaseController implements Initial
         getStageDialog().close();
     }
 
+
     @FXML
-    public void onClosePressed(ActionEvent actionEvent) {
+    void onClosePressed(MouseEvent event) {
         getStageDialog().close();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        FontIcon icon = new FontIcon("fas-times");
+        icon.setIconColor(Color.WHITE);
+        icon.setIconSize(18);
 
+        lblClose.setGraphic(icon);
     }
 
     @Override
