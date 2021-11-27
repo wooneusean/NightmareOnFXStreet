@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
 import org.kordamp.ikonli.javafx.FontIcon;
+import textorm.Model;
 import textorm.TextORM;
 
 import java.net.URL;
@@ -82,7 +83,7 @@ public class ViewPeopleController extends BaseController implements Initializabl
 
     @FXML
     public void onViewAppointmentPressed(ActionEvent actionEvent) {
-        Navigator.navigateInContainer("home", Global.getDashboardReference().getVbxContent(), person);
+        Navigator.navigateInContainer("home", Global.getDashboardReference().getVbxContent(), this);
         getStageDialog().close();
     }
 
@@ -242,5 +243,8 @@ public class ViewPeopleController extends BaseController implements Initializabl
         });
     }
 
-
+    @Override
+    public <T extends Model> T getSelectedModel() {
+        return (T) this.person;
+    }
 }

@@ -211,6 +211,7 @@ public class NewAppointmentController extends BaseController implements Initiali
 
     private boolean hasPendingAppointments() {
         Person person = ((HomeController) getUserData()).getPerson();
+        person.include(Appointment.class);
 
         List<Appointment> appointments = person.getAppointments();
 

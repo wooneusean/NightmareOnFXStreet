@@ -96,7 +96,7 @@ public class NewPeopleController extends BaseController implements Initializable
                     btnAddPerson.getScene().getWindow(),
                     DialogType.ERROR,
                     "Error: Invalid Phone",
-                    "Phone number must only have numbers!"
+                    "Phone number must only have numbers and must be more than 4 characters long!"
             );
             return false;
         }

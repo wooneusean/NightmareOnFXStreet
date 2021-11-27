@@ -77,9 +77,8 @@ public class HomeController extends BaseController {
 
     @Override
     public void onLoaded() {
-
         if (Global.isCommittee()) {
-            person = (Person) getUserData();
+            person = ((BaseController) getUserData()).getSelectedModel();
             lblGreeting.setManaged(false);
         } else {
             person = Global.getLoggedInUser();

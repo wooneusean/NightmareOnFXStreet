@@ -87,7 +87,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     void onNavBtnPress(ActionEvent event, String route) {
-        Navigator.navigateInContainer(route, vbxContent, null);
+        Navigator.navigateInContainer(route, vbxContent, this);
     }
 
     @FXML
