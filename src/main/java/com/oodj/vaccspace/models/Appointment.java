@@ -1,11 +1,9 @@
 package com.oodj.vaccspace.models;
 
-import textorm.Column;
-import textorm.HasOne;
-import textorm.Model;
-import textorm.Repository;
+import textorm.*;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -131,17 +129,75 @@ public class Appointment extends Model {
     }
 
     public void fulfillAppointment() {
+        this.include(Vaccine.class);
+        this.getVaccine().include(VaccineBatch.class);
+        this.getVaccine().getVaccineBatch().include(VaccineType.class);
+        int doses = this.getVaccine().getVaccineBatch().getVaccineType().getDosesNeeded();
+
+        include(Person.class);
+        if (doses == 1) {
+            getPerson().setVaccinationStatus(VaccinationStatus.FULLY_VACCINATED);
+        } else {
+            List<Appointment> previousAppointments = TextORM.getAll(
+                    Appointment.class,
+                    hashMap -> Integer.parseInt(hashMap.get("personId")) == getPerson().getId()
+            );
+
+            if (previousAppointments != null) {
+                previousAppointments.sort(Comparator.comparing(Appointment::getAppointmentDate));
+
+                boolean hasFulfilled = previousAppointments.stream()
+                                                           .anyMatch(
+                                                                   appointment -> appointment
+                                                                           .getAppointmentStatus()
+                                                                           .equals(AppointmentStatus.FULFILLED)
+                                                           );
+                if (hasFulfilled) {
+                    getPerson().setVaccinationStatus(VaccinationStatus.FULLY_VACCINATED);
+                } else {
+                    getPerson().setVaccinationStatus(VaccinationStatus.AWAITING_SECOND_DOSE);
+                }
+            } else {
+                getPerson().setVaccinationStatus(VaccinationStatus.AWAITING_SECOND_DOSE);
+            }
+        }
+
         appointmentStatus = AppointmentStatus.FULFILLED;
         save();
-    }
-
-    public void voidAppointment() {
-        appointmentStatus = AppointmentStatus.VOIDED;
     }
 
     public void absentAppointment() {
         appointmentStatus = AppointmentStatus.ABSENT;
         save();
+
+        include(Person.class);
+        Person person = getPerson();
+        person.include(Appointment.class);
+
+        List<Appointment> appointments = person.getAppointments()
+                                               .stream()
+                                               .filter(appointment -> appointment.getAppointmentStatus() ==
+                                                                      AppointmentStatus.FULFILLED)
+                                               .collect(Collectors.toList());
+
+        boolean hasFulfilledAppointments = appointments.stream()
+                                                       .anyMatch(appointment ->
+                                                                         appointment.getAppointmentStatus() ==
+                                                                         AppointmentStatus.FULFILLED);
+
+        boolean hasConfirmedAppointments = appointments.stream()
+                                                       .anyMatch(appointment ->
+                                                                         appointment.getAppointmentStatus() ==
+                                                                         AppointmentStatus.CONFIRMED);
+
+        if (hasFulfilledAppointments) {
+            person.setVaccinationStatus(VaccinationStatus.AWAITING_SECOND_DOSE);
+        } else if (hasConfirmedAppointments) {
+            person.setVaccinationStatus(VaccinationStatus.AWAITING_FIRST_DOSE);
+        } else {
+            person.setVaccinationStatus(VaccinationStatus.NOT_REGISTERED);
+        }
+        person.save();
     }
 
     //

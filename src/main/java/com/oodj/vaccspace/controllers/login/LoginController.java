@@ -94,7 +94,6 @@ public class LoginController implements Initializable {
         // MFX is scuffed so this doesn't work for now
         // and will probably not work until MFX
         // is updated.
-        System.out.println("Submitted");
         onLoginPressed(event);
     }
 

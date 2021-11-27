@@ -1,9 +1,12 @@
 package com.oodj.vaccspace.controllers;
 
 import io.github.palexdev.materialfx.controls.MFXStageDialog;
+import textorm.Model;
 
 public abstract class BaseController {
+
     private MFXStageDialog stageDialog;
+
     private Object userData;
 
     public MFXStageDialog getStageDialog() {
@@ -23,5 +26,13 @@ public abstract class BaseController {
     }
 
     public void onLoaded() {
+    }
+
+    public <T extends Model> T getSelectedModel() {
+        return null;
+    }
+
+    public void refresh() {
+
     }
 }

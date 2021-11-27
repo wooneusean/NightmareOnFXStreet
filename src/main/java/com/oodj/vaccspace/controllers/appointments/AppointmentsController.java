@@ -18,6 +18,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import textorm.Model;
 import textorm.TextORM;
 
 import java.net.URL;
@@ -27,6 +28,8 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class AppointmentsController extends BaseController implements Initializable {
+
+    Appointment selectedAppointment;
 
     AppointmentsViewModel vm = new AppointmentsViewModel();
 
@@ -41,6 +44,24 @@ public class AppointmentsController extends BaseController implements Initializa
 
     @FXML
     private MFXTextField txtSearch;
+
+    @Override
+    public <T extends Model> T getSelectedModel() {
+        return (T) selectedAppointment;
+    }
+
+    @Override
+    public void refresh() {
+        List<Appointment> appointments = TextORM.getAll(Appointment.class, hashMap -> true);
+
+        masterData = FXCollections.observableArrayList(appointments);
+        filteredData = new FilteredList<>(masterData);
+        sortableData = new SortedList<>(filteredData);
+
+        tblAppointments.setItems(sortableData);
+
+        sortableData.comparatorProperty().bind(tblAppointments.comparatorProperty());
+    }
 
     @FXML
     void onSearchChanged(KeyEvent event) {
@@ -120,8 +141,8 @@ public class AppointmentsController extends BaseController implements Initializa
             TableRow<Appointment> row = new TableRow<>();
             row.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
-                    Appointment appointment = row.getItem();
-                    Navigator.showInDialog(tblAppointments.getScene().getWindow(), "view_appointment", appointment);
+                    selectedAppointment = row.getItem();
+                    Navigator.showInDialog(tblAppointments.getScene().getWindow(), "view_appointment", this);
                 }
             });
             return row;
@@ -129,14 +150,6 @@ public class AppointmentsController extends BaseController implements Initializa
 
         TableHelper.autoSizeColumns(tblAppointments);
 
-        List<Appointment> appointments = TextORM.getAll(Appointment.class, hashMap -> true);
-
-        masterData = FXCollections.observableArrayList(appointments);
-        filteredData = new FilteredList<>(masterData);
-        sortableData = new SortedList<>(filteredData);
-
-        tblAppointments.setItems(sortableData);
-
-        sortableData.comparatorProperty().bind(tblAppointments.comparatorProperty());
+        refresh();
     }
 }

@@ -61,7 +61,7 @@ public class MainApplication extends Application {
                 "0123456789",
                 "qwe",
                 "qwe",
-                VaccinationStatus.NOT_REGISTERED,
+                VaccinationStatus.AWAITING_FIRST_DOSE,
                 "010203040506",
                 false
         );

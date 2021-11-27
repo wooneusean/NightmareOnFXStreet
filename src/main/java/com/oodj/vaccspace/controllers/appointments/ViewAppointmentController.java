@@ -4,7 +4,6 @@ import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.models.Appointment;
 import com.oodj.vaccspace.models.AppointmentStatus;
-import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.Page;
 import io.github.euseanwoon.MFXPillButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -75,8 +74,7 @@ public class ViewAppointmentController extends BaseController implements Initial
             appointment.absentAppointment();
         }
 
-//        Global.getHomeReference().refresh();
-//        Navigator.navigateInContainer("appointment", Global.getDashboardReference().getVbxContent(), null);
+        ((BaseController) getUserData()).refresh();
 
         getStageDialog().close();
     }
@@ -94,7 +92,7 @@ public class ViewAppointmentController extends BaseController implements Initial
             appointment.fulfillAppointment();
         }
 
-//        Global.getHomeReference().refresh();
+        ((BaseController) getUserData()).refresh();
 
         getStageDialog().close();
     }
@@ -112,7 +110,7 @@ public class ViewAppointmentController extends BaseController implements Initial
             appointment.cancel();
         }
 
-//        Global.getHomeReference().refresh();
+        ((BaseController) getUserData()).refresh();
 
         getStageDialog().close();
     }
@@ -134,13 +132,13 @@ public class ViewAppointmentController extends BaseController implements Initial
 
     @Override
     public void onLoaded() {
-        appointment = (Appointment) getUserData();
+        appointment = ((BaseController) getUserData()).getSelectedModel();
         txtCenter.setText(appointment.getVaccinationCenter().toString());
         txtVaccine.setText(appointment.getVaccineName());
         txtDate.setText(appointment.getAppointmentDate().toString());
         txtDose.setText(appointment.getDose().getValue());
 
-        if(Global.isCommittee() && appointment.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)) {
+        if (Global.isCommittee() && appointment.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)) {
             boxCitizenView.setManaged(false);
             btnCancelAppointment.setManaged(false);
 

@@ -9,6 +9,8 @@ module com.oodj.vaccspace {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.fontawesome5;
 
+    exports textorm;
+
     exports com.oodj.vaccspace;
     opens com.oodj.vaccspace to javafx.fxml;
 

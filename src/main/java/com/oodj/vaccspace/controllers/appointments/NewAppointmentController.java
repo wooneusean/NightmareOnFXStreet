@@ -1,6 +1,5 @@
 package com.oodj.vaccspace.controllers.appointments;
 
-import com.oodj.vaccspace.Global;
 import com.oodj.vaccspace.controllers.BaseController;
 import com.oodj.vaccspace.controllers.home.HomeController;
 import com.oodj.vaccspace.models.*;
@@ -55,7 +54,6 @@ public class NewAppointmentController extends BaseController implements Initiali
 
     @Override
     public void onLoaded() {
-        System.out.println(getUserData());
     }
 
     @FXML
@@ -92,20 +90,32 @@ public class NewAppointmentController extends BaseController implements Initiali
 
         LocalDate appointmentDate = vm.getLocalDateObjectProperty();
 
-        // TODO: 24/11/2021 Update this to make it not always give the first dose
+        Person person = ((HomeController) getUserData()).getPerson();
+
+        person.include(Appointment.class);
+        List<Appointment> previousAppointments = person.getAppointments();
+
+        boolean hasFulfilledAppointments = previousAppointments.stream()
+                                                               .anyMatch(
+                                                                       appointment -> appointment
+                                                                               .getAppointmentStatus()
+                                                                               .equals(AppointmentStatus.FULFILLED)
+                                                               );
+
         Appointment appointment = new Appointment(
-                Global.getUserId(),
+                person.getId(),
                 vaccinationCenter.getId(),
                 bookedVaccine.getId(),
                 appointmentDate,
                 AppointmentStatus.CONFIRMED,
-                Dose.FIRST
+                hasFulfilledAppointments ? Dose.SECOND : Dose.FIRST
         );
         appointment.save();
 
-        Person person = Global.getLoggedInUser();
-        person.setVaccinationStatus(VaccinationStatus.AWAITING_FIRST_DOSE);
-        person.save();
+        if (person.getVaccinationStatus().equals(VaccinationStatus.NOT_REGISTERED)) {
+            person.setVaccinationStatus(VaccinationStatus.AWAITING_FIRST_DOSE);
+            person.save();
+        }
 
         getStageDialog().close();
         ((HomeController) getUserData()).refresh();
@@ -160,10 +170,17 @@ public class NewAppointmentController extends BaseController implements Initiali
     }
 
     private boolean isVaccineTypeMismatch() {
-        Person loggedInUser = Global.getLoggedInUser();
-        loggedInUser.include(Appointment.class);
-        Optional<Appointment> possibleAppointment = loggedInUser.getAppointments()
-                                                                .stream()
+        Person person = ((HomeController) getUserData()).getPerson();
+
+        person.include(Appointment.class);
+
+        List<Appointment> appointments = person.getAppointments();
+
+        if (appointments == null) {
+            return false;
+        }
+
+        Optional<Appointment> possibleAppointment = appointments.stream()
                                                                 .filter(appointment ->
                                                                                 appointment.getAppointmentStatus() ==
                                                                                 AppointmentStatus.FULFILLED)
@@ -193,11 +210,15 @@ public class NewAppointmentController extends BaseController implements Initiali
     }
 
     private boolean hasPendingAppointments() {
-        Person loggedInUser = Global.getLoggedInUser();
-        loggedInUser.include(Appointment.class);
+        Person person = ((HomeController) getUserData()).getPerson();
 
-        boolean hasPendingAppointments = loggedInUser
-                .getAppointments()
+        List<Appointment> appointments = person.getAppointments();
+
+        if (appointments == null) {
+            return false;
+        }
+
+        boolean hasPendingAppointments = appointments
                 .stream()
                 .anyMatch(appointment ->
                                   appointment.getAppointmentStatus() == AppointmentStatus.CONFIRMED

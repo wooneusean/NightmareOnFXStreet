@@ -42,7 +42,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="420.0">
          <children>
-            <MFXPillButton fx:id="btnViewAppointments" onAction="#onViewAppointmentPressed" text="View Appointments">
+            <MFXPillButton fx:id="btnViewAppointments" onAction="#onViewAppointmentPressed" rippleArc="40.0" text="View Appointments">
                <styleClass>
                   <String fx:value="btn-tertiary" />
                   <String fx:value="h4" />

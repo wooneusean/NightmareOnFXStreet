@@ -6,26 +6,37 @@ import com.oodj.vaccspace.controllers.appointments.AppointmentStatusIndicatorCel
 import com.oodj.vaccspace.models.Appointment;
 import com.oodj.vaccspace.models.AppointmentStatus;
 import com.oodj.vaccspace.models.Person;
+import com.oodj.vaccspace.models.VaccinationStatus;
 import com.oodj.vaccspace.utils.Navigator;
 import com.oodj.vaccspace.utils.TableHelper;
 import io.github.euseanwoon.MFXPillButton;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import textorm.Model;
+import textorm.TextORM;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Comparator;
-import java.util.ResourceBundle;
+import java.util.List;
 
 public class HomeController extends BaseController {
 
     Person person = null;
+
+    Appointment selectedAppointment;
+
+    ObservableList<Appointment> masterData;
+
+    FilteredList<Appointment> filteredData;
+
+    SortedList<Appointment> sortableData;
 
     @FXML
     private MFXPillButton btnNewAppointment;
@@ -44,6 +55,15 @@ public class HomeController extends BaseController {
 
     @FXML
     private TableView<Appointment> tblAppointments;
+
+    public Person getPerson() {
+        return person;
+    }
+
+    @Override
+    public <T extends Model> T getSelectedModel() {
+        return (T) selectedAppointment;
+    }
 
     @FXML
     void onNewAppointmentPressed(ActionEvent event) {
@@ -86,11 +106,29 @@ public class HomeController extends BaseController {
         setupTable();
     }
 
+    @Override
     public void refresh() {
-        person = Global.getLoggedInUser();
-        person.include(Appointment.class);
-        tblAppointments.setItems(FXCollections.observableArrayList(person.getAppointments()));
+        person = TextORM.getOne(Person.class, hashMap -> Integer.parseInt(hashMap.get("id")) == person.getId());
+
+        List<Appointment> appointments = TextORM.getAll(
+                Appointment.class,
+                hashMap -> Integer.parseInt(hashMap.get("personId")) == person.getId()
+        );
+
+        masterData = FXCollections.observableArrayList(appointments);
+        filteredData = new FilteredList<>(masterData);
+        sortableData = new SortedList<>(filteredData);
+
+        tblAppointments.setItems(sortableData);
+
+        sortableData.comparatorProperty().bind(tblAppointments.comparatorProperty());
+
         updateVaccinationStatusBanner();
+
+        if (person.getVaccinationStatus().equals(VaccinationStatus.FULLY_VACCINATED)) {
+            btnNewAppointment.setManaged(false);
+            btnNewAppointment.setVisible(false);
+        }
     }
 
     private void setupTable() {
@@ -99,42 +137,44 @@ public class HomeController extends BaseController {
                                                                                        .getVaccinationCenter()
                                                                                        .getVaccinationCenterName()));
 
-        TableColumn<Appointment, String> appointmentVaccine = new TableColumn<>("Vaccine");
-        appointmentVaccine.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getVaccineName()));
+        TableColumn<Appointment, String> appointmentVaccineColumn = new TableColumn<>("Vaccine");
+        appointmentVaccineColumn.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue()
+                                                                                            .getVaccineName()));
 
-        TableColumn<Appointment, LocalDate> appointmentDate = new TableColumn<>("Appointment Date");
-        appointmentDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDate"));
+        TableColumn<Appointment, LocalDate> appointmentDateColumn = new TableColumn<>("Appointment Date");
+        appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDate"));
 
-        TableColumn<Appointment, AppointmentStatus> appointmentStatus = new TableColumn<>("Status");
-        appointmentStatus.setCellValueFactory(new PropertyValueFactory<>("appointmentStatus"));
-        appointmentStatus.setCellFactory(statusColumn -> new AppointmentStatusIndicatorCell());
+        TableColumn<Appointment, AppointmentStatus> appointmentStatusColumn = new TableColumn<>("Status");
+        appointmentStatusColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStatus"));
+        appointmentStatusColumn.setCellFactory(statusColumn -> new AppointmentStatusIndicatorCell());
 
-        TableColumn<Appointment, String> dose = new TableColumn<>("Dose");
-        dose.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getDose().getValue()));
+        TableColumn<Appointment, String> doseColumn = new TableColumn<>("Dose");
+        doseColumn.setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getDose().getValue()));
 
-        tblAppointments.getColumns()
-                       .addAll(appointmentLocation, appointmentVaccine, appointmentDate, appointmentStatus, dose);
-
-        // Autosize all columns
-        TableHelper.autoSizeColumns(tblAppointments);
-
-        if (person.getAppointments() == null || person.getAppointments().size() == 0) return;
-
-        person.getAppointments().sort(Comparator.comparing(Appointment::getAppointmentDate));
-
-        tblAppointments.setItems(FXCollections.observableArrayList(person.getAppointments()));
+        tblAppointments.getColumns().addAll(
+                appointmentLocation,
+                appointmentVaccineColumn,
+                appointmentDateColumn,
+                appointmentStatusColumn,
+                doseColumn
+        );
 
         // https://stackoverflow.com/a/26565887/4987298
         tblAppointments.setRowFactory(tv -> {
             TableRow<Appointment> row = new TableRow<>();
             row.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
-                    Appointment rowData = row.getItem();
-                    Navigator.showInDialog(tblAppointments.getScene().getWindow(), "view_appointment", rowData);
+                    selectedAppointment = row.getItem();
+                    Navigator.showInDialog(tblAppointments.getScene().getWindow(), "view_appointment", this);
                 }
             });
             return row;
         });
+
+        // Autosize all columns
+        TableHelper.autoSizeColumns(tblAppointments);
+
+        refresh();
     }
 
 
