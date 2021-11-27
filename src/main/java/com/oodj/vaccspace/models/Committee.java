@@ -7,21 +7,21 @@ import textorm.Repository;
 public class Committee extends User {
 
     @Column
-    private int Salary;
+    private int salary;
 
     public Committee() {
     }
 
     public Committee(String name, String phone, String email, String password, int salary) {
         super(name, phone, email, password);
-        Salary = salary;
+        this.salary = salary;
     }
 
     public int getSalary() {
-        return Salary;
+        return salary;
     }
 
     public void setSalary(int salary) {
-        Salary = salary;
+        this.salary = salary;
     }
 }

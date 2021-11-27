@@ -24,9 +24,9 @@ public class MainApplication extends Application {
         TextORM.setStoragePath("storage");
         TextORM.setMetaStoragePath("storage");
 
-        // seedModels();
+        seedModels();
         // Committee
-        Committee committee = new Committee("Khom Mee Tee", "69420", "zxc", "zxc", 2600);
+        Committee committee = new Committee("Khom Mee Tee", "69420", "admin@vaccspace.com", "password123", 2600);
         committee.save();
 
         // Set icons
@@ -83,13 +83,31 @@ public class MainApplication extends Application {
 
         // Center
 
-        VaccinationCenter bukitJalil = new VaccinationCenter("Bukit Jalil", "123", "123123", "Labuan", CenterStatus.OPEN);
+        VaccinationCenter bukitJalil = new VaccinationCenter(
+                "Bukit Jalil",
+                "123",
+                "123123",
+                "Labuan",
+                CenterStatus.OPEN
+        );
         bukitJalil.save();
 
-        VaccinationCenter movenpick = new VaccinationCenter("Movenpick", "123", "123123", "Labuan", CenterStatus.CLOSED);
+        VaccinationCenter movenpick = new VaccinationCenter(
+                "Movenpick",
+                "123",
+                "123123",
+                "Labuan",
+                CenterStatus.CLOSED
+        );
         movenpick.save();
 
-        VaccinationCenter serdangHospital = new VaccinationCenter("Serdang Hospital", "123", "123123", "Labuan", CenterStatus.CLOSED_COVID);
+        VaccinationCenter serdangHospital = new VaccinationCenter(
+                "Serdang Hospital",
+                "123",
+                "123123",
+                "Labuan",
+                CenterStatus.CLOSED_COVID
+        );
         serdangHospital.save();
 
         // Types

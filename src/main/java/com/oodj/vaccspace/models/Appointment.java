@@ -143,7 +143,7 @@ public class Appointment extends Model {
                     hashMap -> Integer.parseInt(hashMap.get("personId")) == getPerson().getId()
             );
 
-            if (previousAppointments != null) {
+            if (previousAppointments.size() > 0) {
                 previousAppointments.sort(Comparator.comparing(Appointment::getAppointmentDate));
 
                 boolean hasFulfilled = previousAppointments.stream()

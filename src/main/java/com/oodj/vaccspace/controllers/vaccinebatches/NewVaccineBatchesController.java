@@ -143,15 +143,11 @@ public class NewVaccineBatchesController extends BaseController implements Initi
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<VaccinationCenter> vaccinationCenters = TextORM.getAll(VaccinationCenter.class, data -> true);
 
-        if (vaccinationCenters != null) {
-            cmbVaccinationCenter.setItems(FXCollections.observableList(vaccinationCenters));
-        }
+        cmbVaccinationCenter.setItems(FXCollections.observableList(vaccinationCenters));
 
         List<VaccineType> vaccineTypes = TextORM.getAll(VaccineType.class, data -> true);
 
-        if (vaccineTypes != null) {
-            cmbVaccineType.setItems(FXCollections.observableList(vaccineTypes));
-        }
+        cmbVaccineType.setItems(FXCollections.observableList(vaccineTypes));
 
         txtBatchAmount.setText("0");
 

@@ -255,12 +255,10 @@ public abstract class Model {
                 )
         );
 
-        if (toIncludeObjects != null) {
-            try {
-                hasManyField.set(this, toIncludeObjects);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            hasManyField.set(this, toIncludeObjects);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

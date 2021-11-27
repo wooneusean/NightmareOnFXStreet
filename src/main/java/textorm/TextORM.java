@@ -35,7 +35,7 @@ public class TextORM {
 
         List<String> lines = readModelRepository(model);
 
-        if (lines == null) return null;
+        if (lines == null) return models;
 
         T modelInstance;
 

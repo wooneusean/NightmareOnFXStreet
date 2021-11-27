@@ -87,8 +87,6 @@ public class VaccineType extends Model {
                 hashMap -> Integer.parseInt(hashMap.get("vaccineTypeId")) == getId()
         );
 
-        if (vaccineBatches != null) {
-            vaccineBatches.forEach(VaccineBatch::setVoided);
-        }
+        vaccineBatches.forEach(VaccineBatch::setVoided);
     }
 }

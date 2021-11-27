@@ -10,21 +10,14 @@ import java.util.List;
 @Repository
 public class Person extends User {
 
-    @Override
-    public boolean delete() {
-        include(Appointment.class);
-        getAppointments().forEach(Model::delete);
-        return super.delete();
-    }
+    @Column
+    private VaccinationStatus vaccinationStatus;
 
     @Column
-    VaccinationStatus vaccinationStatus;
+    private String identification;
 
     @Column
-    String identification;
-
-    @Column
-    boolean isNonCitizen;
+    private boolean isNonCitizen;
 
     @HasMany(targetKey = "personId")
     private List<Appointment> appointments;
@@ -57,6 +50,13 @@ public class Person extends User {
     }
 
     public Person() {
+    }
+
+    @Override
+    public boolean delete() {
+        include(Appointment.class);
+        getAppointments().forEach(Model::delete);
+        return super.delete();
     }
 
     public boolean isNonCitizen() {

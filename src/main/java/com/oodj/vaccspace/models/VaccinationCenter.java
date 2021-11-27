@@ -108,12 +108,10 @@ public class VaccinationCenter extends Model {
                         getId()
         );
 
-        if (appointments != null) {
-            appointments.forEach(appointment -> {
-                if (appointment.getAppointmentStatus() != AppointmentStatus.FULFILLED) {
-                    appointment.cancel();
-                }
-            });
-        }
+        appointments.forEach(appointment -> {
+            if (appointment.getAppointmentStatus() != AppointmentStatus.FULFILLED) {
+                appointment.cancel();
+            }
+        });
     }
 }
