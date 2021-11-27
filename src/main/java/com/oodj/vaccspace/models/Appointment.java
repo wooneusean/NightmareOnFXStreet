@@ -168,6 +168,11 @@ public class Appointment extends Model {
 
     public void absentAppointment() {
         appointmentStatus = AppointmentStatus.ABSENT;
+
+        include(Vaccine.class);
+        getVaccine().include(VaccineBatch.class);
+        getVaccine().getVaccineBatch().setAvailableAmount(getVaccine().getVaccineBatch().getAvailableAmount() + 1);
+
         save();
 
         include(Person.class);
@@ -198,6 +203,8 @@ public class Appointment extends Model {
             person.setVaccinationStatus(VaccinationStatus.NOT_REGISTERED);
         }
         person.save();
+
+
     }
 
     //

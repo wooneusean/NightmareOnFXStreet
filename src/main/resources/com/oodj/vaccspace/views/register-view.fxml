@@ -66,7 +66,7 @@
                                                 <String fx:value="h3"/>
                                             </styleClass>
                                         </Label>
-                                        <MFXTextField fx:id="tfName" lineStrokeWidth="1.0"
+                                        <MFXTextField fx:id="txtName" lineStrokeWidth="1.0"
                                                       maxWidth="1.7976931348623157E308">
                                             <styleClass>
                                                 <String fx:value="body-medium"/>
@@ -83,7 +83,7 @@
                                                 <String fx:value="h3"/>
                                             </styleClass>
                                         </Label>
-                                        <MFXPasswordField fx:id="tfPassword" lineStrokeWidth="1.0"
+                                        <MFXPasswordField fx:id="txtPassword" lineStrokeWidth="1.0"
                                                           maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                             <styleClass>
                                                 <String fx:value="body-medium"/>
@@ -103,7 +103,7 @@
                                                 <String fx:value="h3"/>
                                             </styleClass>
                                         </Label>
-                                        <MFXPasswordField fx:id="tfRepeatPassword" lineStrokeWidth="1.0"
+                                        <MFXPasswordField fx:id="txtRepeatPassword" lineStrokeWidth="1.0"
                                                           maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                             <styleClass>
                                                 <String fx:value="body-medium"/>
@@ -131,7 +131,7 @@
                                                 <String fx:value="h3"/>
                                             </styleClass>
                                         </Label>
-                                        <MFXTextField fx:id="tfPhoneNumber" lineStrokeWidth="1.0"
+                                        <MFXTextField fx:id="txtPhoneNumber" lineStrokeWidth="1.0"
                                                       maxWidth="1.7976931348623157E308">
                                             <styleClass>
                                                 <String fx:value="body-medium"/>
@@ -148,7 +148,7 @@
                                                 <String fx:value="h3"/>
                                             </styleClass>
                                         </Label>
-                                        <MFXTextField fx:id="tfIdentificationNumber" lineStrokeWidth="1.0"
+                                        <MFXTextField fx:id="txtIdentificationNumber" lineStrokeWidth="1.0"
                                                       maxWidth="1.7976931348623157E308">
                                             <styleClass>
                                                 <String fx:value="body-medium"/>
@@ -165,7 +165,7 @@
                                                 <String fx:value="h3"/>
                                             </styleClass>
                                         </Label>
-                                        <MFXTextField fx:id="tfEmail" lineStrokeWidth="1.0"
+                                        <MFXTextField fx:id="txtEmail" lineStrokeWidth="1.0"
                                                       maxWidth="1.7976931348623157E308">
                                             <styleClass>
                                                 <String fx:value="body-medium"/>

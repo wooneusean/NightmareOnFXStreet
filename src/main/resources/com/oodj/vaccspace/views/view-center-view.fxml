@@ -108,14 +108,6 @@
    </VBox>
     <HBox alignment="TOP_RIGHT" spacing="14.0">
         <children>
-         <MFXPillButton fx:id="btnDeleteCenter" onAction="#onDeleteCenterPressed" prefHeight="41.0" prefWidth="128.0" rippleArc="40.0" text="Delete">
-            <styleClass>
-               <String fx:value="btn" />
-               <String fx:value="btn-danger" />
-               <String fx:value="body-medium" />
-               <String fx:value="h4" />
-            </styleClass>
-         </MFXPillButton>
          <MFXPillButton fx:id="btnEditCenter" onAction="#onEditCenterPressed" prefHeight="41.0" prefWidth="105.0" rippleArc="40.0" text="Edit">
             <styleClass>
                <String fx:value="btn" />
@@ -128,6 +120,14 @@
             <styleClass>
                <String fx:value="btn" />
                <String fx:value="btn-primary" />
+               <String fx:value="body-medium" />
+               <String fx:value="h4" />
+            </styleClass>
+         </MFXPillButton>
+         <MFXPillButton fx:id="btnDeleteCenter" onAction="#onDeleteCenterPressed" prefHeight="41.0" prefWidth="128.0" rippleArc="40.0" text="Delete">
+            <styleClass>
+               <String fx:value="btn" />
+               <String fx:value="btn-danger" />
                <String fx:value="body-medium" />
                <String fx:value="h4" />
             </styleClass>

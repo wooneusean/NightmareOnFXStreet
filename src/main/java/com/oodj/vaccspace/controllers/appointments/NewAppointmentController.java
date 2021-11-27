@@ -65,11 +65,9 @@ public class NewAppointmentController extends BaseController implements Initiali
         VaccineBatch nextVaccineBatch;
 
         try {
-            nextVaccineBatch = VaccineBatch.getNextAvailableVaccineBatch(
-                    vm.getSelectedVaccineTypeProperty()
-                      .getSelectedItem()
-                      .getVaccineName()
-            );
+            int vaccineTypeId = vm.getSelectedVaccineTypeProperty().getSelectedItem().getId();
+            int vaccineCenterId = vm.getSelectedVaccinationCenterProperty().getSelectedItem().getId();
+            nextVaccineBatch = VaccineBatch.getNextAvailableVaccineBatch(vaccineTypeId, vaccineCenterId);
         } catch (IndexOutOfBoundsException | NoSuchElementException | IllegalArgumentException ex) {
             Page.showDialog(
                     cbCenter.getScene().getWindow(),

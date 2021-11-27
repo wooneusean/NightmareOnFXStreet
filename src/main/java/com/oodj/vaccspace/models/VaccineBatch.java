@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 @Repository
 public class VaccineBatch extends Model {
@@ -60,28 +59,24 @@ public class VaccineBatch extends Model {
         this.expiryDate = expiryDate;
     }
 
-    public static VaccineBatch getNextAvailableVaccineBatch(String vaccineName) throws
-                                                                                IllegalArgumentException,
-                                                                                NoSuchElementException,
-                                                                                IndexOutOfBoundsException {
-        VaccineType typeToFind = TextORM.getOne(
-                VaccineType.class,
-                hashMap -> Objects.equals(hashMap.get("vaccineName"), vaccineName)
-        );
-        if (typeToFind == null) {
-            throw new IllegalArgumentException("Vaccine batch for '" + vaccineName + "' not found.");
-        }
-
+    public static VaccineBatch getNextAvailableVaccineBatch(int vaccineTypeId, int vaccinationCenterId) throws
+                                                                                                        IllegalArgumentException,
+                                                                                                        NoSuchElementException,
+                                                                                                        IndexOutOfBoundsException {
         List<VaccineBatch> vaccineBatches = TextORM.getAll(
                 VaccineBatch.class,
-                hashMap -> Integer.parseInt(hashMap.get("vaccineTypeId")) == typeToFind.getId() &&
-                           LocalDate.parse(hashMap.get("expiryDate")).isAfter(LocalDate.now())
+                hashMap -> Integer.parseInt(hashMap.get("vaccineTypeId")) == vaccineTypeId &&
+                           LocalDate.parse(hashMap.get("expiryDate")).isAfter(LocalDate.now()) &&
+                           Integer.parseInt(hashMap.get("vaccinationCenterId")) == vaccinationCenterId &&
+                           Integer.parseInt(hashMap.get("availableAmount")) > 0
+
         );
 
         if (vaccineBatches == null || vaccineBatches.size() == 0) {
-            throw new NoSuchElementException("There are no usable batches that belong to vaccine '" + vaccineName +
-                                             "'. Please select a different vaccine.");
+            throw new NoSuchElementException(
+                    "There are no usable batches that belong to that vaccine. Please select a different vaccine.");
         }
+
 
         vaccineBatches.sort(Comparator.comparing(VaccineBatch::getExpiryDate));
 

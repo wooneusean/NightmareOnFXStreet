@@ -32,25 +32,25 @@ public class RegisterController implements Initializable {
     private MFXPillButton btnBackToLogin;
 
     @FXML
-    private MFXTextField tfEmail;
+    private MFXTextField txtEmail;
 
     @FXML
     private Label lblID;
 
     @FXML
-    private MFXTextField tfIdentificationNumber;
+    private MFXTextField txtIdentificationNumber;
 
     @FXML
-    private MFXTextField tfName;
+    private MFXTextField txtName;
 
     @FXML
-    private MFXPasswordField tfPassword;
+    private MFXPasswordField txtPassword;
 
     @FXML
-    private MFXTextField tfPhoneNumber;
+    private MFXTextField txtPhoneNumber;
 
     @FXML
-    private MFXPasswordField tfRepeatPassword;
+    private MFXPasswordField txtRepeatPassword;
 
     @FXML
     private MFXCheckbox cbIsNotCitizen;
@@ -131,15 +131,29 @@ public class RegisterController implements Initializable {
             return;
         }
 
-        //Identification Number Validation
-        if (!vm.getIdentificationNumber().matches("^[0-9]*$")) {
-            Page.showDialog(
-                    container.getScene().getWindow(),
-                    DialogType.ERROR,
-                    "Error: Invalid IC Number",
-                    "Identification number must only have numbers!"
-            );
-            return;
+        if (vm.isNotCitizen()) {
+            //Passport Number Validation
+            //https://stackoverflow.com/a/40647805/4987298
+            if (!vm.getIdentificationNumber().matches("^(?!^0+$)[a-zA-Z0-9]{3,20}$")) {
+                Page.showDialog(
+                        container.getScene().getWindow(),
+                        DialogType.ERROR,
+                        "Error: Invalid Passport Number",
+                        "Passport number is not in a correct format!"
+                );
+                return;
+            }
+        } else {
+            //Identification Number Validation
+            if (!vm.getIdentificationNumber().matches("^[0-9]{12}$")) {
+                Page.showDialog(
+                        container.getScene().getWindow(),
+                        DialogType.ERROR,
+                        "Error: Invalid IC Number",
+                        "Identification number must only have numbers and must have 12 digits!"
+                );
+                return;
+            }
         }
 
         //Email Validation
@@ -203,12 +217,12 @@ public class RegisterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.vm = new RegisterViewModel(
-                tfName.textProperty(),
-                tfPassword.passwordProperty(),
-                tfRepeatPassword.passwordProperty(),
-                tfPhoneNumber.textProperty(),
-                tfIdentificationNumber.textProperty(),
-                tfEmail.textProperty(),
+                txtName.textProperty(),
+                txtPassword.passwordProperty(),
+                txtRepeatPassword.passwordProperty(),
+                txtPhoneNumber.textProperty(),
+                txtIdentificationNumber.textProperty(),
+                txtEmail.textProperty(),
                 cbIsNotCitizen.selectedProperty()
         );
     }
