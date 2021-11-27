@@ -24,7 +24,10 @@ public class MainApplication extends Application {
         TextORM.setStoragePath("storage");
         TextORM.setMetaStoragePath("storage");
 
-        seedModels();
+        // seedModels();
+        // Committee
+        Committee committee = new Committee("Khom Mee Tee", "69420", "zxc", "zxc", 2600);
+        committee.save();
 
         // Set icons
         stage.getIcons()
