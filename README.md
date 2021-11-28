@@ -1,16 +1,5 @@
-# Nightmare on FX street
+[![Java CI with Gradle](https://github.com/euseanwoon2016/NightmareOnFXStreet/actions/workflows/gradle.yml/badge.svg)](https://github.com/euseanwoon2016/NightmareOnFXStreet/actions/workflows/gradle.yml)
 
-IntelliJ IDEA + Gradle + JavaFX into a single fat jar.
-
-Truly a horrendous nightmare.
-
-### Build a Fat Jar
-```
-./gradlew fatJar
-```
-
-or from the IDEA Gradle menu `other->fatJar`
-
-# Now being used as the Repo for VaccSpace
+# VaccSpace
 
 its like my sejahtera but made in java and slightly worse.
