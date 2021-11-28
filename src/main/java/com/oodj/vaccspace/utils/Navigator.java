@@ -42,6 +42,7 @@ public class Navigator {
         put("view_batch", new Page("views/view-vaccine-batches-view.fxml", "View Vaccine Batch"));
         put("new_people", new Page("views/new-people-view.fxml", "Add Person"));
         put("view_people", new Page("views/view-people-view.fxml", "View Person"));
+        put("reports", new Page("views/reports-view.fxml", "Reports"));
     }};
 
     private static Stage primaryStage;
@@ -108,6 +109,7 @@ public class Navigator {
             T controller = loader.getController();
             controller.setUserData(userData);
             controller.onLoaded();
+            setWindowTitle(null, destination.getDisplayName());
         } catch (IOException e) {
             e.printStackTrace();
             System.err.printf("Unable to load route '%s'.%n", route);

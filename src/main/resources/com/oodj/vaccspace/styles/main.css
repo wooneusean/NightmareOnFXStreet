@@ -192,3 +192,41 @@
 .combo-box .text {
     -fx-fill: white;
 }
+
+.chart * {
+    -fx-font-family: 'Poppins';
+    -fx-font-size: 11;
+    -fx-text-fill: white;
+    -fx-fill: white;
+}
+
+.chart .chart-legend * {
+    -fx-font-family: 'Poppins Medium';
+    -fx-font-size: 14;
+}
+
+.chart .chart-legend {
+    -fx-background-color: #404040;
+}
+
+.chart .chart-title .text {
+    -fx-font-family: 'Poppins';
+    -fx-font-size: 18;
+}
+
+.chart .chart-content .text {
+    -fx-font-family: 'Poppins';
+    -fx-font-size: 14;
+}
+
+.chart .chart-content .chart-plot-background {
+    -fx-background-color: #404040;
+}
+
+.chart .chart-content .chart-alternative-row-fill {
+    -fx-fill: #525252;
+}
+
+.chart .chart-content .chart-vertical-grid-lines {
+    -fx-fill: #525252;
+}

@@ -89,7 +89,7 @@ public class PeopleController extends BaseController implements Initializable {
 
         TableColumn<Person, String> isNonCitizen = new TableColumn<>("Citizenship");
         isNonCitizen.setCellValueFactory(rowData -> {
-            String citizenshipValue = rowData.getValue().isNonCitizen() ? "Non-citizen" : "Citizen";
+            String citizenshipValue = rowData.getValue().isNonCitizen() ? "Non-Citizen" : "Citizen";
             return new SimpleStringProperty(citizenshipValue);
         });
 
@@ -135,7 +135,7 @@ public class PeopleController extends BaseController implements Initializable {
                          StringHelper.containsIgnoreCase(person.getEmail(), vm.getSearch()) ||
                          StringHelper.containsIgnoreCase(person.getPhone(), vm.getSearch()) ||
                          StringHelper.containsIgnoreCase(
-                                 person.isNonCitizen() ? "Non-citizen" : "Citizen",
+                                 person.isNonCitizen() ? "Non-Citizen" : "Citizen",
                                  vm.getSearch()
                          );
     }

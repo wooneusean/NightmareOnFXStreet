@@ -79,6 +79,12 @@ public class DashboardController implements Initializable {
                     "btnVaccinationCenter",
                     actionEvent -> onNavBtnPress(actionEvent, "vaccine_centers"),
                     false
+            ),
+            new DashboardIconButton(
+                    "fas-chart-bar",
+                    "btnReports",
+                    actionEvent -> onNavBtnPress(actionEvent, "reports"),
+                    true
             )
     );
 

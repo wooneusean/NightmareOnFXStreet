@@ -99,7 +99,7 @@
       </VBox>
       <VBox layoutX="50.0" layoutY="352.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0">
          <children>
-            <MFXCheckbox fx:id="chkIsNonCitizen" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Non-citizen">
+            <MFXCheckbox fx:id="chkIsNonCitizen" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Non-Citizen">
                <styleClass>
                   <String fx:value="body-medium" />
                   <String fx:value="h4" />
