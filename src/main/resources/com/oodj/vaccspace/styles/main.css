@@ -230,3 +230,19 @@
 .chart .chart-content .chart-vertical-grid-lines {
     -fx-fill: #525252;
 }
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane .thumb {
+   -fx-background-color: #525252;
+}
+
+.scroll-pane .scroll-bar {
+   -fx-background-color: #404040;
+}

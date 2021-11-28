@@ -5,28 +5,32 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="556.0" prefWidth="1060.0" spacing="14.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.reports.ReportsController">
-   <children>
-      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
-         <children>
-            <StackedBarChart fx:id="stcVaccinationStatus" title="Vaccination Status" HBox.hgrow="ALWAYS">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-               <styleClass>
-                  <String fx:value="body-medium" />
-                  <String fx:value="text-fill-primary" />
-               </styleClass>
-            </StackedBarChart>
-            <PieChart fx:id="pchCitizenNonCitizen" styleClass="body-medium" title="Citizen vs Non-Citizen" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-   </children>
+    <children>
+        <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <content>
+                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="556.0" prefWidth="1060.0">
+                    <children>
+                        <StackedBarChart fx:id="stcVaccinationStatus" title="Vaccination Status" HBox.hgrow="ALWAYS">
+                            <xAxis>
+                                <CategoryAxis side="BOTTOM" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis side="LEFT" />
+                            </yAxis>
+                            <styleClass>
+                                <String fx:value="body-medium" />
+                                <String fx:value="text-fill-primary" />
+                            </styleClass>
+                        </StackedBarChart>
+                        <PieChart fx:id="pchCitizenNonCitizen" styleClass="body-medium" title="Citizen vs Non-Citizen" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+            </content>
+        </ScrollPane>
+    </children>
 </VBox>
