@@ -50,5 +50,8 @@ module com.oodj.vaccspace {
     exports com.oodj.vaccspace.controllers.reports;
     opens com.oodj.vaccspace.controllers.reports to javafx.fxml;
 
+    exports com.oodj.vaccspace.controllers.profile;
+    opens com.oodj.vaccspace.controllers.profile to javafx.fxml;
+
     exports com.oodj.vaccspace.models;
 }

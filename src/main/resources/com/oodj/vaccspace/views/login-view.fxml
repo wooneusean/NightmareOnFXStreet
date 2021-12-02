@@ -4,111 +4,107 @@
 <?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import java.lang.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="582.0" prefWidth="924.0" styleClass="bg-color"
-            stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17"
-            fx:controller="com.oodj.vaccspace.controllers.login.LoginController">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="582.0" prefWidth="924.0" styleClass="bg-color" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oodj.vaccspace.controllers.login.LoginController">
     <right>
-        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-              prefHeight="582.0" prefWidth="334.0" spacing="10.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="582.0" prefWidth="334.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Welcome!">
                     <styleClass>
-                        <String fx:value="h1"/>
-                        <String fx:value="heading-medium"/>
-                        <String fx:value="text-fill-primary"/>
+                        <String fx:value="h1" />
+                        <String fx:value="heading-medium" />
+                        <String fx:value="text-fill-primary" />
                     </styleClass>
                     <VBox.margin>
-                        <Insets bottom="75.0" top="-75.0"/>
+                        <Insets bottom="75.0" top="-75.0" />
                     </VBox.margin>
                 </Label>
                 <Label text="Email">
                     <styleClass>
-                        <String fx:value="body-medium"/>
-                        <String fx:value="h4"/>
+                        <String fx:value="body-medium" />
+                        <String fx:value="h4" />
                     </styleClass>
                 </Label>
                 <MFXTextField fx:id="tfEmail" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308">
                     <styleClass>
-                        <String fx:value="body-regular"/>
-                        <String fx:value="h4"/>
+                        <String fx:value="body-regular" />
+                        <String fx:value="h4" />
                     </styleClass>
                 </MFXTextField>
                 <Label text="Password">
                     <styleClass>
-                        <String fx:value="body-medium"/>
-                        <String fx:value="h4"/>
+                        <String fx:value="body-medium" />
+                        <String fx:value="h4" />
                     </styleClass>
                 </Label>
-                <MFXPasswordField fx:id="tfPassword" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308"
-                                  onAction="#onSubmit">
+                <MFXPasswordField fx:id="tfPassword" lineStrokeWidth="1.0" maxWidth="1.7976931348623157E308" onAction="#onSubmit" prefHeight="35.0" prefWidth="301.0">
                     <styleClass>
-                        <String fx:value="body-regular"/>
-                        <String fx:value="h4"/>
+                        <String fx:value="body-regular" />
+                        <String fx:value="h4" />
                     </styleClass>
                 </MFXPasswordField>
                 <HBox alignment="CENTER_LEFT" spacing="14.0">
                     <children>
-                        <MFXCheckbox fx:id="chkIsCommittee" styleClass="body-medium" text="Committee"/>
+                        <MFXCheckbox fx:id="chkIsCommittee" styleClass="body-medium" text="Committee" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="234.0">
                     <children>
-                        <MFXPillButton fx:id="btnLogin" buttonType="RAISED" onAction="#onLoginPressed" prefHeight="41.0"
-                                       prefWidth="106.0" rippleArc="40" rippleColor="WHITE" text="Login">
+                        <MFXPillButton fx:id="btnLogin" buttonType="RAISED" onAction="#onLoginPressed" prefHeight="41.0" prefWidth="106.0" rippleArc="40" rippleColor="WHITE" text="Login">
                             <styleClass>
-                                <String fx:value="btn-primary"/>
-                                <String fx:value="btn"/>
-                                <String fx:value="body-medium"/>
-                                <String fx:value="h4"/>
+                                <String fx:value="btn-primary" />
+                                <String fx:value="btn" />
+                                <String fx:value="body-medium" />
+                                <String fx:value="h4" />
                             </styleClass>
                         </MFXPillButton>
                     </children>
                 </HBox>
             </children>
             <padding>
-                <Insets left="50.0" right="50.0"/>
+                <Insets left="50.0" right="50.0" />
             </padding>
         </VBox>
     </right>
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="895.0" fitWidth="644.0" layoutY="-178.0" pickOnBounds="true" preserveRatio="true"
-                           AnchorPane.bottomAnchor="-135.0" AnchorPane.leftAnchor="0.0"
-                           AnchorPane.rightAnchor="0.260498046875" AnchorPane.topAnchor="-178.0">
+                <ImageView fitHeight="895.0" fitWidth="644.0" layoutY="-178.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-135.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.260498046875" AnchorPane.topAnchor="-178.0">
                     <image>
-                        <Image url="@../images/vaccspace.jpg"/>
+                        <Image url="@../images/vaccspace.jpg" />
                     </image>
                 </ImageView>
                 <Label layoutX="14.0" layoutY="545.0" text="Don't have an account?">
                     <styleClass>
-                        <String fx:value="body-regular"/>
-                        <String fx:value="h4"/>
+                        <String fx:value="body-regular" />
+                        <String fx:value="h4" />
                     </styleClass>
                 </Label>
-                <Hyperlink fx:id="lnkRegister" layoutX="204.0" layoutY="541.0" onAction="#onRegisterPressed"
-                           text="Register here.">
+                <Hyperlink fx:id="lnkRegister" layoutX="204.0" layoutY="541.0" onAction="#onRegisterPressed" text="Register here.">
                     <styleClass>
-                        <String fx:value="body-medium"/>
-                        <String fx:value="h4"/>
+                        <String fx:value="body-medium" />
+                        <String fx:value="h4" />
                     </styleClass>
                 </Hyperlink>
-                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true"
-                           preserveRatio="true" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="28.0">
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="28.0">
                     <image>
-                        <Image url="@../images/vaccine_small.png"/>
+                        <Image url="@../images/vaccine_small.png" />
                     </image>
                 </ImageView>
                 <Label layoutX="97.0" layoutY="39.0" text="VaccSpace">
                     <styleClass>
-                        <String fx:value="h2"/>
-                        <String fx:value="heading-medium"/>
+                        <String fx:value="h2" />
+                        <String fx:value="heading-medium" />
                     </styleClass>
                 </Label>
             </children>
