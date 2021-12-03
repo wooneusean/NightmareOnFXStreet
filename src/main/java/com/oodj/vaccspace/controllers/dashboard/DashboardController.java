@@ -32,6 +32,9 @@ public class DashboardController implements Initializable {
     private MFXButton btnMenu;
 
     @FXML
+    private MFXPillButton btnAccount;
+
+    @FXML
     private MFXButton btnHome;
 
     @FXML
@@ -97,6 +100,11 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    void onAccountPressed(ActionEvent event) {
+        Navigator.showInDialog(btnAccount.getScene().getWindow(),"view_profile", null);
+    }
+
+    @FXML
     void onLogoutPressed(ActionEvent event) {
         Logging.write(String.format("Logout {user_id: %d, committee: %b}", Global.getUserId(), Global.isCommittee()));
         Global.setUserId(-1);
@@ -106,6 +114,10 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Navigator.navigateInContainer(Global.isCommittee() ? "appointments" : "home", vbxContent, null);
+
+        if(Global.isCommittee()) {
+            btnAccount.setManaged(false);
+        }
 
         initializeIcons();
         Global.setDashboardReference(this);

@@ -13,7 +13,7 @@ public abstract class User extends Model {
     @Column
     private String phone;
 
-    @Column
+    @Column 
     private String email;
 
     @Column
