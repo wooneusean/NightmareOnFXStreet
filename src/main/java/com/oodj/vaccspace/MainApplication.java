@@ -24,10 +24,7 @@ public class MainApplication extends Application {
         TextORM.setStoragePath("storage");
         TextORM.setMetaStoragePath("storage");
 
-        // seedModels();
-        // Committee
-        Committee committee = new Committee("Khom Mee Tee", "69420", "admin@vaccspace.com", "password123", 2600);
-        committee.save();
+        seedModels();
 
         // Set icons
         stage.getIcons()
@@ -55,15 +52,15 @@ public class MainApplication extends Application {
         }
 
         // Committee
-        Committee committee = new Committee("Khom Mee Tee", "69420", "zxc", "zxc", 2600);
+        Committee committee = new Committee("Khom Mee Tee", "69420", "admin@vaccspace.com", "password", 2600);
         committee.save();
 
         // Citizen
         Person citizen = new Person(
                 "Siti Zheng",
                 "0123456789",
-                "qwe",
-                "qwe",
+                "siti.z@mail.com",
+                "password",
                 VaccinationStatus.AWAITING_FIRST_DOSE,
                 "010203040506",
                 false
@@ -73,8 +70,8 @@ public class MainApplication extends Application {
         Person noncitizen = new Person(
                 "Naan Siti Zhen",
                 "0123456789",
-                "asd",
-                "asd",
+                "n.siti@mail.com",
+                "password",
                 VaccinationStatus.AWAITING_FIRST_DOSE,
                 "010203040506",
                 true
@@ -126,7 +123,7 @@ public class MainApplication extends Application {
         VaccineBatch sinovacFirstBatch = new VaccineBatch(
                 sinovac.getId(),
                 200,
-                200,
+                199,
                 bukitJalil.getId(),
                 LocalDate.now(),
                 LocalDate.now().plusYears(3)
@@ -146,7 +143,7 @@ public class MainApplication extends Application {
         VaccineBatch pfizerBatch2 = new VaccineBatch(
                 pfizer.getId(),
                 250,
-                250,
+                249,
                 movenpick.getId(),
                 LocalDate.now(),
                 LocalDate.now().plusYears(3)

@@ -19,6 +19,7 @@ import textorm.TextORM;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class NewVaccineBatchesController extends BaseController implements Initializable {
@@ -145,7 +146,10 @@ public class NewVaccineBatchesController extends BaseController implements Initi
 
         cmbVaccinationCenter.setItems(FXCollections.observableList(vaccinationCenters));
 
-        List<VaccineType> vaccineTypes = TextORM.getAll(VaccineType.class, data -> true);
+        List<VaccineType> vaccineTypes = TextORM.getAll(
+                VaccineType.class,
+                data -> Objects.equals(data.get("isVoided"), "false")
+        );
 
         cmbVaccineType.setItems(FXCollections.observableList(vaccineTypes));
 

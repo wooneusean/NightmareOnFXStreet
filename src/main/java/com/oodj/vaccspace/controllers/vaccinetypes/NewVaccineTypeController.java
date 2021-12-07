@@ -96,8 +96,9 @@ public class NewVaccineTypeController extends BaseController implements Initiali
                 "Successfully added new vaccine."
         );
 
-        getStageDialog().close();
         ((VaccineTypesController) getUserData()).refresh();
+
+        getStageDialog().close();
     }
 
     @FXML

@@ -154,20 +154,6 @@ public class ViewVaccineBatchesController extends BaseController implements Init
             return false;
         }
 
-//        List<Vaccine> registeredVaccines = TextORM.getAll(Vaccine.class,
-//                data -> Objects.equals(data.get("vaccineBatchId"), vaccineBatch.getId()));
-//
-//        if (batchAmount < registeredVaccines.size()) {
-//            Page.showDialog(
-//                    btnSaveBatch.getScene().getWindow(),
-//                    DialogType.ERROR,
-//                    "Error: Vaccine Batch Amount is Less Than " + registeredVaccines.size(),
-//                    "There are " + registeredVaccines.size() + " amount of vaccines registered to this batch, please ensure you at least have "
-//                            + registeredVaccines.size() + " vaccines in this batch! "
-//            );
-//            return false;
-//        }
-
         if (batchAmount < registeredVaccines) {
             Page.showDialog(
                     btnSaveBatch.getScene().getWindow(),

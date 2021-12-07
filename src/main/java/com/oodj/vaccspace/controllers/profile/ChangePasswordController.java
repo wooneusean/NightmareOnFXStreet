@@ -85,6 +85,16 @@ public class ChangePasswordController extends BaseController implements Initiali
             return false;
         }
 
+        if (txtNewPassword.getPassword().length() < 8) {
+            Page.showDialog(
+                    txtNewPassword.getScene().getWindow(),
+                    DialogType.ERROR,
+                    "Error: Invalid Password",
+                    "Your password must have at least 8 characters!"
+            );
+            return false;
+        }
+
         if (!txtRepeatPassword.getPassword().equals(txtNewPassword.getPassword())) {
             Page.showDialog(
                     txtRepeatPassword.getScene().getWindow(),
